@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "180339207083",
+    "firebase_url": "https://bidbadandroid.firebaseio.com",
+    "project_id": "bidbadandroid",
+    "storage_bucket": "bidbadandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180339207083:android:55d25e284fa9b8834bc0ee",
+        "android_client_info": {
+          "package_name": "com.wielabs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180339207083-97lq3l1bc4l842a3kgqtoekoc8athoae.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wielabs",
+            "certificate_hash": "c75a460ccf26d70222a1ea6ec870f2043193a9b7"
+          }
+        },
+        {
+          "client_id": "180339207083-69si8nac5j5cf894bhehjodhb5u4i0jh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXSv04yEnH_pvQ0psdMMBD-8Yak-XVQW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180339207083-69si8nac5j5cf894bhehjodhb5u4i0jh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

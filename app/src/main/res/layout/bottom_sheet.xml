@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
+
+    <ProgressBar
+        android:id="@+id/bottomSheetProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:backgroundTint="@color/colorPrimary"
+        android:elevation="10dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:text="Bid"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="15dp"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/layoutBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="15dp">
+
+        <ImageView
+            android:id="@+id/imageBottomsheet"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <TextView
+            android:id="@+id/titleBottomSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/imageBottomsheet"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/entryprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleBottomSheet"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/imageBottomsheet"/>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/biddingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutBottomSheet"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/drawable_uname"
+        android:hint="@string/enter_your_bid"
+        android:inputType="numberDecimal"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/bottomSheetTerms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/biddingButton"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:gravity="left"
+        android:text="By clicking enter bidding the entry amount will be deducted from your wallet, and the entered bid will be placed"
+        android:textSize="10dp"
+        tools:ignore="RtlHardcoded" />
+
+    <Button
+        android:id="@+id/bottomSheetPlaceBid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bottomSheetTerms"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/gradient_curved"
+        android:text="Enter bidding"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

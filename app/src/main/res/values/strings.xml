@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">BidBad</string>
+
+    <string name="server_client_id">265115395991-78ikuabsoid63j2u3oormnnklrbohjcm.apps.googleusercontent.com</string>
+    <string name="login_text">Login</string>
+    <string name="terms"><u>terms and conditions</u>.</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="enterbidding">Enter bidding</string>
+    <string name="ak_client_token">a0b869de4d5f1c42882bebea7cf36f04</string>
+    <string name="ak_app_id">1948200768795074</string>
+    <string name="ak_login_protocol_scheme">ak1948200768795074</string>
+
+
+    <string name="permissions_read_phone_state_title">Read Phone Number</string>
+    <string name="permissions_receive_sms_message">
+        Grant permission to read your SMS code from your device to pre-fill.
+    </string>
+    <string name="permissions_read_phone_state_message">
+        Grant permission to read your phone number from your device to pre-fill.
+    </string>
+    <string name="permissions_receive_sms_title">Read SMS Code</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rupee_symbol">₹</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+    </string>
+    <string name="action_settings">Settings</string>
+    <string name="placeyourorder">Place your order</string>
+    <string name="title_activity_product_des">ProductDes</string>
+    <string name="bid">Bid</string>
+    <string name="title_of_product">Title of product</string>
+    <string name="enter_your_bid">Enter your bid</string>
+
+</resources>

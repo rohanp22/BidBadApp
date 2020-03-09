@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/feedback_bg"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/feedbackText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:textSize="18dp"
+        android:text="Feedback"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/feedbackText"
+        android:layout_marginTop="15dp"
+        android:background="@color/gray" />
+
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/textFeedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/feedbackText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Your review will help us to give you better \n experience. Make it a good one!" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:numStars="5"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textFeedback"
+        android:layout_centerHorizontal="true"
+        android:progressTint="@android:color/holo_orange_light"
+        android:progressBackgroundTint="@color/gray"
+        android:secondaryProgressTint="@android:color/holo_orange_dark"
+        android:layout_marginTop="30dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ratingBar"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/drawable_uname"
+        android:gravity="left"
+        android:id="@+id/feedbackMessage"
+        android:hint="Tell us your experience..."
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:padding="10dp"
+        android:textColorHint="@color/gray" />
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/feedbackMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Discard"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textAllCaps="false" />
+
+
+        <Button
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="2"
+            android:background="@color/colorPrimaryLight"
+            android:text="Send feedback"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

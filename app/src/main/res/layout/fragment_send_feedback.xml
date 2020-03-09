@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.SendFeedback">
+
+    <ImageView
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:id="@+id/backsend"/>
+
+    <TextView
+        android:layout_below="@+id/backsend"
+        android:text="Send Feedback"
+        android:textColor="@color/black"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
+        android:id="@+id/sendtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- TODO: Update blank fragment layout -->
+    <EditText
+        android:padding="10dp"
+        android:layout_below="@id/sendtext"
+        android:gravity="top"
+        android:backgroundTint="@color/gray"
+        android:background="@drawable/round_edittext"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_height="wrap_content"
+        android:lines="5"
+        android:inputType="text|textMultiLine"
+        android:id="@+id/feedback"/>
+
+    <Button
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/feedback"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/gradient_curved"
+        android:text="Submit"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

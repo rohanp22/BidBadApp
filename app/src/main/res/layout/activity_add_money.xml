@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#eee"
+    android:layout_height="match_parent"
+    tools:context=".Activities.AddMoney">
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:id="@+id/backAddMoney"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"/>
+
+    <LinearLayout
+        android:layout_below="@+id/backAddMoney"
+        android:id="@+id/layout1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"
+        android:background="@drawable/dialog_bg"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" >
+
+        <TextView
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wallet Balance "
+            />
+
+        <TextView
+            android:id="@+id/walletbalance"
+            android:layout_marginLeft="40dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="20dp"
+            android:gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""/>
+
+    </LinearLayout>
+
+    <EditText
+        android:layout_margin="20dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:hint="Select Amount"
+        android:layout_height="50dp"
+        android:inputType="number"
+        android:background="@drawable/dialog_bg"
+        android:id="@+id/enteramount"
+        android:layout_below="@+id/layout1"/>
+
+
+    <LinearLayout
+        android:id="@+id/linearAdd"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/enteramount"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="+100"
+            android:id="@+id/add50"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:background="@drawable/gradient_curved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:id="@+id/add100"
+            android:text="+300"
+            android:textColor="@color/white"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/gradient_curved"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:id="@+id/add500"
+            android:textColor="@color/white"
+            android:background="@drawable/gradient_curved"
+            android:text="+500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addmoney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_curved"
+        android:text="Add Money to Wallet"
+        android:layout_below="@id/linearAdd"
+        android:layout_margin="20dp"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addmoney"
+        android:id="@+id/showtransactions"
+        android:background="@drawable/gradient_curved"
+        android:layout_margin="20dp"
+        android:textColor="@color/white"
+        android:text="Show transactions"
+        android:onClick="gotoTransactions"
+        />
+
+</RelativeLayout>

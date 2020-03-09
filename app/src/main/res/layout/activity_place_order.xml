@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f2f2f2"
+    tools:context=".Activities.PlaceOrder">
+
+    <TextView
+        android:id="@+id/titleorder"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Order now"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <ScrollView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/relativeOrder"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/titleorder">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext_gray"
+                android:padding="15dp"
+                android:text="On clicking place order the amount will be deducted from the wallet, make sure that you have the required amount in the wallet"
+                android:textColor="#777" />
+
+            <TextView
+                android:id="@+id/deliverto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Deliver to:"
+                android:textSize="15dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/deliverto"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/round_edittext"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <EditText
+                    android:id="@+id/nameplaceorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#FFF"
+                    android:hint="Name"
+                    android:padding="10dp"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <EditText
+                    android:id="@+id/mobileplaceorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#FFF"
+                    android:hint="Mobile"
+                    android:padding="10dp"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <EditText
+                    android:id="@+id/housenoplaceorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#FFF"
+                    android:hint="House no"
+                    android:padding="10dp"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <EditText
+                    android:id="@+id/streetplaceorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#FFF"
+                    android:hint="Street"
+                    android:padding="10dp"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <EditText
+                    android:id="@+id/cityplaceorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#FFF"
+                    android:hint="City"
+                    android:padding="10dp"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <EditText
+                    android:id="@+id/stateplaceorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#FFF"
+                    android:hint="State"
+                    android:padding="10dp"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray" />
+
+                <EditText
+                    android:id="@+id/pinplaceorder"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#FFF"
+                    android:hint="pincode"
+                    android:padding="10dp"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order Total: "
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/placeorderamount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@+id/relativeOrder"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/relativeOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <Button
+            android:id="@+id/placeOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/gradient_curved"
+            android:padding="10dp"
+            android:text="@string/placeyourorder"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

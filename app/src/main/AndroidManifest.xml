@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.wielabs">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon_bg"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon_bg"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoactionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".BottomSheetProduct"></activity>
+        <activity
+            android:name=".ProductDes"
+            android:label="@string/title_activity_product_des"
+            android:theme="@style/AppTheme.NoactionBar.NoActionBar" />
+        <activity android:name=".Activities.PlaceOrder" />
+        <activity
+            android:name=".Activities.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:parentActivityName=".Activities.AddMoney"
+            android:theme="@style/AppTheme.NoactionBar.NoActionBar" />
+        <activity android:name=".Others.AccountKitLoginActivity" />
+        <activity android:name=".Otp" />
+        <activity android:name=".Activities.PlaceBid" />
+        <activity android:name=".Activities.AddMoney" />
+        <activity android:name=".Activities.ProductDescription" />
+        <activity
+            android:name=".Activities.Home"
+            android:label="@string/title_activity_home" />
+        <activity
+            android:name=".Activities.ForgotPassword"
+            android:theme="@style/AppTheme.CustomSignal" />
+        <activity
+            android:name=".Activities.Signup"
+            android:theme="@style/AppTheme.CustomSignal" />
+        <activity
+            android:name=".Activities.Login"
+            android:theme="@style/AppTheme.CustomSignal" />
+        <activity android:name=".Activities.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+
+        <activity
+            android:name="com.facebook.accountkit.ui.AccountKitActivity"
+            android:parentActivityName=".Activities.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/ak_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.facebook.accountkit.ApplicationName"
+            android:value="@string/app_name" />
+        <meta-data
+            android:name="com.facebook.accountkit.ClientToken"
+            android:value="@string/ak_client_token" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/ak_app_id" />
+
+        <service android:name=".MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

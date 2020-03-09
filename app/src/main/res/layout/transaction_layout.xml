@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:layout_marginLeft="5dp"
+    android:background="@color/white"
+    android:layout_marginRight="5dp">
+
+    <ImageView
+        android:id="@+id/imageTransaction"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
+
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/imageTransaction"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/transactionDescription"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/orderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:text="30"
+        android:textColor="#000"
+        android:textSize="20dp" />
+
+    <!-- <View
+         android:layout_marginTop="10dp"
+         android:layout_marginRight="5dp"
+         android:layout_marginLeft="5dp"
+         android:background="#D3D3D3"
+         android:layout_alignParentBottom="true"
+         android:layout_width="match_parent"
+         android:layout_height="1dp"/> -->
+
+</RelativeLayout>

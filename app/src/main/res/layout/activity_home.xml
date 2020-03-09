@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:text="@string/title_home"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:borderWidth="0dp"
+        app:layout_anchor="@id/bar"
+        android:id="@+id/fabhome"/>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bar"
+        android:layout_height="?actionBarSize"
+        android:layout_gravity="bottom"
+        app:fabCradleRoundedCornerRadius="40dp"
+        app:backgroundTint="@color/colorPrimaryDark"
+        app:hideOnScroll="true"
+        app:fabCradleMargin="6dp"
+        android:theme="@style/Widget.MaterialComponents.BottomAppBar"
+        app:popupTheme="@style/AppTheme.NoactionBar.PopupOverlay"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:weightSum="3"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:id="@+id/homeLayout"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/bottomHome"
+                android:layout_width="16dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_home_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Home"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:id="@+id/completedLayout"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/bottomCompleted"
+                    android:layout_width="16dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_dashboard_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Completed"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/nav_view"-->
+<!--            app:itemIconSize="20dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:itemBackground="@color/white"-->
+<!--            app:layout_behavior=".Activities.BottomNavigationBehavior"-->
+<!--            android:layout_gravity="bottom"-->
+<!--            app:labelVisibilityMode="unlabeled"-->
+<!--            android:background="?android:attr/windowBackground"-->
+<!--            app:menu="@menu/bottom_nav_menu" />-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

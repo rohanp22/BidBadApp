@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryLight">#ff8b7a</color>
+    <color name="colorPrimary">#ff416c</color>
+    <color name="colorPrimaryDark">#ff4b2b</color>
+    <color name="colorAccent">#ff4b2b</color>
+
+    <color name="black">#000000</color>
+    <color name="blue">#3F51B5</color>
+    <color name="white">#ffffff</color>
+
+    <color name="border">#e8e8e8</color>
+    <color name="text">#808080</color>
+    <color name="dullicon">#D1CFCF</color>
+    <color name="green">#228B22</color>
+
+    <color name="gray">#ddd</color>
+    <color name="com_accountkit_button_background_color">@color/gradient_color</color>
+
+</resources>
