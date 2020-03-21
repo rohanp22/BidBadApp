@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +42,7 @@ public class BottomSheetProduct extends AppCompatActivity {
 
     String imageurl, imageurl2, imageurl3;
     SliderAdapterExample adapter;
-    TextView title, entry;
+    TextView title, entry, productdesc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class BottomSheetProduct extends AppCompatActivity {
 
         LinearLayout llBottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(llBottomSheet);
+        productdesc = (TextView) findViewById(R.id.desctext);
 
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -91,8 +93,11 @@ public class BottomSheetProduct extends AppCompatActivity {
                                 //mrp.setText("MRP: ₹"+mrpString);
                                 entry.setText("Entry : ₹"+sp);
                                 String h = "Hello \n world";
-                                String d = heroObject.getString("description")+"<u>Read more</u>";
+                                String d = heroObject.getString("description");
                                 Log.d("Text", heroObject.getString("description"));
+                                String s = d.replace("\\t","\t");
+                                productdesc.setText(s.replace("\\n","\n"));
+
                                 //productDescription.setText(d);
                                 //adapter.notifyDataSetChanged();
 

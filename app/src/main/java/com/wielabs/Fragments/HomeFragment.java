@@ -16,11 +16,16 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.CountDownTimer;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
 import android.transition.Fade;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +34,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -42,17 +48,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.bidbadsample.LeaderBoardFragment;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.wielabs.Activities.AddMoney;
+import com.wielabs.Activities.Home;
 import com.wielabs.BottomSheetProduct;
 import com.wielabs.DetailsTransition;
 import com.wielabs.ListenerImage;
 import com.wielabs.Models.CartItems;
 import com.wielabs.Models.Current_Product;
 import com.wielabs.Activities.ProductDescription;
+import com.wielabs.Models.PastProducts;
 import com.wielabs.R;
 import com.wielabs.Others.SharedPrefManager;
 
@@ -80,8 +89,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     Context c;
     public RecyclerViewAdapterCurrent adapter;
     SwipeRefreshLayout mSwipeRefreshLayout;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -140,11 +147,13 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                         switch(item.getTitle().toString()){
                             case "Settings" : getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
                             break;
+
+                            case "Profile" : getFragmentManager().beginTransaction().replace(R.id.fragment_container, new LeaderBoardFragment()).commit();
+                            break;
                         }
                         return true;
                     }
                 });
-
                 popup.show();//showing popup menu
             }
         });
@@ -166,18 +175,21 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
-        SliderView sliderView = view.findViewById(R.id.sliderview2);
+        RecyclerView sliderView = view.findViewById(R.id.sliderview2);
+        sliderView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.HORIZONTAL, false));
+        SliderAdapter adapter = new SliderAdapter(view.getContext(), sliderView);
+        sliderView.setAdapter(adapter);
 
-        SliderAdapterExample adapter2 = new SliderAdapterExample(view.getContext());
-
-        sliderView.setSliderAdapter(adapter2);
-
-        sliderView.setNextFocusRightId(1);
-        sliderView.setIndicatorAnimation(IndicatorAnimations.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
-        sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
-        sliderView.startAutoCycle();
+//        SliderAdapterExample adapter2 = new SliderAdapterExample(view.getContext());
+//
+//        sliderView.setSliderAdapter(adapter2);
+//
+//        sliderView.setNextFocusRightId(1);
+//        sliderView.setIndicatorAnimation(IndicatorAnimations.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+//        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+//        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+//        sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
+//        sliderView.startAutoCycle();
     }
 
     void loadCurrentProducts(final View view) {
@@ -234,6 +246,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL );
         recyclerViewCurrent = (RecyclerView) view.findViewById(R.id.recyclerviewCurrent);
+        if(current_products.size() == 0)
+            recyclerViewCurrent.setVisibility(View.GONE);
         Drawable verticalDivider = ContextCompat.getDrawable(view.getContext(), R.drawable.vertical_divider);
         DividerItemDecoration verticalDecoration = new DividerItemDecoration(recyclerViewCurrent.getContext(),
                 DividerItemDecoration.HORIZONTAL);
@@ -312,7 +326,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         int bal;
 
         @Override
-        public void onBindViewHolder(final RecyclerViewAdapterCurrent.ViewHolder holder, final int position) {
+        public void onBindViewHolder(final RecyclerViewAdapterCurrent.ViewHolder holder,final int position) {
 
             long diff = 0;
             this.position = position;
@@ -397,7 +411,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 }
 
                 public void onFinish() {
-                    loadCurrentProducts(view);
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
                 }
             }.start();
 
@@ -448,7 +462,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             ImageView image;
             TextView name;
             TextView time;
-            TextView mrp;
             TextView sp;
             TextView time2;
             RelativeLayout r;
@@ -458,7 +471,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 bid = itemView.findViewById(R.id.bidbtn);
                 sp = itemView.findViewById(R.id.sprp);
                 r = itemView.findViewById(R.id.flash_layout);
-                //mrp = itemView.findViewById(R.id.mrprp);
                 time = itemView.findViewById(R.id.time);
                 time2 = itemView.findViewById(R.id.time2);
                 image = itemView.findViewById(R.id.image_view);
@@ -470,14 +482,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         public int getItemViewType(int position) {
             return 1;
         }
-
-        public void removeItem(int position) {
-            current_products.remove(position);
-            recyclerViewCurrent.removeViewAt(position);
-            adapter.notifyItemRemoved(position);
-            adapter.notifyItemRangeChanged(position, current_products.size());
-        }
-
     }
 
     class sortTime implements Comparator<Current_Product>
@@ -514,7 +518,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         @Override
         public void onBindViewHolder(SliderAdapterExample.SliderAdapterVH viewHolder, int position) {
             //viewHolder.textViewDescription.setText("This is slider item " + position);
-            String url = "https://cdn.pixabay.com/photo/2012/08/27/14/19/evening-55067__340.png";
+            String url = "http://easyvela.esy.es/CurrentProductImages/1-01.jpg";
             switch (position) {
                 case 0:
                     Glide.with(viewHolder.itemView)
@@ -523,12 +527,12 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     break;
                 case 1:
                     Glide.with(viewHolder.itemView)
-                            .load(url)
+                            .load("http://easyvela.esy.es/CurrentProductImages/1-02.jpg")
                             .into(viewHolder.imageViewBackground);
                     break;
                 case 2:
                     Glide.with(viewHolder.itemView)
-                            .load(url)
+                            .load("http://easyvela.esy.es/CurrentProductImages/1-03.jpg")
                             .into(viewHolder.imageViewBackground);
                     break;
                 default:
@@ -557,6 +561,75 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 imageViewBackground = itemView.findViewById(R.id.image_view);
                 //textViewDescription = itemView.findViewById(R.id.tv_auto_image_slider);
                 this.itemView = itemView;
+            }
+        }
+    }
+
+    class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.ViewHolder>{
+
+        ArrayList<PastProducts> CartList;
+        Context mContext;
+        RecyclerView recyclerView;
+
+        public SliderAdapter(Context context, RecyclerView recyclerView) {
+            mContext = context;
+            this.recyclerView = recyclerView;
+        }
+
+        @NonNull
+        @Override
+        public SliderAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_slider_home, parent, false);
+            int width = recyclerView.getWidth();
+            ViewGroup.LayoutParams params = view.getLayoutParams();
+            params.width = (int)(width * 0.7);
+            view.setLayoutParams(params);
+
+            return new SliderAdapter.ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull SliderAdapter.ViewHolder holder, int position) {
+            String url = "http://easyvela.esy.es/CurrentProductImages/1-01.jpg";
+            switch (position) {
+                case 0:
+                    Glide.with(holder.itemView)
+                            .load(url)
+                            .into(holder.image);
+                    break;
+                case 1:
+                    Glide.with(holder.itemView)
+                            .load("http://easyvela.esy.es/CurrentProductImages/1-02.jpg")
+                            .into(holder.image);
+                    break;
+                case 2:
+                    Glide.with(holder.itemView)
+                            .load("http://easyvela.esy.es/CurrentProductImages/1-03.jpg")
+                            .into(holder.image);
+                    break;
+                default:
+                    Glide.with(holder.itemView)
+                            .load(url)
+                            .into(holder.image);
+                    break;
+
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return 3;
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+            ImageView image;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+                //listView = itemView.findViewById(R.id.bidHistory);
+                image = itemView.findViewById(R.id.image_view);
+
             }
         }
     }

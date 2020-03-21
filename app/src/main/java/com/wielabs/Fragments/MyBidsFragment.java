@@ -2,7 +2,6 @@ package com.wielabs.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,8 +49,9 @@ import java.util.List;
 public class MyBidsFragment extends Fragment {
 
     public ArrayList<CartItems> cartItems;
-    public ArrayList<CartItems> pastItems;
-    private RecyclerView cartList, pastList;
+    //public ArrayList<CartItems> pastItems;
+    private RecyclerView cartList;
+    View view;
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 
@@ -66,21 +66,22 @@ public class MyBidsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_bids, container, false);
 //        cartItems = new ArrayList<>();
 //        loadList(view);
+        this.view = view;
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         cartItems = new ArrayList<>();
-        pastItems = new ArrayList<>();
+        //pastItems = new ArrayList<>();
         loadList(view);
     }
 
     void loadList(final View view) {
         cartList = (RecyclerView) view.findViewById(R.id.myBidsList);
-        pastList = (RecyclerView) view.findViewById(R.id.mypastbids);
+        //pastList = (RecyclerView) view.findViewById(R.id.mypastbids);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getmybids.php?id=" + SharedPrefManager.getInstance(getActivity()).getUser().getId(),
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getmyongoingbids.php?id=" + SharedPrefManager.getInstance(getActivity()).getUser().getId(),
                 new Response.Listener<String>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
@@ -88,7 +89,7 @@ public class MyBidsFragment extends Fragment {
                         try {
                             cartItems.clear();
                             JSONObject obj = new JSONObject(response);
-                            Log.d("Bids", response + "");
+
                             JSONArray heroArray = obj.getJSONArray("Bids");
                             for (int i = 0; i < heroArray.length(); i++) {
                                 JSONObject heroObject = heroArray.getJSONObject(i);
@@ -104,16 +105,18 @@ public class MyBidsFragment extends Fragment {
                                         heroObject.getString("currentid"));
                                 if (a1.compareTo(new java.sql.Date(System.currentTimeMillis())) > 0)
                                     cartItems.add(c);
-                                else
-                                    pastItems.add(c);
+                                    //pastItems.add(c);
                                 //ListView l = (ListView) findViewById(R.id.transactionList);
                             }
                             cartItems.sort(new sortTime());
+                            if(cartItems.size() == 0){
+                                view.findViewById(R.id.nobids).setVisibility(View.VISIBLE);
+                            } else {
+                                view.findViewById(R.id.nobids).setVisibility(View.GONE);
+                            }
                             BidsAdapter walletAdapter = new BidsAdapter(view.getContext(), cartItems);
-                            Past t = new Past(view.getContext(), pastItems);
-                            pastItems.sort(new sortTime2());
-                            pastList.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                            pastList.setAdapter(t);
+                            //Past t = new Past(view.getContext(), pastItems);
+                            //pastItems.sort(new sortTime2());
                             Drawable horizontalDivider = ContextCompat.getDrawable(view.getContext(), R.drawable.horizontal);
                             DividerItemDecoration horizontalDecoration = new DividerItemDecoration(cartList.getContext(),
                                     DividerItemDecoration.VERTICAL);
@@ -132,6 +135,7 @@ public class MyBidsFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+
                     }
                 });
 
@@ -139,75 +143,75 @@ public class MyBidsFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    class Past extends RecyclerView.Adapter<Past.ViewHolder> {
-
-        ArrayList<CartItems> cartList;
-        Context mContext;
-        Date startDate1;
-
-        public Past(Context context, ArrayList<CartItems> heroList) {
-            mContext = context;
-            this.cartList = heroList;
-        }
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mybid_layout, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull final Past.ViewHolder holder, final int position) {
-
-            holder.image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ProductDescription ldf = new ProductDescription();
-                    Bundle args = new Bundle();
-                    args.putString("YourKey", pastItems.get(position).getId());
-                    args.putString("show", "no");
-                    args.putString("im", pastItems.get(position).getImage_url());
-                    ldf.setArguments(args);
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack(null).commit();
-                }
-            });
-
-            holder.amount.setText("Your bid: "+pastItems.get(position).getMybid());
-
-            holder.title.setText(pastItems.get(position).getTitleCart());
-
-            holder.date.setText("Expired");
-
-            holder.date.setTextColor(Color.RED);
-
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(pastItems.get(position).getImage_url())
-                    .into(holder.image);
-        }
-
-        @Override
-        public int getItemCount() {
-            return cartList.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-
-            ImageView image;
-            TextView title;
-            TextView amount;
-            TextView date;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                title = (TextView) itemView.findViewById(R.id.titleMyBid);
-                amount = (TextView) itemView.findViewById(R.id.yourBid);
-                image = (ImageView) itemView.findViewById(R.id.myBidImage);
-                date = (TextView) itemView.findViewById(R.id.status);
-            }
-        }
-    }
+//    class Past extends RecyclerView.Adapter<Past.ViewHolder> {
+//
+//        ArrayList<CartItems> cartList;
+//        Context mContext;
+//        Date startDate1;
+//
+//        public Past(Context context, ArrayList<CartItems> heroList) {
+//            mContext = context;
+//            this.cartList = heroList;
+//        }
+//
+//        @NonNull
+//        @Override
+//        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mybid_layout, parent, false);
+//            return new ViewHolder(view);
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(@NonNull final Past.ViewHolder holder, final int position) {
+//
+//            holder.image.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    ProductDescription ldf = new ProductDescription();
+//                    Bundle args = new Bundle();
+//                    args.putString("YourKey", pastItems.get(position).getId());
+//                    args.putString("show", "no");
+//                    args.putString("im", pastItems.get(position).getImage_url());
+//                    ldf.setArguments(args);
+//                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack(null).commit();
+//                }
+//            });
+//
+//            holder.amount.setText("Your bid: "+pastItems.get(position).getMybid());
+//
+//            holder.title.setText(pastItems.get(position).getTitleCart());
+//
+//            holder.date.setText("Expired");
+//
+//            holder.date.setTextColor(Color.RED);
+//
+//            Glide.with(mContext)
+//                    .asBitmap()
+//                    .load(pastItems.get(position).getImage_url())
+//                    .into(holder.image);
+//        }
+//
+//        @Override
+//        public int getItemCount() {
+//            return cartList.size();
+//        }
+//
+//        public class ViewHolder extends RecyclerView.ViewHolder {
+//
+//            ImageView image;
+//            TextView title;
+//            TextView amount;
+//            TextView date;
+//
+//            public ViewHolder(View itemView) {
+//                super(itemView);
+//                title = (TextView) itemView.findViewById(R.id.titleMyBid);
+//                amount = (TextView) itemView.findViewById(R.id.yourBid);
+//                image = (ImageView) itemView.findViewById(R.id.myBidImage);
+//                date = (TextView) itemView.findViewById(R.id.status);
+//            }
+//        }
+//    }
 
     class BidsAdapter extends RecyclerView.Adapter<BidsAdapter.ViewHolder> {
 
@@ -334,6 +338,11 @@ public class MyBidsFragment extends Fragment {
     }
 
     class sortTime implements Comparator<CartItems> {
+
+
+
+
+
         // Used for sorting in ascending order of
         // roll number
         public int compare(CartItems a, CartItems b) {

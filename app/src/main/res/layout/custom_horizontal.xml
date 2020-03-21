@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     android:background="@drawable/item_bg"
-    android:elevation="10dp">
+    android:paddingTop="10dp"
+    android:paddingBottom="5dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,8 +23,6 @@
             android:clipToPadding="false"
             android:divider="@android:color/transparent"
             android:dividerHeight="0.0px"
-            android:elevation="4dp"
-            card_view:cardElevation="4dp"
             card_view:cardPreventCornerOverlap="false">
 
             <LinearLayout
@@ -55,6 +54,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/circularstd"
                                 android:text="Flash sale"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white"
@@ -83,10 +83,11 @@
 
                     <TextView
                         android:id="@+id/time"
-                        android:padding="2dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
+                        android:layout_marginRight="5dp"
+                        android:padding="2dp"
                         android:textColor="@android:color/holo_green_light"
                         android:textSize="12dp" />
 
@@ -113,12 +114,13 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_marginLeft="5dp"
                         android:id="@+id/name"
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:textColor="@color/black"
+                        android:fontFamily="@font/helvetica"
+                        android:textColor="#4a4a4a"
                         android:textSize="12dp" />
 
 
@@ -142,38 +144,34 @@
 
                     <TextView
                         android:id="@+id/sprp"
-                        android:layout_marginRight="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="12dp" />
-
-                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/name"
-                        android:layout_alignParentEnd="true"
-                        android:textSize="1dp" />
-
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:height="30dp"
+                        android:fontFamily="@font/dmsansregular"
+                        android:gravity="center_vertical"
+                        android:textColor="#525d68"
+                        android:textSize="12dp" />
 
                     <Button
                         android:id="@+id/bidbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_below="@+id/sprp"
-                        android:layout_centerHorizontal="true"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/name"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
-                        android:background="@drawable/gradient_curved"
-                        android:paddingRight="20dp"
-                        android:paddingLeft="20dp"
+                        android:background="@drawable/bidbuttonbg"
+                        android:fontFamily="@font/ralewaybold"
+                        android:text="Bid"
                         android:textAllCaps="false"
-                        android:text="Bid Now"
                         android:textColor="#FFF"
-                        android:textSize="12dp"
-                        android:visibility="visible" />
+                        android:textSize="14dp"
+                        android:visibility="visible">
+
+                    </Button>
 
                 </RelativeLayout>
 

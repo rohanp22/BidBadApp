@@ -62,6 +62,7 @@ public class Signup extends AppCompatActivity {
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/round.otf");
 
         create.setTypeface(custom_font);
+        phoneNumberString = getIntent().getStringExtra("mobile");
 
         terms = (TextView) findViewById(R.id.txt_terms);
         terms.setOnClickListener(new View.OnClickListener() {
@@ -79,20 +80,6 @@ public class Signup extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Signup.this, Login.class);
                 startActivity(intent);
-            }
-        });
-
-        AccountKit.getCurrentAccount(new AccountKitCallback<Account>() {
-            @Override
-            public void onSuccess(final Account account) {
-                String accountKitId = account.getId();
-                PhoneNumber phoneNumber = account.getPhoneNumber();
-                phoneNumberString = phoneNumber.toString();
-            }
-
-            @Override
-            public void onError(final AccountKitError error) {
-                // Handle Error
             }
         });
 

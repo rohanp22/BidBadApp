@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/feedback_bg"
@@ -9,7 +10,7 @@
         android:id="@+id/feedbackText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:textSize="18dp"
         android:text="Feedback"
@@ -52,6 +53,7 @@
         android:layout_below="@id/ratingBar"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
+        android:nestedScrollingEnabled="true"
         android:layout_marginRight="30dp"
         android:background="@drawable/drawable_uname"
         android:gravity="left"
@@ -60,7 +62,8 @@
         android:inputType="textMultiLine"
         android:lines="4"
         android:padding="10dp"
-        android:textColorHint="@color/gray" />
+        android:textColorHint="@color/gray"
+        tools:ignore="RtlHardcoded" />
 
     <LinearLayout
         android:layout_marginTop="50dp"
@@ -78,7 +81,6 @@
             android:background="@color/white"
             android:textColor="@color/black"
             android:textAllCaps="false" />
-
 
         <Button
             android:textColor="@color/white"

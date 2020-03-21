@@ -7,21 +7,21 @@
     tools:context=".Fragments.MyBidsFragment">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No bids currently, Start bidding"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/nobids"/>
+
+    <TextView
         android:id="@+id/textviewmybids1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="My Bids"
+        android:text="Ongoing Bids"
         android:textColor="@color/black"
         android:textSize="20dp" />
-
-    <View
-        android:elevation="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_below="@+id/textviewmybids1"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_marginTop="10dp"
@@ -40,24 +40,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:scrollbars="none" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Completed Bids"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
-                android:textSize="20dp"/>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="10dp"
-                android:id="@+id/mypastbids"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:scrollbars="none" />

@@ -17,19 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoactionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BottomSheetProduct"></activity>
-        <activity
-            android:name=".ProductDes"
-            android:label="@string/title_activity_product_des"
-            android:theme="@style/AppTheme.NoactionBar.NoActionBar" />
+        <activity android:name=".Activities.ProfileActivity"></activity>
+        <activity android:name=".PhoneVerification" />
+        <activity android:name=".BottomSheetProduct" />
         <activity android:name=".Activities.PlaceOrder" />
         <activity
             android:name=".Activities.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
             android:parentActivityName=".Activities.AddMoney"
             android:theme="@style/AppTheme.NoactionBar.NoActionBar" />
-        <activity android:name=".Others.AccountKitLoginActivity" />
-        <activity android:name=".Otp" />
         <activity android:name=".Activities.PlaceBid" />
         <activity android:name=".Activities.AddMoney" />
         <activity android:name=".Activities.ProductDescription" />

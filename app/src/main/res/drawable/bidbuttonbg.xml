@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Drop Shadow Stack -->
+    <item>
+        <shape>
+            <padding android:bottom="1dp" android:left="1dp" />
+            <stroke android:color="#05000000" android:width="1dp" />
+            <corners android:bottomLeftRadius="50dp"
+                android:topLeftRadius="50dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="1dp" android:left="1dp" />
+            <stroke android:color="#10000000" android:width="1dp" />
+            <corners android:bottomLeftRadius="50dp"
+                android:topLeftRadius="50dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="1dp" android:left="1dp" />
+            <stroke android:color="#15000000" android:width="1dp" />
+            <corners android:bottomLeftRadius="50dp"
+                android:topLeftRadius="50dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="1dp" android:left="1dp" />
+            <stroke android:color="#20000000" android:width="1dp" />
+            <corners android:bottomLeftRadius="50dp"
+                android:topLeftRadius="50dp"/>
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="1dp" android:left="1dp" />
+            <stroke android:color="#25000000" android:width="1dp" />
+            <corners android:bottomLeftRadius="50dp"
+                android:topLeftRadius="50dp"/>
+        </shape>
+    </item>
+
+    <!-- Background -->
+    <item>
+        <shape android:id="@+id/rectangle">
+            <solid android:color="#fff"/>
+            <gradient
+                android:startColor="@color/colorPrimary"
+                android:endColor="@color/colorPrimaryDark"
+                android:angle="45"/>
+
+            <corners
+                android:topLeftRadius="50dp"
+                android:bottomLeftRadius="50dp"/>
+        </shape>
+    </item>
+</layer-list>

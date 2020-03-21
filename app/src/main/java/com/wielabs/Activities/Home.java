@@ -21,7 +21,6 @@ import com.wielabs.Fragments.FeedbackBottomDialogFragment;
 import com.wielabs.Fragments.HomeFragment;
 import com.wielabs.Fragments.MyBidsFragment;
 import com.wielabs.Fragments.MyOrdersFragment;
-import com.wielabs.Fragments.NotificationsFragment;
 import com.wielabs.Fragments.PastFragment;
 import com.wielabs.Fragments.PrivacyPolicy;
 import com.wielabs.Fragments.SendFeedback;
@@ -29,10 +28,8 @@ import com.wielabs.Fragments.SettingsFragment;
 import com.wielabs.Fragments.TermsAndConditions;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -43,12 +40,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
-
-import java.util.HashMap;
 
 public class Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ActionBottomDialogFragment.ItemClickListener, FeedbackBottomDialogFragment.ItemClickListener {
 
@@ -57,6 +51,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     FloatingActionButton fab;
     BottomAppBar nav;
     BottomAppBar bottomAppBar;
+    TextView homeText, resultsText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +83,10 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
 //        navigation = findViewById(R.id.nav_view);
 //        navigation.setOnNavigationItemSelectedListener(this);
         nav = findViewById(R.id.bar);
+
+
+        homeText = findViewById(R.id.homeText);
+        resultsText = findViewById(R.id.resultsText);
 
         fab = findViewById(R.id.fabhome);
         fab.setOnClickListener(new View.OnClickListener() {

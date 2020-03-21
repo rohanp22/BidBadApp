@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">?android:windowBackground</item>
     </style>
 
     <!-- Base application theme. -->
@@ -54,5 +56,19 @@
         <item name="colorControlNormal">@color/colorPrimaryDark</item>
         <item name="colorControlActivated">@color/gray</item>
     </style>
+
+
+    -<style parent="Theme.MaterialComponents.Light.NoActionBar" name="AppThemeNew">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:windowLightStatusBar">true</item>
+    <item name="android:statusBarColor">?android:windowBackground</item>
+</style>
+    <style parent="TextAppearance.MaterialComponents.Headline6" name="ToolbarTitle">
+    <item name="fontFamily">@font/dmsansregular</item>
+    <item name="android:textStyle">bold</item>
+</style>
 
 </resources>

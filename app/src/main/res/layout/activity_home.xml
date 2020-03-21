@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,17 +19,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:borderWidth="0dp"
+        android:elevation="10dp"
+        android:src="@drawable/ic_b_iocn"
+        app:fabCustomSize="48dp"
+        app:backgroundTint="@color/gradient_color"
         app:layout_anchor="@id/bar"
         android:id="@+id/fabhome"/>
+
+    <View
+        android:id="@+id/shadowview"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_anchor="@id/bar"
+        android:background="@drawable/shape_drawable" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bar"
         android:layout_height="?actionBarSize"
         android:layout_gravity="bottom"
         app:fabCradleRoundedCornerRadius="40dp"
-        app:backgroundTint="@color/colorPrimaryDark"
-        app:hideOnScroll="true"
-        app:fabCradleMargin="6dp"
+        app:backgroundTint="@color/white"
+        app:hideOnScroll="false"
+        app:fabCradleMargin="0dp"
+        app:fabAlignmentMode="center"
         android:theme="@style/Widget.MaterialComponents.BottomAppBar"
         app:popupTheme="@style/AppTheme.NoactionBar.PopupOverlay"
         android:layout_width="match_parent">
@@ -40,67 +52,75 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_marginTop="6dp"
+            <RelativeLayout
                 android:layout_weight="1"
-                android:id="@+id/homeLayout"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/bottomHome"
-                android:layout_width="16dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_home_black_24dp" />
-
-                <TextView
+                <LinearLayout
+                    android:layout_marginTop="6dp"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/homeLayout"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:textSize="12dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Home"/>
+                    android:layout_height="20dp">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_home_alt" />
+
+                    <TextView
+                        android:visibility="visible"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/homeText"
+                        android:text="Home"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:orientation="vertical"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:visibility="invisible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_marginTop="6dp"
-                android:layout_weight="1"
+                android:layout_centerInParent="true"
                 android:id="@+id/completedLayout"
-                android:orientation="vertical"
-                android:layout_gravity="center"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="20dp">
 
                 <ImageView
-                    android:id="@+id/bottomCompleted"
-                    android:layout_width="16dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_dashboard_black_24dp" />
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_circle_star" />
 
                 <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:textSize="12dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Completed"/>
+                    android:id="@+id/resultsText"
+                    android:text="Results"/>
 
             </LinearLayout>
+
+            </RelativeLayout>
 
         </LinearLayout>
 

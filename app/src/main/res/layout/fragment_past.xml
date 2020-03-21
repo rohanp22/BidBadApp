@@ -31,12 +31,42 @@
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 
+            <LinearLayout
+                android:layout_below="@id/textviewpast1"
+                android:layout_width="match_parent"
+                android:id="@+id/completedButtons"
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All"
+                    android:id="@+id/all"
+                    android:textAllCaps="false"
+                    android:background="@drawable/gradient_curved"
+                    android:textColor="@color/white"/>
+
+                <Button
+                    android:id="@+id/onlymybids"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_curved"
+                    android:text="My bids"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"/>
+
+            </LinearLayout>
+
             <!-- TODO: Update blank fragment layout -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pastItemsList"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textviewpast1"
+                android:layout_below="@+id/completedButtons"
                 android:layout_marginBottom="50dp"
                 android:scrollbars="none" />
 

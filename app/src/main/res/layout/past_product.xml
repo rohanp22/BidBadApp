@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:paddingLeft="5dp"
     android:layout_marginBottom="5dp"
     android:paddingRight="5dp">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="8dp"
@@ -17,15 +18,20 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
         <RelativeLayout
+            android:id="@+id/relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="20dp"
             android:paddingTop="12dp"
-            android:paddingEnd="12dp"
             android:paddingBottom="12dp">
 
             <TextView
+                android:paddingStart="20dp"
                 android:id="@+id/bidTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,6 +44,7 @@
                 android:id="@+id/bidImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:layout_marginEnd="12dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/placekitten_1"
@@ -46,6 +53,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:paddingStart="20dp"
                 android:id="@+id/bidWinner1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,6 +64,7 @@
                 android:textSize="14dp" />
 
             <TextView
+                android:paddingStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/bidWinner"
@@ -64,6 +73,7 @@
                 android:layout_below="@+id/bidWinner1"/>
 
             <TextView
+                android:layout_marginStart="20dp"
                 android:id="@+id/bidPrice"
                 android:background="@drawable/rounded_bg"
                 android:layout_width="wrap_content"
@@ -80,6 +90,7 @@
                 android:textSize="12dp" />
 
             <TextView
+                android:paddingStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,8 +99,59 @@
                 android:layout_below="@id/bidPrice"
                 android:textColor="@color/gray"/>
 
+<!--            <View-->
+<!--                android:layout_below="@id/datetime"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:id="@+id/divider"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:background="@color/gray"/>-->
+
+
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/showHistory"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:paddingTop="5dp"-->
+<!--                android:paddingBottom="5dp"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_below="@id/divider"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <TextView-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Show Bid history"/>-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/down"-->
+<!--                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:layout_alignParentRight="true"/>-->
+
+<!--            </RelativeLayout>-->
 
         </RelativeLayout>
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/expandedLayout"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent">-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/bidHistory"-->
+<!--                android:nestedScrollingEnabled="true"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"/>-->
+
+<!--        </RelativeLayout>-->
+
+        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

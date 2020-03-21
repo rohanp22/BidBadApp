@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wielabs.Others.AccountKitLoginActivity;
+import com.wielabs.PhoneVerification;
 import com.wielabs.R;
 import com.wielabs.Others.RequestHandler;
 import com.wielabs.Others.SharedPrefManager;
@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, AccountKitLoginActivity.class);
+                Intent intent = new Intent(Login.this, PhoneVerification.class);
                 startActivity(intent);
             }
         });
