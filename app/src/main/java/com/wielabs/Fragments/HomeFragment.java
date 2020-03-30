@@ -54,6 +54,7 @@ import com.smarteist.autoimageslider.SliderView;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.wielabs.Activities.AddMoney;
 import com.wielabs.Activities.Home;
+import com.wielabs.Activities.ProfileActivity;
 import com.wielabs.BottomSheetProduct;
 import com.wielabs.DetailsTransition;
 import com.wielabs.LeaderBoardFragment;
@@ -148,7 +149,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             case "Settings" : getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
                             break;
 
-                            case "Profile" : getFragmentManager().beginTransaction().replace(R.id.fragment_container, new LeaderBoardFragment()).commit();
+                            case "Profile" : startActivity(new Intent(view.getContext(), ProfileActivity.class));
                             break;
                         }
                         return true;
