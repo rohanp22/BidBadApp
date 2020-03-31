@@ -180,17 +180,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         sliderView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.HORIZONTAL, false));
         SliderAdapter adapter = new SliderAdapter(view.getContext(), sliderView);
         sliderView.setAdapter(adapter);
-
-//        SliderAdapterExample adapter2 = new SliderAdapterExample(view.getContext());
-//
-//        sliderView.setSliderAdapter(adapter2);
-//
-//        sliderView.setNextFocusRightId(1);
-//        sliderView.setIndicatorAnimation(IndicatorAnimations.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-//        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-//        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
-//        sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
-//        sliderView.startAutoCycle();
     }
 
     void loadCurrentProducts(final View view) {

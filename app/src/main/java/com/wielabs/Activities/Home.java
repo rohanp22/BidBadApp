@@ -9,6 +9,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -41,6 +43,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,13 +54,16 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     FloatingActionButton fab;
     BottomAppBar nav;
     BottomAppBar bottomAppBar;
-    TextView homeText, resultsText;
+    RelativeLayout blank;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        blank = findViewById(R.id.blank);
+        linearLayout = (LinearLayout) findViewById(R.id.bottomlinear);
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
@@ -78,17 +84,13 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                     }
                 });
 
+        fab = findViewById(R.id.fabhome);
         fragment = new HomeFragment();
         loadFragment(new HomeFragment(), "Home");
 //        navigation = findViewById(R.id.nav_view);
 //        navigation.setOnNavigationItemSelectedListener(this);
         nav = findViewById(R.id.bar);
 
-
-        homeText = findViewById(R.id.homeText);
-        resultsText = findViewById(R.id.resultsText);
-
-        fab = findViewById(R.id.fabhome);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,10 +102,13 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             }
         });
 
-        LinearLayout home = findViewById(R.id.homeLayout);
+        final LinearLayout home = findViewById(R.id.homeLayout);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                YoYo.with(Techniques.RotateInUpLeft)
+                        .duration(700)
+                        .playOn(home);
                 loadFragment(new HomeFragment(), "home");
             }
         });
@@ -121,9 +126,8 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(Home.this, R.color.colorPrimary));
 
-            bottomAppBar = (BottomAppBar) findViewById(R.id.bar);
+        bottomAppBar = (BottomAppBar) findViewById(R.id.bar);
 //        bottomAppBar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_home_black_24dp));
-
 
         setSupportActionBar(bottomAppBar);
 
@@ -207,9 +211,22 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         return loadFragment(fragment, name);
     }
 
+    @SuppressLint("RestrictedApi")
     private boolean loadFragment(Fragment fragment, String name) {
 
         if (fragment != null) {
+
+            if(!(fragment instanceof HomeFragment)){
+                fab.setVisibility(View.GONE);
+                blank.setVisibility(View.GONE);
+                linearLayout.setWeightSum(4);
+
+            } else {
+                fab.setVisibility(View.VISIBLE);
+                blank.setVisibility(View.VISIBLE);
+                linearLayout.setWeightSum(5);
+            }
+
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)

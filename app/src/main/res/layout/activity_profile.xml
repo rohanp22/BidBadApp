@@ -239,14 +239,9 @@
         android:weightSum="4">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-
-        <RelativeLayout
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_centerHorizontal="true"
@@ -260,22 +255,17 @@
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:text="Orders"
                 android:textSize="12dp" />
 
         </RelativeLayout>
 
-        </RelativeLayout>
-
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-        <RelativeLayout
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_centerHorizontal="true"
@@ -289,23 +279,16 @@
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
                 android:text="Cancelled"
                 android:textSize="12dp" />
 
         </RelativeLayout>
 
-        </RelativeLayout>
-
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-
-        <RelativeLayout
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/notifications"
@@ -319,23 +302,16 @@
                 android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
                 android:text="Notifications"
                 android:textSize="12dp" />
 
         </RelativeLayout>
 
-        </RelativeLayout>
-
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-
-        <RelativeLayout
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/invite"
@@ -349,11 +325,9 @@
                 android:layout_below="@id/invite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
                 android:text="Invite"
                 android:textSize="12dp" />
-
-        </RelativeLayout>
 
         </RelativeLayout>
 
@@ -365,23 +339,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/linearlayout2"
         android:layout_marginTop="20dp"
-        android:weightSum="2">
+        android:weightSum="4">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_weight="3">
-
-        <RelativeLayout
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:layout_gravity="center_horizontal"
                 android:id="@+id/wishlist"
-                android:layout_centerHorizontal="true"
                 android:src="@drawable/logo" />
 
             <TextView
@@ -392,24 +362,18 @@
                 android:text="wishlist"
                 android:textSize="12dp" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_weight="3">
-
-        <RelativeLayout
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
                 android:id="@+id/payments"
                 android:src="@drawable/logo" />
 
@@ -421,9 +385,7 @@
                 android:layout_below="@id/payments"
                 android:textSize="12dp" />
 
-        </RelativeLayout>
-
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -436,9 +398,10 @@
         android:background="@color/gray" />
 
     <ListView
+        android:id="@+id/profilelist"
+        android:divider="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view2"
-        android:layout_marginLeft="20dp" />
+        android:layout_below="@+id/view2" />
 
 </RelativeLayout>

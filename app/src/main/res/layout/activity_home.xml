@@ -42,13 +42,12 @@
         app:hideOnScroll="false"
         app:fabCradleMargin="0dp"
         app:fabAlignmentMode="center"
-        android:theme="@style/Widget.MaterialComponents.BottomAppBar"
-        app:popupTheme="@style/AppTheme.NoactionBar.PopupOverlay"
         android:layout_width="match_parent">
 
         <LinearLayout
-            android:weightSum="3"
+            android:weightSum="5"
             android:orientation="horizontal"
+            android:id="@+id/bottomlinear"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -70,14 +69,26 @@
                         android:layout_height="20dp"
                         android:src="@drawable/ic_home_alt" />
 
-                    <TextView
-                        android:visibility="visible"
-                        android:layout_marginLeft="5dp"
-                        android:layout_width="wrap_content"
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_marginTop="6dp"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:id="@+id/homeText"
-                        android:text="Home"/>
+                        android:src="@drawable/ic_home_alt" />
 
                 </LinearLayout>
 
@@ -86,9 +97,31 @@
             <RelativeLayout
                 android:orientation="vertical"
                 android:layout_weight="1"
+                android:id="@+id/blank"
                 android:visibility="invisible"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_marginTop="6dp"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_home_alt" />
+
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -109,14 +142,6 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_circle_star" />
-
-                <TextView
-                    android:layout_marginLeft="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:id="@+id/resultsText"
-                    android:text="Results"/>
 
             </LinearLayout>
 
