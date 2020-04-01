@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="#fff"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            app:title="Profile"
+            app:titleTextAppearance="@style/ToolbarTitle" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:overScrollMode="never">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:padding="24dp"
+            tools:context=".ProfileFragment">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePic"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_pic_sample"
+                app:layout_constraintBottom_toBottomOf="@id/profileLevel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/profileName" />
+
+            <TextView
+                android:id="@+id/profileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Eyal ZuriMy"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/profilePic"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/profileEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:src="@drawable/edit_circle"
+                app:layout_constraintBottom_toBottomOf="@+id/profileLevel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/profileName" />
+
+            <TextView
+                android:id="@+id/profileLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/gradient_curved"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="4dp"
+                android:text="Level 3"
+                android:textColor="?android:textColorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/profileName"
+                app:layout_constraintTop_toBottomOf="@+id/profileName" />
+
+            <TextView
+                android:id="@+id/profileBids"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="48dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="3"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/profileWins"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileLevel" />
+
+            <TextView
+                android:id="@+id/profileWins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/profileBids"
+                app:layout_constraintEnd_toStartOf="@+id/profileRewards"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/profileBids"
+                app:layout_constraintTop_toTopOf="@+id/profileBids" />
+
+            <TextView
+                android:id="@+id/profileRewards"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="320"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/profileWins"
+                app:layout_constraintEnd_toStartOf="@+id/profileProducts"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/profileWins"
+                app:layout_constraintTop_toTopOf="@+id/profileWins" />
+
+            <TextView
+                android:id="@+id/profileProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="1"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/profileRewards"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/profileRewards"
+                app:layout_constraintTop_toTopOf="@+id/profileRewards" />
+
+            <TextView
+                android:id="@+id/profileTextBids"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Bids"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/profileBids"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/profileBids"
+                app:layout_constraintTop_toBottomOf="@+id/profileBids" />
+
+            <TextView
+                android:id="@+id/profileTextWins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Wins"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/profileTextBids"
+                app:layout_constraintEnd_toEndOf="@+id/profileWins"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/profileWins"
+                app:layout_constraintTop_toBottomOf="@+id/profileBids" />
+
+            <TextView
+                android:id="@+id/profileTextRewards"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Rewards"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/profileTextWins"
+                app:layout_constraintEnd_toEndOf="@+id/profileRewards"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/profileRewards"
+                app:layout_constraintTop_toBottomOf="@+id/profileBids" />
+
+            <TextView
+                android:id="@+id/profileTextProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Products"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/profileTextRewards"
+                app:layout_constraintEnd_toEndOf="@+id/profileProducts"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/profileProducts"
+                app:layout_constraintTop_toBottomOf="@+id/profileBids" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginStart="-24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="-24dp"
+                android:background="#f2f2f2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileTextBids" />
+
+            <TextView
+                android:id="@+id/profileOrdersTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Order &amp; Stuff"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/profileTextBids"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/profileOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:drawableTop="@drawable/ic_supermarket"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Orders"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/profileCancelled"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileOrdersTitle" />
+
+            <TextView
+                android:id="@+id/profileCancelled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:drawableTop="@drawable/ic_order_cancelled"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Cancelled"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/profileOrders"
+                app:layout_constraintEnd_toStartOf="@+id/profileNotifications"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/profileOrders"
+                app:layout_constraintTop_toBottomOf="@+id/profileOrdersTitle" />
+
+            <TextView
+                android:id="@+id/profileNotifications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:drawableTop="@drawable/ic_tips"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Notifications"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/profileCancelled"
+                app:layout_constraintEnd_toStartOf="@+id/profileInvite"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/profileCancelled"
+                app:layout_constraintTop_toBottomOf="@+id/profileOrdersTitle" />
+
+            <TextView
+                android:id="@+id/profileInvite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:drawableTop="@drawable/ic_mail"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Invite"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/profileNotifications"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/profileNotifications"
+                app:layout_constraintTop_toBottomOf="@+id/profileOrdersTitle" />
+
+            <TextView
+                android:id="@+id/profileWishList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:drawableTop="@drawable/ic_wishlist"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="WishList"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/profileOrders"
+                app:layout_constraintStart_toStartOf="@+id/profileOrders"
+                app:layout_constraintTop_toBottomOf="@+id/profileOrders" />
+
+            <TextView
+                android:id="@+id/profileUpi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_payment"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Payments"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/profileCancelled"
+                app:layout_constraintStart_toStartOf="@+id/profileCancelled"
+                app:layout_constraintTop_toTopOf="@+id/profileWishList" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginStart="-24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="-24dp"
+                android:background="#f2f2f2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileWishList" />
+
+            <TextView
+                android:id="@+id/profileHowToBid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-24dp"
+                android:layout_marginEnd="-24dp"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_joystick"
+                android:drawableEnd="@drawable/ic_navigate_next"
+                android:drawablePadding="16dp"
+                android:focusable="true"
+                android:fontFamily="@font/dm_sans_regular"
+                android:gravity="center_vertical"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="16dp"
+                android:text="How to play"
+                android:textColor="?android:textColorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+            <TextView
+                android:id="@+id/profileSendFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-24dp"
+                android:layout_marginEnd="-24dp"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_letter"
+                android:drawableEnd="@drawable/ic_navigate_next"
+                android:drawablePadding="16dp"
+                android:focusable="true"
+                android:fontFamily="@font/dm_sans_regular"
+                android:gravity="center_vertical"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="16dp"
+                android:text="Send feedback"
+                android:textColor="?android:textColorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileHowToBid" />
+
+            <TextView
+                android:id="@+id/profileTermsAndConditions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-24dp"
+                android:layout_marginEnd="-24dp"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_terms_and_conditions"
+                android:drawableEnd="@drawable/ic_navigate_next"
+                android:drawablePadding="16dp"
+                android:focusable="true"
+                android:fontFamily="@font/dm_sans_regular"
+                android:gravity="center_vertical"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="16dp"
+                android:text="Terms and conditons"
+                android:textColor="?android:textColorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileSendFeedback" />
+
+            <TextView
+                android:id="@+id/profilePrivacyPolicy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-24dp"
+                android:layout_marginEnd="-24dp"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_privacy_policy"
+                android:drawableEnd="@drawable/ic_navigate_next"
+                android:drawablePadding="16dp"
+                android:focusable="true"
+                android:fontFamily="@font/dm_sans_regular"
+                android:gravity="center_vertical"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="16dp"
+                android:text="Privacy policy"
+                android:textColor="?android:textColorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileTermsAndConditions" />
+
+            <TextView
+                android:id="@+id/profileSupport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-24dp"
+                android:layout_marginEnd="-24dp"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_customer_service"
+                android:drawableEnd="@drawable/ic_navigate_next"
+                android:drawablePadding="16dp"
+                android:focusable="true"
+                android:fontFamily="@font/dm_sans_regular"
+                android:gravity="center_vertical"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="16dp"
+                android:text="Support"
+                android:textColor="?android:textColorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profilePrivacyPolicy" />
+
+            <TextView
+                android:id="@+id/profileLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-24dp"
+                android:layout_marginEnd="-24dp"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_logout"
+                android:drawableEnd="@drawable/ic_navigate_next"
+                android:drawablePadding="16dp"
+                android:focusable="true"
+                android:fontFamily="@font/dm_sans_regular"
+                android:gravity="center_vertical"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="16dp"
+                android:text="Logout"
+                android:textColor="?android:textColorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profileSupport" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

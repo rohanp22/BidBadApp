@@ -147,10 +147,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     public boolean onMenuItemClick(MenuItem item) {
                         switch(item.getTitle().toString()){
                             case "Settings" : getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
-                            break;
+                                break;
 
-                            case "Profile" : startActivity(new Intent(view.getContext(), ProfileActivity.class));
-                            break;
+                            case "Profile" : getFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                                break;
                         }
                         return true;
                     }
