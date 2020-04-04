@@ -46,7 +46,7 @@ public class PhoneVerification extends AppCompatActivity {
 
                 Toast.makeText(PhoneVerification.this, "Verified", Toast.LENGTH_LONG);
                 Intent i = new Intent(PhoneVerification.this, Signup.class);
-                i.putExtra("mobile", mobile.getText().toString());
+                i.putExtra("mobile", "91"+mobile.getText().toString());
                 startActivity(i);
             }
 

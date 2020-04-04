@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.github.javiersantos.appupdater.AppUpdater;
+import com.github.javiersantos.appupdater.enums.Display;
 import com.wielabs.Fragments.HomeFragment;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
@@ -23,6 +25,21 @@ public class Splash extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+
+        AppUpdater appUpdater = new AppUpdater(Splash.this);
+        appUpdater.setDisplay(Display.DIALOG);
+        appUpdater.setUpdateJSON("http://easyvela.esy.es/AndroidAPI/update.json");
+        appUpdater.setTitleOnUpdateAvailable("Update available")
+                .setContentOnUpdateAvailable("Check out the latest version available of my app!")
+                .setTitleOnUpdateNotAvailable("Update not available")
+                .setContentOnUpdateNotAvailable("No update available. Check for updates again later!")
+                .setButtonUpdate("Update now?")
+	            .setButtonDismiss("Maybe later")
+	            .setButtonDoNotShowAgain("Huh, not interested")
+	            .setIcon(R.drawable.logo) // Notification icon
+                .setCancelable(false);
+
+        appUpdater.start();
 
         if(SharedPrefManager.getInstance(this).isLoggedIn()){
             i = new Intent(Splash.this, Home.class);

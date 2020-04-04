@@ -1,166 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:text="@string/title_home"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:text="@string/title_home"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabhome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:borderWidth="0dp"
         android:elevation="10dp"
         android:src="@drawable/ic_b_iocn"
-        app:fabCustomSize="48dp"
         app:backgroundTint="@color/gradient_color"
-        app:layout_anchor="@id/bar"
-        android:id="@+id/fabhome"/>
+        app:borderWidth="0dp"
+        app:fabCustomSize="48dp"
+        app:layout_anchor="@id/bar" />
 
     <View
         android:id="@+id/shadowview"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:layout_anchor="@id/bar"
-        android:background="@drawable/shape_drawable" />
+        android:background="@drawable/shape_drawable"
+        app:layout_anchor="@id/bar" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bar"
+        android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_gravity="bottom"
-        app:fabCradleRoundedCornerRadius="40dp"
         app:backgroundTint="@color/white"
-        app:hideOnScroll="false"
-        app:fabCradleMargin="0dp"
         app:fabAlignmentMode="center"
-        android:layout_width="match_parent">
+        app:fabCradleMargin="0dp"
+        app:fabCradleRoundedCornerRadius="40dp"
+        app:hideOnScroll="false">
 
         <LinearLayout
-            android:weightSum="5"
-            android:orientation="horizontal"
-            android:id="@+id/bottomlinear"
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="5">
 
             <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <LinearLayout
-                    android:layout_marginTop="6dp"
+                    android:animateLayoutChanges="true"
                     android:layout_centerInParent="true"
-                    android:id="@+id/homeLayout"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_home_alt" />
+                        android:id="@+id/homeIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_home_alt"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:drawableStart="@drawable/circular_bg"
+                        android:textSize="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"/>
 
                 </LinearLayout>
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <LinearLayout
-                    android:layout_marginTop="6dp"
                     android:layout_centerInParent="true"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_home_alt" />
+                        android:id="@+id/resultIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_circle_star"
+                        android:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:text="Results"
+                        android:textSize="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/blankIcon"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:visibility="invisible" />
+
+            <RelativeLayout
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/rewardsIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/reward_stock" />
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:text="Rewards"
+                        android:textSize="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"/>
 
                 </LinearLayout>
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:id="@+id/blank"
-                android:visibility="invisible"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <LinearLayout
-                    android:layout_marginTop="6dp"
                     android:layout_centerInParent="true"
-                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_home_alt" />
+                        android:id="@+id/profileIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/black"
+                        android:src="@drawable/data" />
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="wrap_content"
+                        android:text="Profile"
+                        android:textSize="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"/>
 
                 </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_marginTop="6dp"
-                android:layout_centerInParent="true"
-                android:id="@+id/completedLayout"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_circle_star" />
-
-            </LinearLayout>
 
             </RelativeLayout>
 
         </LinearLayout>
 
     </com.google.android.material.bottomappbar.BottomAppBar>
-
-<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--            android:id="@+id/nav_view"-->
-<!--            app:itemIconSize="20dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:itemBackground="@color/white"-->
-<!--            app:layout_behavior=".Activities.BottomNavigationBehavior"-->
-<!--            android:layout_gravity="bottom"-->
-<!--            app:labelVisibilityMode="unlabeled"-->
-<!--            android:background="?android:attr/windowBackground"-->
-<!--            app:menu="@menu/bottom_nav_menu" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,6 +1,9 @@
 package com.wielabs.Activities;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -9,8 +12,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -25,6 +26,7 @@ import com.wielabs.Fragments.MyBidsFragment;
 import com.wielabs.Fragments.MyOrdersFragment;
 import com.wielabs.Fragments.PastFragment;
 import com.wielabs.Fragments.PrivacyPolicy;
+import com.wielabs.Fragments.ProfileFragment;
 import com.wielabs.Fragments.SendFeedback;
 import com.wielabs.Fragments.SettingsFragment;
 import com.wielabs.Fragments.TermsAndConditions;
@@ -42,9 +44,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ActionBottomDialogFragment.ItemClickListener, FeedbackBottomDialogFragment.ItemClickListener {
@@ -54,7 +60,8 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     FloatingActionButton fab;
     BottomAppBar nav;
     BottomAppBar bottomAppBar;
-    RelativeLayout blank;
+    ImageView reward, profile, results;
+    ImageView blank;
     LinearLayout linearLayout;
 
     @Override
@@ -62,33 +69,101 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        blank = findViewById(R.id.blank);
-        linearLayout = (LinearLayout) findViewById(R.id.bottomlinear);
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (!task.isSuccessful()) {
-                            //Log.w(TAG, "getInstanceId failed", task.getException());
                             return;
                         }
-
-                        // Get new Instance ID token
                         String token = task.getResult().getToken();
-
-                        // Log and toast
-                        //String msg = getString(R.string.msg_token_fmt, token);
                         Log.d("Token", token);
                         sendToken(token);
-                        //Toast.makeText(Home.this, token, Toast.LENGTH_SHORT).show();
                     }
                 });
+        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        blank = (ImageView) findViewById(R.id.blankIcon);
 
         fab = findViewById(R.id.fabhome);
         fragment = new HomeFragment();
         loadFragment(new HomeFragment(), "Home");
-//        navigation = findViewById(R.id.nav_view);
-//        navigation.setOnNavigationItemSelectedListener(this);
+        ImageView home = (ImageView) findViewById(R.id.homeIcon);
+        reward = (ImageView) findViewById(R.id.rewardsIcon);
+        profile = (ImageView) findViewById(R.id.profileIcon);
+        results = (ImageView) findViewById(R.id.resultIcon);
+
+        results.setBackgroundTintList(getColorStateList(R.color.grey_titn));
+        profile.setImageDrawable(getResources().getDrawable(R.drawable.ic_person_black_24dp));
+        reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01));
+        reward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reward.setImageDrawable(getResources().getDrawable(R.drawable.rewars_icon));
+                final AnimatedVectorDrawable rewardanimation = (AnimatedVectorDrawable) reward.getDrawable();
+                rewardanimation.start();
+                results.setBackgroundTintList(getColorStateList(R.color.grey_titn));
+                profile.setImageDrawable(getResources().getDrawable(R.drawable.ic_person_black_24dp));
+
+//                fab.animate()
+//                        .rotationBy(360)        // rest 180 covered by "shrink" animation
+//                        .setDuration(1000)
+//                        .scaleX(0.7f)           //Scaling to 110%
+//                        .scaleY(0.7f)           //Scaling to 110%
+//                        .withEndAction(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                ValueAnimator m1 = ValueAnimator.ofFloat(5, 4); //fromWeight, toWeight
+//                                m1.setDuration(1000);
+//                                m1.setInterpolator(new LinearInterpolator());
+//                                m1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//                                    @Override
+//                                    public void onAnimationUpdate(ValueAnimator animation) {
+//                                        linearLayout.setWeightSum((float) animation.getAnimatedValue());
+//                                        linearLayout.requestLayout();
+//                                    }
+//                                });
+//                                //m1.start();
+//                                blank.setVisibility(View.GONE);
+//                                linearLayout.setWeightSum(4);
+//
+//                                fab.setVisibility(View.GONE);
+//                                //Chaning the icon by the end of animation
+//                            }
+//                        })
+//                        .start();
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01));
+                results.setBackgroundTintList(getColorStateList(R.color.grey_titn));
+                loadFragment(new HomeFragment(), "home");
+            }
+        });
+
+        results.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01));
+                loadFragment(new PastFragment(), "past");
+            }
+        });
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                results.setBackgroundTintList(getColorStateList(R.color.grey_titn));
+                profile.setImageDrawable(getResources().getDrawable(R.drawable.data));
+                reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01));
+                final AnimatedVectorDrawable v = (AnimatedVectorDrawable) profile.getDrawable();
+                v.start();
+                loadFragment(new ProfileFragment(), "profile");
+            }
+        });
+
+
         nav = findViewById(R.id.bar);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -102,24 +177,24 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             }
         });
 
-        final LinearLayout home = findViewById(R.id.homeLayout);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                YoYo.with(Techniques.RotateInUpLeft)
-                        .duration(700)
-                        .playOn(home);
-                loadFragment(new HomeFragment(), "home");
-            }
-        });
-
-        LinearLayout completed = findViewById(R.id.completedLayout);
-        completed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadFragment(new PastFragment(), "past");
-            }
-        });
+//        final LinearLayout home = findViewById(R.id.homeLayout);
+//        home.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                YoYo.with(Techniques.RotateInUpLeft)
+//                        .duration(700)
+//                        .playOn(home);
+//                loadFragment(new HomeFragment(), "home");
+//            }
+//        });
+//
+//        LinearLayout completed = findViewById(R.id.completedLayout);
+//        completed.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                loadFragment(new PastFragment(), "past");
+//            }
+//        });
 
         Window window = Home.this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -128,8 +203,6 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
 
         bottomAppBar = (BottomAppBar) findViewById(R.id.bar);
 //        bottomAppBar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_home_black_24dp));
-
-        setSupportActionBar(bottomAppBar);
 
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,9 +246,6 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
-//        menu.add("Settings");
-//        menu.add("Help");
         return true;
     }
 
@@ -211,22 +281,11 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         return loadFragment(fragment, name);
     }
 
+
     @SuppressLint("RestrictedApi")
-    private boolean loadFragment(Fragment fragment, String name) {
+    private boolean loadFragment(final Fragment fragment, String name) {
 
         if (fragment != null) {
-
-            if(!(fragment instanceof HomeFragment)){
-                fab.setVisibility(View.GONE);
-                blank.setVisibility(View.GONE);
-                linearLayout.setWeightSum(4);
-
-            } else {
-                fab.setVisibility(View.VISIBLE);
-                blank.setVisibility(View.VISIBLE);
-                linearLayout.setWeightSum(5);
-            }
-
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)

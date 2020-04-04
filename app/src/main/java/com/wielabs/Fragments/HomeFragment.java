@@ -16,16 +16,12 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.CountDownTimer;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 import android.transition.Fade;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,16 +44,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.smarteist.autoimageslider.IndicatorAnimations;
-import com.smarteist.autoimageslider.SliderAnimations;
-import com.smarteist.autoimageslider.SliderView;
-import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.wielabs.Activities.AddMoney;
-import com.wielabs.Activities.Home;
-import com.wielabs.Activities.ProfileActivity;
 import com.wielabs.BottomSheetProduct;
 import com.wielabs.DetailsTransition;
-import com.wielabs.LeaderBoardFragment;
 import com.wielabs.ListenerImage;
 import com.wielabs.Models.CartItems;
 import com.wielabs.Models.Current_Product;
@@ -193,6 +182,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                             current_products.clear();
                             JSONObject obj = new JSONObject(response);
                             JSONArray heroArray = obj.getJSONArray("Current_Products");
+                            Log.d("output", response);
                             for (int i = 0; i < heroArray.length(); i++) {
                                 JSONObject heroObject = heroArray.getJSONObject(i);
                                 Current_Product c = new Current_Product(
@@ -225,7 +215,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         RequestQueue requestQueue = Volley.newRequestQueue(this.c);
         requestQueue.add(stringRequest);
-
     }
 
     public RecyclerView recyclerViewCurrent;
@@ -490,68 +479,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
 
             return a1.compareTo(b1);
-        }
-    }
-
-    public class SliderAdapterExample extends SliderViewAdapter<SliderAdapterExample.SliderAdapterVH> {
-
-        public SliderAdapterExample(Context context) {
-        }
-
-        @Override
-        public SliderAdapterExample.SliderAdapterVH onCreateViewHolder(ViewGroup parent) {
-            View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_slider_layout_item, null);
-
-            return new SliderAdapterExample.SliderAdapterVH(inflate);
-        }
-
-        @Override
-        public void onBindViewHolder(SliderAdapterExample.SliderAdapterVH viewHolder, int position) {
-            //viewHolder.textViewDescription.setText("This is slider item " + position);
-            String url = "http://easyvela.esy.es/CurrentProductImages/1-01.jpg";
-            switch (position) {
-                case 0:
-                    Glide.with(viewHolder.itemView)
-                            .load(url)
-                            .into(viewHolder.imageViewBackground);
-                    break;
-                case 1:
-                    Glide.with(viewHolder.itemView)
-                            .load("http://easyvela.esy.es/CurrentProductImages/1-02.jpg")
-                            .into(viewHolder.imageViewBackground);
-                    break;
-                case 2:
-                    Glide.with(viewHolder.itemView)
-                            .load("http://easyvela.esy.es/CurrentProductImages/1-03.jpg")
-                            .into(viewHolder.imageViewBackground);
-                    break;
-                default:
-                    Glide.with(viewHolder.itemView)
-                            .load(url)
-                            .into(viewHolder.imageViewBackground);
-                    break;
-
-            }
-
-        }
-
-        @Override
-        public int getCount() {
-            //slider view count could be dynamic size
-            return 3;
-        }
-
-        class SliderAdapterVH extends SliderViewAdapter.ViewHolder {
-
-            View itemView;
-            ImageView imageViewBackground;
-
-            public SliderAdapterVH(View itemView) {
-                super(itemView);
-                imageViewBackground = itemView.findViewById(R.id.image_view);
-                //textViewDescription = itemView.findViewById(R.id.tv_auto_image_slider);
-                this.itemView = itemView;
-            }
         }
     }
 
