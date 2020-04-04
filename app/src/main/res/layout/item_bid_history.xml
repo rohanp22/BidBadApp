@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/bidHistoryImage"
+        android:layout_width="96dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="2dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/headph"
+        app:layout_constraintBottom_toBottomOf="@+id/bidHistoryRank"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bidHistoryTitle" />
+
+    <TextView
+        android:id="@+id/bidHistoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/dm_sans_regular"
+        android:text="Play Station 4"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/bidHistoryImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/bidHistoryStartDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/dm_sans_regular"
+        android:text="Bidding started on Tue, 31 Mar, 2020 and ended on Thu, 2 Apr, 2020."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bidHistoryTitle"
+        app:layout_constraintTop_toBottomOf="@+id/bidHistoryTitle" />
+
+    <TextView
+        android:id="@+id/bidHistoryRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rank_bid_history"
+        android:fontFamily="@font/dm_sans_regular"
+        android:paddingStart="16dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="4dp"
+        android:text="#1234567890"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/bidHistoryAmount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bidHistoryAmount" />
+
+    <TextView
+        android:id="@+id/bidHistoryAmountText"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/dm_sans_regular"
+        android:text="Bid amount"
+        android:textColor="?android:textColorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/bidHistoryStartDate"
+        app:layout_constraintTop_toBottomOf="@+id/bidHistoryStartDate" />
+
+    <TextView
+        android:id="@+id/bidHistoryAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/dm_sans_regular"
+        android:text="25$"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:textColor="#f9a825"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bidHistoryStartDate"
+        app:layout_constraintTop_toBottomOf="@+id/bidHistoryAmountText" />
+</androidx.constraintlayout.widget.ConstraintLayout>
