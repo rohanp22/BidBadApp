@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,28 +26,24 @@ import com.google.android.material.tabs.TabLayout;
 import com.wielabs.LeaderBoardFragment;
 import com.wielabs.R;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BidsHistory extends Fragment {
 
-    public BidsHistory() {
-        // Required empty public constructor
-    }
-
+    ViewPager viewPager;
+    ArrayList<Fragment> fragments;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bids_history, container, false);
-    }
+        Log.d("BidsHistory", "working");
 
-    ViewPager viewPager;
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_bids_history, container, false);
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         viewPager=(ViewPager) view.findViewById(R.id.viewPager);
@@ -55,17 +52,17 @@ public class BidsHistory extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("Won bids"));
         tabLayout.addTab(tabLayout.newTab().setText("All Bids"));
         tabLayout.addTab(tabLayout.newTab().setText("Leaderboard"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorPrimary));
-        tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
-        tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#ffbc00"));
-
-        final MyAdapter adapter = new MyAdapter(view.getContext(), getFragmentManager(), tabLayout.getTabCount());
+        MyAdapter adapter = new MyAdapter(view.getContext(), getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorPrimary));
+        tabLayout.setSelectedTabIndicatorHeight((int) (3 * getResources().getDisplayMetrics().density));
+        tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#ffbc00"));
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -83,82 +80,75 @@ public class BidsHistory extends Fragment {
             }
         });
 
-        //RecyclerView bidHistoryRecyclerView = view.findViewById(R.id.bidHistoryRecyclerView);
-        //DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), RecyclerView.VERTICAL);
-        //dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
-        //bidHistoryRecyclerView.addItemDecoration(dividerItemDecoration);
-        //bidHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        //bidHistoryRecyclerView.setAdapter(new BidHistoryAdapterAll());
+        return view;
     }
 
-    class BidHistoryAdapterAll extends RecyclerView.Adapter<BidHistoryAdapterAll.BidHistoryViewHolder> {
+    class MyAdapter extends FragmentPagerAdapter {
 
-        @NonNull
+        private Context myContext;
+        int totalTabs;
+
+        public MyAdapter(Context context, FragmentManager fm, int totalTabs) {
+            super(fm);
+            myContext = context;
+            this.totalTabs = totalTabs;
+        }
+
+        // this is for fragment tabs
         @Override
-        public BidHistoryAdapterAll.BidHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new BidHistoryViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bid_history, parent, false));
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull BidHistoryViewHolder holder, int position) {
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return 10;
-        }
-
-        class BidHistoryViewHolder extends RecyclerView.ViewHolder {
-            ImageView bidHistoryImage;
-
-            BidHistoryViewHolder(View itemView) {
-                super(itemView);
-                bidHistoryImage = itemView.findViewById(R.id.bidHistoryImage);
-            }
-        }
-    }
-}
-
-class MyAdapter extends FragmentPagerAdapter {
-
-    private Context myContext;
-    int totalTabs;
-
-    public MyAdapter(Context context, FragmentManager fm, int totalTabs) {
-        super(fm);
-        myContext = context;
-        this.totalTabs = totalTabs;
-    }
-
-    // this is for fragment tabs
-    @Override
-    public Fragment getItem(int position) {
-        switch (position) {
+        public Fragment getItem(int position) {
+            switch (position) {
                 case 0:
-                    EmptyFragment myBidsFragment = new EmptyFragment();
-                    return myBidsFragment;
+                    return new EmptyFragment("mybids");
 
                 case 1:
-                    EmptyFragment sportFragment = new EmptyFragment();
-                    return sportFragment;
+                    return new EmptyFragment("allbids");
 
                 case 2:
-                    EmptyFragment movieFragment = new EmptyFragment();
-                    return movieFragment;
+                    return new HelloFragment();
 
                 case 3:
-                    LeaderBoardFragment lastFragment = new LeaderBoardFragment();
-                    return  lastFragment;
-            default:
-                return null;
+                    return new LeaderBoardFragment();
+                default:
+                    return null;
+            }
+        }
+        // this counts total number of tabs
+        @Override
+        public int getCount() {
+            return totalTabs;
         }
     }
-    // this counts total number of tabs
+
     @Override
-    public int getCount() {
-        return totalTabs;
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    }
+
+    public class FragmentAdapter extends FragmentPagerAdapter {
+
+        Context context;
+        ArrayList<Fragment> fragments;
+
+        public FragmentAdapter(FragmentManager fm, Context context, ArrayList<Fragment> fragments) {
+            super(fm);
+            this.context = context;
+            this.fragments = fragments;
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+
+        @Override
+        public Fragment getItem(int i) {
+            return fragments.get(i);
+        }
+
     }
 }
+
+
 
 

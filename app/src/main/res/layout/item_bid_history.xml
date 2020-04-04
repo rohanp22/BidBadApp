@@ -10,7 +10,7 @@
         android:layout_width="80dp"
         android:layout_height="0dp"
         android:layout_marginTop="2dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:src="@drawable/headph"
         app:layout_constraintBottom_toBottomOf="@+id/bidHistoryRank"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,4 +85,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/bidHistoryStartDate"
         app:layout_constraintTop_toBottomOf="@+id/bidHistoryAmountText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

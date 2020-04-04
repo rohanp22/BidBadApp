@@ -337,11 +337,6 @@ public class MyBidsFragment extends Fragment {
     }
 
     class sortTime implements Comparator<CartItems> {
-
-
-
-
-
         // Used for sorting in ascending order of
         // roll number
         public int compare(CartItems a, CartItems b) {

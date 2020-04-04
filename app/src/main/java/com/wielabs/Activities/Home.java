@@ -130,7 +130,6 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             @Override
             public void onClick(View view) {
                 reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01));
-                results.setBackgroundTintList(getColorStateList(R.color.grey_titn));
                 loadFragment(new HomeFragment(), "home");
             }
         });
