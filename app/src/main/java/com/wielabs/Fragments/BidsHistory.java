@@ -1,6 +1,7 @@
 package com.wielabs.Fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,13 +51,15 @@ public class BidsHistory extends Fragment {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         viewPager=(ViewPager) view.findViewById(R.id.viewPager);
 
-
-
         tabLayout.addTab(tabLayout.newTab().setText("My Bids"));
+        tabLayout.addTab(tabLayout.newTab().setText("Won bids"));
         tabLayout.addTab(tabLayout.newTab().setText("All Bids"));
-        tabLayout.addTab(tabLayout.newTab().setText("My won bids"));
         tabLayout.addTab(tabLayout.newTab().setText("Leaderboard"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorPrimary));
+        tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
+        tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#ffbc00"));
 
         final MyAdapter adapter = new MyAdapter(view.getContext(), getFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);

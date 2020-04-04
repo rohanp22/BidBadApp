@@ -5,23 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="#fff"
-            app:title="Leaderboard"
-            app:titleTextAppearance="@style/ToolbarTitle" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?actionBarSize"
         android:orientation="vertical"
         android:padding="16dp"
         tools:context=".LeaderBoardFragment">
@@ -37,7 +23,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/dmsansregular"
-                android:text="201"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +43,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/dmsansregular"
-                android:text="Text1"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/profilePhoto"
@@ -85,7 +69,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/dmsansregular"
-                android:text="Text3"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/someText2"
