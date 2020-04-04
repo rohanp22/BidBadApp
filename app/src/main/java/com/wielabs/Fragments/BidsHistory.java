@@ -102,10 +102,10 @@ public class BidsHistory extends Fragment {
                     return new EmptyFragment("mybids");
 
                 case 1:
-                    return new EmptyFragment("allbids");
+                    return new EmptyFragment("wonbids");
 
                 case 2:
-                    return new HelloFragment();
+                    return new EmptyFragment("allbids");
 
                 case 3:
                     return new LeaderBoardFragment();

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.wielabs.R;
 public class ProfileFragment extends Fragment {
 
     TextView HowToPlay, TermsandConditions, SendFeedback, Privacypolicy, Support, logout;
+    TextView order;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -27,6 +29,15 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+
+        order = (TextView) view.findViewById(R.id.profileOrders);
+        order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new MyOrdersFragment()).commit();
+            }
+        });
+
         TermsandConditions = (TextView) view.findViewById(R.id.profileTermsAndConditions);
         SendFeedback = (TextView) view.findViewById(R.id.profileSendFeedback);
         Privacypolicy = (TextView) view.findViewById(R.id.profilePrivacyPolicy);

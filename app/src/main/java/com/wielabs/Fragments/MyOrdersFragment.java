@@ -81,7 +81,7 @@ public class MyOrdersFragment extends Fragment {
                             for (int i = 0; i < heroArray.length(); i++) {
                                 JSONObject heroObject = heroArray.getJSONObject(i);
                                 Orders c = new Orders(
-                                        heroObject.getString("currentid"),
+                                        heroObject.getString("past_id"),
                                         heroObject.getString("image_url"),
                                         heroObject.getString("title"),
                                         heroObject.getString("endtime"),
