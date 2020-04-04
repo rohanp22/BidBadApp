@@ -1,10 +1,8 @@
 package com.wielabs.Fragments;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,8 +61,6 @@ public class EmptyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -228,7 +224,6 @@ public class EmptyFragment extends Fragment {
                     .load(heroList.get(position).getImage_url())
                     .into(holder.bidHistoryImage);
         }
-
 
         @Override
         public int getItemCount() {
