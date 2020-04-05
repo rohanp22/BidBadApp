@@ -277,7 +277,6 @@ public class EmptyFragment extends Fragment {
                     .into(holder.bidHistoryImage);
         }
 
-
         @Override
         public int getItemCount() {
             return cartItems.size();
