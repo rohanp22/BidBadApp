@@ -21,7 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.wielabs.Models.Orders;
+import com.wielabs.Models.WonItem;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
 
@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class PlaceOrder extends AppCompatActivity {
 
-    Orders c;
+    WonItem c;
     Dialog dialog;
     EditText name, mobile, houseno, street, city, state, pincode;
     String address;
@@ -45,7 +45,7 @@ public class PlaceOrder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
-        c = (Orders) getIntent().getSerializableExtra("order");
+        c = (WonItem) getIntent().getSerializableExtra("order");
         TextView amount = findViewById(R.id.placeorderamount);
         amount.setText("₹"+c.getBidamount());
         name = (EditText) findViewById(R.id.nameplaceorder);

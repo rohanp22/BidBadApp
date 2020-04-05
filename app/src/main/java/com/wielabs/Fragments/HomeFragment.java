@@ -113,39 +113,11 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         return view;
     }
 
-    ImageView button;
-
     @Override
     public void onViewCreated(final @NonNull View view, @Nullable Bundle savedInstanceState) {
         //this.view = view;
         p = view.findViewById(R.id.progressBarHome);
         c = view.getContext();
-        button = view.findViewById(R.id.overflow);
-        button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //Creating the instance of PopupMenu
-                PopupMenu popup = new PopupMenu(view.getContext() , button);
-                //Inflating the Popup using xml file
-                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-
-                //registering popup with OnMenuItemClickListener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch(item.getTitle().toString()){
-                            case "Settings" : getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
-                                break;
-
-                            case "Profile" : getFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
-                                break;
-                        }
-                        return true;
-                    }
-                });
-                popup.show();//showing popup menu
-            }
-        });
 
         dialog = new Dialog(view.getContext());
         dialog.setContentView(R.layout.bid_dialog);

@@ -2,7 +2,7 @@ package com.wielabs.Models;
 
 import java.io.Serializable;
 
-public class Orders implements Serializable {
+public class WonItem implements Serializable {
 
     private String id;
     private String image_url;
@@ -15,7 +15,7 @@ public class Orders implements Serializable {
     private String status;
     private String orderplaced;
 
-    public Orders(String id, String image_url, String title, String end_date, String mrp, String sp, String description, String bidamount, String status, String orderplaced){
+    public WonItem(String id, String image_url, String title, String end_date, String mrp, String sp, String description, String bidamount, String status, String orderplaced){
         this.end_date = end_date;
         this.title = title;
         this.image_url = image_url;

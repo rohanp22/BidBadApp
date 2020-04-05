@@ -19,9 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="10dp"
+        android:visibility="visible"
         android:src="@drawable/ic_b_iocn"
         app:backgroundTint="@color/gradient_color"
-        app:borderWidth="0dp"
         app:fabCustomSize="48dp"
         app:layout_anchor="@id/bar" />
 
@@ -37,18 +37,18 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_gravity="bottom"
+        app:fabCradleMargin="0dp"
+        app:fabCradleRoundedCornerRadius="0dp"
         app:backgroundTint="@color/white"
         app:fabAlignmentMode="center"
-        app:fabCradleMargin="0dp"
-        app:fabCradleRoundedCornerRadius="40dp"
         app:hideOnScroll="false">
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
+            android:animateLayoutChanges="true"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="5">
+            android:orientation="horizontal">
 
             <RelativeLayout
                 android:layout_width="24dp"
@@ -65,16 +65,18 @@
                     <ImageView
                         android:id="@+id/homeIcon"
                         android:layout_width="24dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="24dp"
                         android:layout_gravity="center"
+                        android:padding="4dp"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_home_alt"
+                        android:src="@drawable/home_animated"
                         android:tint="@color/colorPrimary" />
 
                     <TextView
                         android:layout_marginTop="5dp"
+                        android:id="@+id/homeText"
                         android:layout_width="wrap_content"
-                        android:drawableStart="@drawable/circular_bg"
+                        android:drawableLeft="@drawable/circular_bg"
                         android:textSize="10dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"/>
@@ -96,14 +98,16 @@
 
                     <ImageView
                         android:id="@+id/resultIcon"
+                        android:padding="4dp"
                         android:layout_width="24dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_circle_star"
+                        android:src="@drawable/results_animated"
                         android:tint="@color/colorPrimary" />
 
                     <TextView
+                        android:id="@+id/resultsText"
                         android:layout_marginTop="5dp"
                         android:layout_width="wrap_content"
                         android:text="Results"
@@ -117,11 +121,10 @@
 
             <ImageView
                 android:id="@+id/blankIcon"
-                android:layout_width="24dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:visibility="invisible" />
+                android:visibility="visible"/>
 
             <RelativeLayout
                 android:layout_width="24dp"
@@ -140,12 +143,14 @@
                         android:layout_height="24dp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:src="@drawable/reward_stock" />
+                        android:src="@drawable/rewards_animated" />
 
                     <TextView
+                        android:id="@+id/rewardsText"
                         android:layout_marginTop="5dp"
                         android:layout_width="wrap_content"
                         android:text="Rewards"
+                        android:minWidth="10dp"
                         android:textSize="10dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"/>
@@ -172,9 +177,10 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:backgroundTint="@color/black"
-                        android:src="@drawable/data" />
+                        android:src="@drawable/profile_animated" />
 
                     <TextView
+                        android:id="@+id/profileText"
                         android:layout_marginTop="5dp"
                         android:layout_width="wrap_content"
                         android:text="Profile"

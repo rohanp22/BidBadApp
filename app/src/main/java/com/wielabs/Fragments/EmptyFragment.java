@@ -1,11 +1,8 @@
 package com.wielabs.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.wielabs.Activities.PlaceOrder;
-import com.wielabs.Models.Orders;
+import com.wielabs.Models.WonItem;
 import com.wielabs.Models.PastProducts;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
@@ -56,7 +52,7 @@ public class EmptyFragment extends Fragment {
     RecyclerView cartList;
     String bid;
     BidHistoryAdapterAll adapterall;
-    public ArrayList<Orders> pastItems;
+    public ArrayList<WonItem> pastItems;
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 
@@ -189,7 +185,7 @@ public class EmptyFragment extends Fragment {
                                 JSONArray heroArray = obj.getJSONArray("Bids");
                                 for (int i = 0; i < heroArray.length(); i++) {
                                     JSONObject heroObject = heroArray.getJSONObject(i);
-                                    Orders c = new Orders(
+                                    WonItem c = new WonItem(
                                             heroObject.getString("past_id"),
                                             heroObject.getString("image_url"),
                                             heroObject.getString("title"),
@@ -222,10 +218,10 @@ public class EmptyFragment extends Fragment {
         return view;
     }
 
-    class sortTime2 implements Comparator<Orders> {
+    class sortTime2 implements Comparator<WonItem> {
         // Used for sorting in ascending order of
         // roll number
-        public int compare(Orders a, Orders b) {
+        public int compare(WonItem a, WonItem b) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
             Date a1 = null, b1 = null;
             try {
@@ -308,9 +304,9 @@ public class EmptyFragment extends Fragment {
     class WonItemsAdapter extends RecyclerView.Adapter<WonItemsAdapter.BidHistoryViewHolder> {
 
         Context context;
-        ArrayList<Orders> heroList;
+        ArrayList<WonItem> heroList;
 
-        WonItemsAdapter(Context context, ArrayList<Orders> heroList){
+        WonItemsAdapter(Context context, ArrayList<WonItem> heroList){
             this.context = context;
             this.heroList = heroList;
         }
@@ -322,7 +318,7 @@ public class EmptyFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull BidHistoryViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final BidHistoryViewHolder holder, final int position) {
             progressBar.setVisibility(View.GONE);
             holder.bidHistoryTitle.setText(heroList.get(position).getTitle());
             holder.bidHistoryStartDate.setText(heroList.get(position).getEnd_date());
@@ -346,6 +342,7 @@ public class EmptyFragment extends Fragment {
                         public void onResponse(String response) {
                             //This code is executed if the server responds, whether or not the response contains data.
                             //The String 'response' contains the server's response.
+                            holder.bidHistoryRank.setVisibility(View.GONE);
                         }
                     }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
                         @Override

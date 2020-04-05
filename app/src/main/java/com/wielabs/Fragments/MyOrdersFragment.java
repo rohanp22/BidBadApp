@@ -8,7 +8,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -25,7 +32,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wielabs.Activities.PlaceOrder;
-import com.wielabs.Models.Orders;
+import com.wielabs.Models.Order;
+import com.wielabs.Models.WonItem;
 import com.bumptech.glide.Glide;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
@@ -38,12 +46,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MyOrdersFragment extends Fragment {
 
-    public ArrayList<Orders> pastItems;
-    ListView pastList;
+    public ArrayList<Order> pastItems;
+    RecyclerView pastList;
+    ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +65,7 @@ public class MyOrdersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_myorders, container, false);
-
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBarOrders);
 
         return view;
     }
@@ -67,9 +78,12 @@ public class MyOrdersFragment extends Fragment {
 
 
     void loadList(final View view){
-        pastList = (ListView) view.findViewById(R.id.Myorderslist);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getwonitems.php?id="+ SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
+        pastList = (RecyclerView) view.findViewById(R.id.Myorderslist);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), RecyclerView.VERTICAL);
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
+        pastList.addItemDecoration(dividerItemDecoration);
+        pastList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/orders.php?id="+ SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
                 new Response.Listener<String>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
@@ -78,21 +92,21 @@ public class MyOrdersFragment extends Fragment {
                             pastItems.clear();
                             JSONObject obj = new JSONObject(response);
                             JSONArray heroArray = obj.getJSONArray("Bids");
+                            Log.d(" Orders", response);
                             for (int i = 0; i < heroArray.length(); i++) {
                                 JSONObject heroObject = heroArray.getJSONObject(i);
-                                Orders c = new Orders(
-                                        heroObject.getString("past_id"),
-                                        heroObject.getString("image_url"),
+                                Order c = new Order(
                                         heroObject.getString("title"),
-                                        heroObject.getString("endtime"),
+                                        heroObject.getString("bidamount"),
+                                        heroObject.getString("date"),
+                                        heroObject.getString("image_url"),
                                         heroObject.getString("mrp"),
                                         heroObject.getString("sp"),
-                                        heroObject.getString("description"),
-                                        heroObject.getString("bidamount"),"Won", heroObject.getString("orderplaced"));
+                                        heroObject.getString("oid"),
+                                        heroObject.getString("address"));
                                 pastItems.add(c);
                             }
-                            pastItems.sort(new sortTime());
-                            PastAdapter walletAdapter = new PastAdapter(view.getContext(), pastItems);
+                            OrderAdapter walletAdapter = new OrderAdapter(view.getContext(), pastItems);
                             pastList.setAdapter(walletAdapter);
                             view.findViewById(R.id.progressBarOrders).setVisibility(View.GONE);
                         } catch (JSONException e) {
@@ -111,78 +125,60 @@ public class MyOrdersFragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    class PastAdapter extends ArrayAdapter<Orders> {
+    class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.BidHistoryViewHolder> {
 
-        List<Orders> CartList;
-        Context mContext;
+        Context context;
+        ArrayList<Order> heroList;
 
-        public PastAdapter(Context context, List<Orders> heroList) {
-            super(context, R.layout.transaction_layout, heroList);
-
-            mContext = context;
-            this.CartList = heroList;
+        OrderAdapter(Context context, ArrayList<Order> heroList){
+            this.context = context;
+            this.heroList = heroList;
         }
 
-        @SuppressLint("SetTextI18n")
         @NonNull
         @Override
-        public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-            //getting the view
-            View view = layoutInflater.inflate(R.layout.order_layout, null, false);
+        public OrderAdapter.BidHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new OrderAdapter.BidHistoryViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.order_layout, parent, false));
+        }
 
-            //getting the view elements of the list from the view
+        @Override
+        public void onBindViewHolder(@NonNull BidHistoryViewHolder holder, int position) {
+            holder.orderId.setText("Orderid : " + heroList.get(position).getOid());
+            holder.orderTitle.setText(heroList.get(position).getName());
+            holder.orderPlaceDate.setText(heroList.get(position).getDate());
 
-            ImageView image = (ImageView) view.findViewById(R.id.imageorder);
-            image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    Intent it = new Intent(getActivity().getApplicationContext(), ProductDescription.class);
-//                    it.putExtra("id", HomeFragment.current_products.get(position));
-//                    Log.d("Position", position + "");
-//                    startActivity(it);
-                }
-            });
-            TextView title = (TextView) view.findViewById(R.id.titleorder);
-            TextView amount = (TextView) view.findViewById(R.id.yourBidOrder);
-            amount.setText(pastItems.get(position).getBidamount());
-            TextView status = (TextView) view.findViewById(R.id.statusOrder);
-            status.setText("Status: "+pastItems.get(position).getStatus());
-            title.setText(pastItems.get(position).getTitle());
-            Button claim = (Button) view.findViewById(R.id.claimButton);
+            Glide.with(context)
+                    .load(heroList.get(position).getImage_url())
+                    .into(holder.orderImage);
+            progressBar.setVisibility(View.GONE);
+        }
 
-            if(pastItems.get(position).getOrderplaced().equals("1")){
-                claim.setVisibility(View.GONE);
-                status.setText("Status: Order placed");
+        @Override
+        public int getItemCount() {
+            return heroList.size();
+        }
+
+        class BidHistoryViewHolder extends RecyclerView.ViewHolder {
+            ImageView orderImage;
+            TextView orderTitle;
+            TextView orderPlaceDate;
+            TextView orderId;
+
+            BidHistoryViewHolder(View itemView) {
+                super(itemView);
+                orderId = itemView.findViewById(R.id.summaryOrderId);
+                orderImage = itemView.findViewById(R.id.summaryOrderImage);
+                orderTitle = itemView.findViewById(R.id.summaryOrderTitle);
+                //orderAmount = itemView.findViewById(R.id.bidHistoryTitle);
+                orderPlaceDate = itemView.findViewById(R.id.summaryOrderDate);
             }
-
-//            if(pastItems.get(position).getPlaced().equals("1")){
-//                claim.setVisibility(View.GONE);
-//            }
-
-            claim.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(view.getContext(), PlaceOrder.class);
-                    i.putExtra("order", pastItems.get(position));
-                    startActivity(i);
-                    getActivity().finish();
-                }
-            });
-
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(pastItems.get(position).getImage_url())
-                    .into(image);
-
-            return view;
         }
     }
 
-    class sortTime implements Comparator<Orders> {
+    class sortTime implements Comparator<WonItem> {
         // Used for sorting in ascending order of
         // roll number
-        public int compare(Orders a, Orders b) {
+        public int compare(WonItem a, WonItem b) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
             Date a1 = null, b1 = null;
             try {

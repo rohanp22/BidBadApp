@@ -1,5 +1,7 @@
 package com.wielabs.Activities;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
@@ -10,6 +12,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.wielabs.Fragments.BidsHistory;
 import com.wielabs.Fragments.PrivacyPolicy;
 import com.wielabs.Fragments.ProfileFragment;
@@ -43,8 +47,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ActionBottomDialogFragment.ItemClickListener, FeedbackBottomDialogFragment.ItemClickListener {
@@ -57,11 +63,54 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     ImageView reward, profile, results;
     ImageView blank;
     LinearLayout linearLayout;
+    ImageView home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        blank = findViewById(R.id.blankIcon);
+        linearLayout = findViewById(R.id.linearLayout);
+        fab = findViewById(R.id.fabhome);
+        bottomAppBar = findViewById(R.id.bar);
+        fab.setScaleX(0.0f);
+        fab.setScaleY(0.0f);
+
+        new Handler().postDelayed(new Runnable() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void run() {
+
+                fab.setVisibility(View.VISIBLE);
+                ValueAnimator m1 = ValueAnimator.ofFloat(0, 1); //fromWeight, toWeight
+                        m1.setDuration(500);
+                        m1.setInterpolator(new LinearInterpolator());
+                        m1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+                            public void onAnimationUpdate(ValueAnimator animation) {
+                                LinearLayout.LayoutParams l = (LinearLayout.LayoutParams) blank.getLayoutParams();
+                                l.weight = (float) animation.getAnimatedValue();
+                                blank.setLayoutParams(l);
+                            }
+                        });
+                        m1.start();
+
+                fab.animate()
+                        .setDuration(200)
+                        .scaleX(1.0f)           //Scaling to 110%
+                        .scaleY(1.0f)
+                        .start();
+
+                //loadFragment(new HomeFragment(), "home");
+            }
+        }, 1000);
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                loadFragment(new HomeFragment(), "home");
+//            }
+//        }, 1000);
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -75,54 +124,26 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                         sendToken(token);
                     }
                 });
-        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
-        blank = (ImageView) findViewById(R.id.blankIcon);
 
-        fab = findViewById(R.id.fabhome);
-        loadFragment(new HomeFragment(), "Home");
+        home = findViewById(R.id.homeIcon);
+        TextView homeText = findViewById(R.id.homeText);
+        final TextView rewardText = findViewById(R.id.rewardsText);
+        reward = findViewById(R.id.rewardsIcon);
+        profile = findViewById(R.id.profileIcon);
+        results = findViewById(R.id.resultIcon);
 
-        ImageView home = (ImageView) findViewById(R.id.homeIcon);
-        reward = (ImageView) findViewById(R.id.rewardsIcon);
-        profile = (ImageView) findViewById(R.id.profileIcon);
-        results = (ImageView) findViewById(R.id.resultIcon);
+        profile.setImageDrawable(getResources().getDrawable(R.drawable.ic_person_black_24dp, null));
+        reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01, null));
 
-        profile.setImageDrawable(getResources().getDrawable(R.drawable.ic_person_black_24dp));
-        reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01));
         reward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reward.setImageDrawable(getResources().getDrawable(R.drawable.rewars_icon));
+                rewardText.setCompoundDrawablesRelative(getResources().getDrawable(R.drawable.circular_bg, null), null, null, null);
+                rewardText.setText(null);
+                reward.setImageDrawable(getResources().getDrawable(R.drawable.rewards_animated, null));
                 final AnimatedVectorDrawable rewardanimation = (AnimatedVectorDrawable) reward.getDrawable();
                 rewardanimation.start();
-                profile.setImageDrawable(getResources().getDrawable(R.drawable.ic_person_black_24dp));
-
-//                fab.animate()
-//                        .rotationBy(360)        // rest 180 covered by "shrink" animation
-//                        .setDuration(1000)
-//                        .scaleX(0.7f)           //Scaling to 110%
-//                        .scaleY(0.7f)           //Scaling to 110%
-//                        .withEndAction(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                ValueAnimator m1 = ValueAnimator.ofFloat(5, 4); //fromWeight, toWeight
-//                                m1.setDuration(1000);
-//                                m1.setInterpolator(new LinearInterpolator());
-//                                m1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//                                    @Override
-//                                    public void onAnimationUpdate(ValueAnimator animation) {
-//                                        linearLayout.setWeightSum((float) animation.getAnimatedValue());
-//                                        linearLayout.requestLayout();
-//                                    }
-//                                });
-//                                //m1.start();
-//                                blank.setVisibility(View.GONE);
-//                                linearLayout.setWeightSum(4);
-//
-//                                fab.setVisibility(View.GONE);
-//                                //Chaning the icon by the end of animation
-//                            }
-//                        })
-//                        .start();
+                profile.setImageDrawable(getResources().getDrawable(R.drawable.ic_person_black_24dp, null));
             }
         });
 
@@ -146,7 +167,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             @Override
             public void onClick(View view) {
                 results.setBackgroundTintList(getColorStateList(R.color.grey_titn));
-                profile.setImageDrawable(getResources().getDrawable(R.drawable.data));
+                profile.setImageDrawable(getResources().getDrawable(R.drawable.profile_animated));
                 reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01));
                 final AnimatedVectorDrawable v = (AnimatedVectorDrawable) profile.getDrawable();
                 v.start();
@@ -191,7 +212,6 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(Home.this, R.color.colorPrimary));
 
-        bottomAppBar = (BottomAppBar) findViewById(R.id.bar);
 //        bottomAppBar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_home_black_24dp));
 
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
