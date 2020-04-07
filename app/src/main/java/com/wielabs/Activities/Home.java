@@ -1,9 +1,11 @@
 package com.wielabs.Activities;
 
 import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.AnimatedVectorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -16,6 +18,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.wielabs.Fragments.BidsHistory;
 import com.wielabs.Fragments.PrivacyPolicy;
+//import com.wielabs.Fragments.ProfileFragment;
 import com.wielabs.Fragments.ProfileFragment;
 import com.wielabs.Fragments.SendFeedback;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,8 +38,12 @@ import com.wielabs.Fragments.SettingsFragment;
 import com.wielabs.Fragments.TermsAndConditions;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -45,6 +52,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
@@ -60,21 +68,31 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     FloatingActionButton fab;
     BottomAppBar nav;
     BottomAppBar bottomAppBar;
-    ImageView reward, profile, results;
-    ImageView blank;
-    LinearLayout linearLayout;
-    ImageView home;
+    ImageView reward, profile, results, indicator, blank, home;
+    TextView homeText, rewardText, resultText, profileText;
+    float x;
+    int TIME_OUT = 500;
+    int dotPosition = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        blank = findViewById(R.id.blankIcon);
-        linearLayout = findViewById(R.id.linearLayout);
+
         fab = findViewById(R.id.fabhome);
         bottomAppBar = findViewById(R.id.bar);
         fab.setScaleX(0.0f);
         fab.setScaleY(0.0f);
+
+        CoordinatorLayout c = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+
+        c.post(new Runnable() {
+            @Override
+            public void run() {
+                x = indicator.getX();
+            }
+        });
 
         new Handler().postDelayed(new Runnable() {
             @SuppressLint("RestrictedApi")
@@ -82,18 +100,18 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             public void run() {
 
                 fab.setVisibility(View.VISIBLE);
-                ValueAnimator m1 = ValueAnimator.ofFloat(0, 1); //fromWeight, toWeight
-                        m1.setDuration(500);
-                        m1.setInterpolator(new LinearInterpolator());
-                        m1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                            @Override
-                            public void onAnimationUpdate(ValueAnimator animation) {
-                                LinearLayout.LayoutParams l = (LinearLayout.LayoutParams) blank.getLayoutParams();
-                                l.weight = (float) animation.getAnimatedValue();
-                                blank.setLayoutParams(l);
-                            }
-                        });
-                        m1.start();
+//                ValueAnimator m1 = ValueAnimator.ofFloat(0, 1); //fromWeight, toWeight
+//                        m1.setDuration(500);
+//                        m1.setInterpolator(new LinearInterpolator());
+//                        m1.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//                            @Override
+//                            public void onAnimationUpdate(ValueAnimator animation) {
+//                                LinearLayout.LayoutParams l = (LinearLayout.LayoutParams) blank.getLayoutParams();
+//                                l.weight = (float) animation.getAnimatedValue();
+//                                blank.setLayoutParams(l);
+//                            }
+//                        });
+//                        m1.start();
 
                 fab.animate()
                         .setDuration(200)
@@ -105,12 +123,12 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             }
         }, 1000);
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                loadFragment(new HomeFragment(), "home");
-//            }
-//        }, 1000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadFragment(new HomeFragment(), "home");
+            }
+        }, 500);
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -126,52 +144,89 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                 });
 
         home = findViewById(R.id.homeIcon);
-        TextView homeText = findViewById(R.id.homeText);
-        final TextView rewardText = findViewById(R.id.rewardsText);
         reward = findViewById(R.id.rewardsIcon);
         profile = findViewById(R.id.profileIcon);
         results = findViewById(R.id.resultIcon);
 
-        profile.setImageDrawable(getResources().getDrawable(R.drawable.ic_person_black_24dp, null));
-        reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01, null));
+        homeText = findViewById(R.id.homeText);
+        rewardText = findViewById(R.id.rewardsText);
+        resultText = findViewById(R.id.resultsText);
+        profileText = findViewById(R.id.profileText);
+
+        indicator = (ImageView) findViewById(R.id.indicator);
 
         reward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rewardText.setCompoundDrawablesRelative(getResources().getDrawable(R.drawable.circular_bg, null), null, null, null);
-                rewardText.setText(null);
-                reward.setImageDrawable(getResources().getDrawable(R.drawable.rewards_animated, null));
-                final AnimatedVectorDrawable rewardanimation = (AnimatedVectorDrawable) reward.getDrawable();
-                rewardanimation.start();
-                profile.setImageDrawable(getResources().getDrawable(R.drawable.ic_person_black_24dp, null));
+                if (dotPosition != 2) {
+                    hideTextViews();
+                    if (dotPosition > 2)
+                        moveLeft(reward, indicator);
+                    else
+                        moveRight(reward, indicator);
+                    dotPosition = 2;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            displayTextViews();
+                        }
+                    }, 1000);
+                }
             }
         });
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01));
-                loadFragment(new HomeFragment(), "home");
+                if(dotPosition != 0){
+                    hideTextViews();
+                    moveLeft(home, indicator);
+                    dotPosition = 0;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            displayTextViews();
+                        }
+                    }, 1000);
+                }
             }
         });
+
 
         results.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01));
-                loadFragment(new BidsHistory(), "past");
+                if (dotPosition != 1) {
+                    hideTextViews();
+                    if (dotPosition > 1)
+                        moveLeft(results, indicator);
+                    else
+                        moveRight(results, indicator);
+                    dotPosition = 1;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            displayTextViews();
+                        }
+                    }, 1000);
+                }
             }
         });
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                results.setBackgroundTintList(getColorStateList(R.color.grey_titn));
-                profile.setImageDrawable(getResources().getDrawable(R.drawable.profile_animated));
-                reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_profile_greycolor_01));
-                final AnimatedVectorDrawable v = (AnimatedVectorDrawable) profile.getDrawable();
-                v.start();
-                loadFragment(new ProfileFragment(), "profile");
+            public void onClick(final View view) {
+                if(dotPosition != 3){
+                    hideTextViews();
+                    moveRight(profile, indicator);
+                    dotPosition = 3;
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            displayTextViews();
+                        }
+                    }, 1000);
+                }
             }
         });
 
@@ -184,36 +239,13 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                         .beginTransaction()
                         .replace(R.id.fragment_container, new MyBidsFragment())
                         .commit();
-                //navigation.setSelectedItemId(R.id.mybid);
             }
         });
-
-//        final LinearLayout home = findViewById(R.id.homeLayout);
-//        home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                YoYo.with(Techniques.RotateInUpLeft)
-//                        .duration(700)
-//                        .playOn(home);
-//                loadFragment(new HomeFragment(), "home");
-//            }
-//        });
-//
-//        LinearLayout completed = findViewById(R.id.completedLayout);
-//        completed.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                loadFragment(new PastFragment(), "past");
-//            }
-//        });
 
         Window window = Home.this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(ContextCompat.getColor(Home.this, R.color.colorPrimary));
-
-//        bottomAppBar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_home_black_24dp));
-
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -226,9 +258,9 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         });
     }
 
-    void sendToken(String token){
+    void sendToken(String token) {
         int id = SharedPrefManager.getInstance(Home.this).getUser().getId();
-        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/updateToken.php?id="+id+"&token="+token,
+        StringRequest stringRequest2 = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/updateToken.php?id=" + id + "&token=" + token,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -311,7 +343,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     @Override
     public void onBackPressed() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if(currentFragment instanceof ProductDescription){
+        if (currentFragment instanceof ProductDescription) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             bottomAppBar.setVisibility(View.VISIBLE);
             fab.setVisibility(View.VISIBLE);
@@ -335,8 +367,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         } else if (currentFragment instanceof MyOrdersFragment || currentFragment instanceof SendFeedback || currentFragment instanceof TermsAndConditions || currentFragment instanceof PrivacyPolicy) {
             Log.v("frags", "find the current fragment");
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
-        }
-        else if(currentFragment instanceof MyBidsFragment || currentFragment instanceof PastFragment || currentFragment instanceof SettingsFragment){
+        } else if (currentFragment instanceof MyBidsFragment || currentFragment instanceof PastFragment || currentFragment instanceof SettingsFragment) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             bottomAppBar.setVisibility(View.VISIBLE);
             fab.setVisibility(View.VISIBLE);
@@ -346,5 +377,50 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     @Override
     public void onItemClick(String item) {
         Log.d("Bottom", item);
+    }
+
+    private void moveLeft(ImageView target, ImageView imageView) {
+        imageView.animate().setDuration(1000).translationXBy(-(imageView.getX() - target.getX() + target.getWidth() / 6) + target.getWidth() / 2).start();
+    }
+
+    private void moveRight(ImageView target, ImageView imageView) {
+        imageView.animate().setDuration(1000).translationXBy(target.getX() + target.getWidth() / 2 - imageView.getX() - target.getWidth() / 6).start();
+    }
+
+    private void hideTextViews() {
+        homeText.setVisibility(View.INVISIBLE);
+        rewardText.setVisibility(View.INVISIBLE);
+        profileText.setVisibility(View.INVISIBLE);
+        resultText.setVisibility(View.INVISIBLE);
+    }
+
+    private void displayTextViews() {
+
+        switch (dotPosition) {
+
+            case 0:
+                rewardText.setVisibility(View.VISIBLE);
+                profileText.setVisibility(View.VISIBLE);
+                resultText.setVisibility(View.VISIBLE);
+                break;
+            case 1:
+                rewardText.setVisibility(View.VISIBLE);
+                profileText.setVisibility(View.VISIBLE);
+                homeText.setVisibility(View.VISIBLE);
+                break;
+
+            case 2:
+                homeText.setVisibility(View.VISIBLE);
+                profileText.setVisibility(View.VISIBLE);
+                resultText.setVisibility(View.VISIBLE);
+                break;
+
+            case 3:
+                rewardText.setVisibility(View.VISIBLE);
+                homeText.setVisibility(View.VISIBLE);
+                resultText.setVisibility(View.VISIBLE);
+                break;
+        }
+
     }
 }
