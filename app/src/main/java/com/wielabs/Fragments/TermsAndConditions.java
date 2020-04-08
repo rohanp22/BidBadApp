@@ -29,12 +29,7 @@ public class TermsAndConditions extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         WebView webView = (WebView) view.findViewById(R.id.termsandconditionswebview);
         webView.loadUrl("https://www.google.com");
-        view.findViewById(R.id.backterms).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
-            }
-        });
+
         super.onViewCreated(view, savedInstanceState);
     }
 

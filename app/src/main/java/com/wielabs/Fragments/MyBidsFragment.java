@@ -47,10 +47,10 @@ import java.util.Date;
 
 public class MyBidsFragment extends Fragment {
 
-    public ArrayList<CartItems> cartItems;
-    //public ArrayList<CartItems> pastItems;
+    private ArrayList<CartItems> cartItems;
     private RecyclerView cartList;
-    View view;
+    private View view;
+
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 
@@ -63,8 +63,6 @@ public class MyBidsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_bids, container, false);
-//        cartItems = new ArrayList<>();
-//        loadList(view);
         this.view = view;
         return view;
     }
@@ -72,13 +70,11 @@ public class MyBidsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         cartItems = new ArrayList<>();
-        //pastItems = new ArrayList<>();
         loadList(view);
     }
 
     void loadList(final View view) {
         cartList = (RecyclerView) view.findViewById(R.id.myBidsList);
-        //pastList = (RecyclerView) view.findViewById(R.id.mypastbids);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getmyongoingbids.php?id=" + SharedPrefManager.getInstance(getActivity()).getUser().getId(),
                 new Response.Listener<String>() {
@@ -104,18 +100,18 @@ public class MyBidsFragment extends Fragment {
                                         heroObject.getString("currentid"));
                                 if (a1.compareTo(new java.sql.Date(System.currentTimeMillis())) > 0)
                                     cartItems.add(c);
-                                    //pastItems.add(c);
-                                //ListView l = (ListView) findViewById(R.id.transactionList);
                             }
+
                             cartItems.sort(new sortTime());
+
                             if(cartItems.size() == 0){
                                 view.findViewById(R.id.nobids).setVisibility(View.VISIBLE);
                             } else {
                                 view.findViewById(R.id.nobids).setVisibility(View.GONE);
                             }
+
                             BidsAdapter walletAdapter = new BidsAdapter(view.getContext(), cartItems);
-                            //Past t = new Past(view.getContext(), pastItems);
-                            //pastItems.sort(new sortTime2());
+
                             Drawable horizontalDivider = ContextCompat.getDrawable(view.getContext(), R.drawable.horizontal);
                             DividerItemDecoration horizontalDecoration = new DividerItemDecoration(cartList.getContext(),
                                     DividerItemDecoration.VERTICAL);
@@ -124,6 +120,7 @@ public class MyBidsFragment extends Fragment {
                             cartList.setLayoutManager(new LinearLayoutManager(view.getContext()));
                             view.findViewById(R.id.progressBar).setVisibility(View.GONE);
                             cartList.setAdapter(walletAdapter);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (ParseException e) {
@@ -141,76 +138,6 @@ public class MyBidsFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
         requestQueue.add(stringRequest);
     }
-
-//    class Past extends RecyclerView.Adapter<Past.ViewHolder> {
-//
-//        ArrayList<CartItems> cartList;
-//        Context mContext;
-//        Date startDate1;
-//
-//        public Past(Context context, ArrayList<CartItems> heroList) {
-//            mContext = context;
-//            this.cartList = heroList;
-//        }
-//
-//        @NonNull
-//        @Override
-//        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mybid_layout, parent, false);
-//            return new ViewHolder(view);
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(@NonNull final Past.ViewHolder holder, final int position) {
-//
-//            holder.image.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    ProductDescription ldf = new ProductDescription();
-//                    Bundle args = new Bundle();
-//                    args.putString("YourKey", pastItems.get(position).getId());
-//                    args.putString("show", "no");
-//                    args.putString("im", pastItems.get(position).getImage_url());
-//                    ldf.setArguments(args);
-//                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack(null).commit();
-//                }
-//            });
-//
-//            holder.amount.setText("Your bid: "+pastItems.get(position).getMybid());
-//
-//            holder.title.setText(pastItems.get(position).getTitleCart());
-//
-//            holder.date.setText("Expired");
-//
-//            holder.date.setTextColor(Color.RED);
-//
-//            Glide.with(mContext)
-//                    .asBitmap()
-//                    .load(pastItems.get(position).getImage_url())
-//                    .into(holder.image);
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return cartList.size();
-//        }
-//
-//        public class ViewHolder extends RecyclerView.ViewHolder {
-//
-//            ImageView image;
-//            TextView title;
-//            TextView amount;
-//            TextView date;
-//
-//            public ViewHolder(View itemView) {
-//                super(itemView);
-//                title = (TextView) itemView.findViewById(R.id.titleMyBid);
-//                amount = (TextView) itemView.findViewById(R.id.yourBid);
-//                image = (ImageView) itemView.findViewById(R.id.myBidImage);
-//                date = (TextView) itemView.findViewById(R.id.status);
-//            }
-//        }
-//    }
 
     class BidsAdapter extends RecyclerView.Adapter<BidsAdapter.ViewHolder> {
 
@@ -270,8 +197,6 @@ public class MyBidsFragment extends Fragment {
 
             new CountDownTimer(finalDiff, 1000) {
 
-                long dif = finalDiff;
-
                 public void onTick(long millisUntilFinished) {
 
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
@@ -297,7 +222,9 @@ public class MyBidsFragment extends Fragment {
                         final long elapsedSeconds = different / secondsInMilli;
 
                         String curtime = elapsedHours + "hr " + String.format("%02d", elapsedMinutes) + "m " + String.format("%02d", elapsedSeconds) + "s";
+
                         holder.date.setText("Ends in: "+curtime);
+
                     } else {
 
                     }
@@ -349,22 +276,6 @@ public class MyBidsFragment extends Fragment {
                 e.printStackTrace();
             }
             return a1.compareTo(b1);
-        }
-    }
-
-    class sortTime2 implements Comparator<CartItems> {
-        // Used for sorting in ascending order of
-        // roll number
-        public int compare(CartItems a, CartItems b) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
-            Date a1 = null, b1 = null;
-            try {
-                a1 = simpleDateFormat.parse(a.getStatus());
-                b1 = simpleDateFormat.parse(b.getStatus());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return b1.compareTo(a1);
         }
     }
 }

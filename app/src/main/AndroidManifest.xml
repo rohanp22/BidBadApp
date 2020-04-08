@@ -18,7 +18,6 @@
         android:theme="@style/AppTheme.NoactionBar"
         android:usesCleartextTraffic="true">
         <activity android:name=".TestActivity"></activity>
-        <activity android:name=".Activities.ProfileActivity" />
         <activity android:name=".PhoneVerification" />
         <activity android:name=".BottomSheetProduct" />
         <activity android:name=".Activities.PlaceOrder" />

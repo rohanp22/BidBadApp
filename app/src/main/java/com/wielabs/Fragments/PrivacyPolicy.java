@@ -20,12 +20,6 @@ public class PrivacyPolicy extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         WebView webView = (WebView) view.findViewById(R.id.privacypolicywebview);
         webView.loadUrl("https://www.google.com");
-        view.findViewById(R.id.backpolicy).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
-            }
-        });
     }
 
     @Override
