@@ -74,7 +74,7 @@ public class MyBidsFragment extends Fragment {
     }
 
     void loadList(final View view) {
-        cartList = (RecyclerView) view.findViewById(R.id.myBidsList);
+        cartList = view.findViewById(R.id.myBidsList);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getmyongoingbids.php?id=" + SharedPrefManager.getInstance(getActivity()).getUser().getId(),
                 new Response.Listener<String>() {
@@ -98,6 +98,7 @@ public class MyBidsFragment extends Fragment {
                                         heroObject.getString("endtime"),
                                         heroObject.getString("title"),
                                         heroObject.getString("currentid"));
+
                                 if (a1.compareTo(new java.sql.Date(System.currentTimeMillis())) > 0)
                                     cartItems.add(c);
                             }
@@ -264,10 +265,9 @@ public class MyBidsFragment extends Fragment {
     }
 
     class sortTime implements Comparator<CartItems> {
-        // Used for sorting in ascending order of
-        // roll number
+
         public int compare(CartItems a, CartItems b) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
             Date a1 = null, b1 = null;
             try {
                 a1 = simpleDateFormat.parse(a.getStatus());
