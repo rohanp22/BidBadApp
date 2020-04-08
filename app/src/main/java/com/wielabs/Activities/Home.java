@@ -309,6 +309,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
 //                fragment = new MyBidsFragment();
 //                name = "mybids";
 //                break;
+            //hi
 //
 //            case R.id.navigation_notifications:
 //                fragment = new NotificationsFragment();

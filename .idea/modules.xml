@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BidBadAndroid.iml" filepath="$PROJECT_DIR$/BidBadAndroid.iml" group="BidBadAndroid" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="BidBadAndroid/app" />
+      <module fileurl="file://$PROJECT_DIR$/BidBad.iml" filepath="$PROJECT_DIR$/BidBad.iml" group="BidBad" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="BidBad/app" />
     </modules>
   </component>
 </project>
