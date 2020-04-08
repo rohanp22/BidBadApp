@@ -117,7 +117,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                         public void run() {
                             rewardText.setVisibility(View.VISIBLE);
                             resultText.setVisibility(View.VISIBLE);
-                            profile.setVisibility(View.VISIBLE);
+                            profileText.setVisibility(View.VISIBLE);
                             loadFragment(new HomeFragment(), "home");
                         }
                     }, TIME_OUT);
@@ -140,7 +140,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                         public void run() {
                             homeText.setVisibility(View.VISIBLE);
                             rewardText.setVisibility(View.VISIBLE);
-                            profile.setVisibility(View.VISIBLE);
+                            profileText.setVisibility(View.VISIBLE);
                             loadFragment(new BidsHistory(), "bidhistoy");
                         }
                     }, TIME_OUT);
@@ -244,11 +244,11 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     }
 
     private void moveLeft(ImageView target, ImageView imageView) {
-        imageView.animate().setDuration(1000).translationXBy(-(imageView.getX() - target.getX() + target.getWidth() / 6) + target.getWidth() / 2).start();
+        imageView.animate().setDuration(TIME_OUT).translationXBy(-(imageView.getX() - target.getX() + target.getWidth() / 6) + target.getWidth() / 2).start();
     }
 
     private void moveRight(ImageView target, ImageView imageView) {
-        imageView.animate().setDuration(1000).translationXBy(target.getX() + target.getWidth() / 2 - imageView.getX() - target.getWidth() / 6).start();
+        imageView.animate().setDuration(TIME_OUT).translationXBy(target.getX() + target.getWidth() / 2 - imageView.getX() - target.getWidth() / 6).start();
     }
 
     @Override
