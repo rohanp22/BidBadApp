@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BidBad.iml" filepath="$PROJECT_DIR$/BidBad.iml" group="BidBad" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="BidBad/app" />
+      <module fileurl="file://$PROJECT_DIR$/BidBadApp.iml" filepath="$PROJECT_DIR$/BidBadApp.iml" group="BidBadApp" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="BidBadApp/app" />
     </modules>
   </component>
 </project>
