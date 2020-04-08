@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.os.CountDownTimer;
 import android.transition.Fade;
 import android.util.Log;
@@ -36,6 +38,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -69,28 +72,13 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private ArrayList<Current_Product> current_products = new ArrayList<>();
     private Dialog dialog;
-    private ProgressBar p;
     private View view;
-    private Context c;
     public RecyclerViewAdapterCurrent adapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setHasOptionsMenu(true);
-    }
-
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // TODO Add your menu entries here
-    }
-
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -98,19 +86,15 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        p = view.findViewById(R.id.progressBarHome);
-        c = view.getContext();
         dialog = new Dialog(view.getContext());
         dialog.setContentView(R.layout.bid_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
         loadCurrentProducts(view);
         return view;
     }
 
     @Override
     public void onViewCreated(final @NonNull View view, @Nullable Bundle savedInstanceState) {
-
         ImageView walletimg = view.findViewById(R.id.walletimg);
         RecyclerView sliderView = view.findViewById(R.id.sliderview2);
         sliderView.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.HORIZONTAL, false));
@@ -126,14 +110,13 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 ((Activity) view.getContext()).overridePendingTransition(0, 0);
             }
         });
-
         mSwipeRefreshLayout = view.findViewById(R.id.refresh);
         mSwipeRefreshLayout.setOnRefreshListener(this);
     }
 
     private void loadCurrentProducts(final View view) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/currentproducts.php?id="+SharedPrefManager.getInstance(getContext()).getUser().getId(),
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/currentproducts.php?id=" + SharedPrefManager.getInstance(getContext()).getUser().getId(),
                 new Response.Listener<String>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
@@ -173,15 +156,15 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                     }
                 });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(this.c);
+        RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
         requestQueue.add(stringRequest);
     }
 
     private void initRecyclerView(final View view) {
-        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL );
+        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         RecyclerView recyclerViewCurrent = view.findViewById(R.id.recyclerviewCurrent);
 
-        if(current_products.size() == 0)
+        if (current_products.size() == 0)
             recyclerViewCurrent.setVisibility(View.GONE);
 
         Drawable verticalDivider = ContextCompat.getDrawable(view.getContext(), R.drawable.vertical_divider);
@@ -197,7 +180,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         adapter = new RecyclerViewAdapterCurrent(view.getContext(), current_products);
 
         view.findViewById(R.id.progressBarHome).setVisibility(View.GONE);
-        recyclerViewCurrent.setAdapter(null);
         recyclerViewCurrent.setAdapter(adapter);
     }
 
@@ -227,7 +209,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         }
 
         @Override
-        public void onBindViewHolder(final RecyclerViewAdapterCurrent.ViewHolder holder,final int position) {
+        public void onBindViewHolder(final RecyclerViewAdapterCurrent.ViewHolder holder, final int position) {
 
             long diff = 0;
             this.position = position;
@@ -252,7 +234,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
             ViewCompat.setTransitionName(holder.image, String.valueOf(position) + "_image");
 
-            holder.sp.setText("Entry : ₹"+current_products.get(position).getSp());
+            holder.sp.setText("Entry : ₹" + current_products.get(position).getSp());
 
             final long secondsInMilli = 1000;
             final long minutesInMilli = secondsInMilli * 60;
@@ -277,7 +259,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
                     long different = startDate1.getTime() - System.currentTimeMillis();
 
-                    if(different > 0) {
+                    if (different > 0) {
 
                         final long elapsedDays = different / daysInMilli;
 
@@ -291,11 +273,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
                         String curtime;
 
-                        if(elapsedHours > 0) {
+                        if (elapsedHours > 0) {
                             curtime = elapsedHours + "hr " + String.format("%02d", elapsedMinutes) + "m";
                             holder.time.setText(curtime);
-                        }
-                        else {
+                        } else {
                             holder.time.setVisibility(View.GONE);
                             holder.r.setVisibility(View.VISIBLE);
                             holder.time2.setVisibility(View.VISIBLE);
@@ -329,7 +310,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             holder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i  = new Intent(view.getContext(), BottomSheetProduct.class);
+                    Intent i = new Intent(view.getContext(), BottomSheetProduct.class);
                     i.putExtra("imageurl", current_products.get(position).getImage_url());
                     i.putExtra("YourKey", current_products.get(position).getId());
                     startActivity(i);
@@ -338,7 +319,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         }
 
         public void showBottomSheet(String productId, String imageurl, String titleString, String sp) {
-            Log.d("yes","yes");
+            Log.d("yes", "yes");
             ActionBottomDialogFragment addPhotoBottomDialogFragment =
                     ActionBottomDialogFragment.newInstance(productId, imageurl, titleString, sp);
             addPhotoBottomDialogFragment.show(getFragmentManager(),
@@ -378,10 +359,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         }
     }
 
-    class sortTime implements Comparator<Current_Product>
-    {
-        public int compare(Current_Product a, Current_Product b)
-        {
+    class sortTime implements Comparator<Current_Product> {
+        public int compare(Current_Product a, Current_Product b) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
             Date a1 = null, b1 = null;
             try {
@@ -395,7 +374,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         }
     }
 
-    class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.ViewHolder>{
+    class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.ViewHolder> {
 
         ArrayList<PastProducts> CartList;
         Context mContext;
@@ -412,7 +391,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_slider_home, parent, false);
             int width = recyclerView.getWidth();
             ViewGroup.LayoutParams params = view.getLayoutParams();
-            params.width = (int)(width * 0.7);
+            params.width = (int) (width * 0.7);
             view.setLayoutParams(params);
             return new SliderAdapter.ViewHolder(view);
         }
@@ -451,6 +430,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             ImageView image;
+
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 image = itemView.findViewById(R.id.image_view);
