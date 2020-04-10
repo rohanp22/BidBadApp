@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:padding="24dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/editItemTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Title"
+        android:fontFamily="@font/dm_sans_regular"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16dp"/>
+
+    <ImageView
+        android:id="@+id/editItemImage"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_navigate_next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/editItemValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/dm_sans_regular"
+        android:text="Rohan"
+        app:layout_constraintRight_toLeftOf="@+id/editItemImage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginRight="16dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

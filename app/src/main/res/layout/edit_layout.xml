@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:src="@drawable/ic_back"
+                    android:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:text="Edit profile"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:text="Save"
+                    android:textColor="@color/blue"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/editImage"
+                android:layout_width="92dp"
+                android:layout_height="92dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/profile_pic_sample"
+                app:layout_constraintLeft_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/editName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Name"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editImage" />
+
+            <ImageView
+                android:id="@+id/editImageName"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_navigate_next"
+                app:layout_constraintBottom_toBottomOf="@id/editName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editName" />
+
+            <TextView
+                android:id="@+id/editNameValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Rohan"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/editName"
+                app:layout_constraintRight_toLeftOf="@+id/editImageName"
+                app:layout_constraintTop_toTopOf="@id/editName" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="-16dp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/editName" />
+
+            <TextView
+                android:id="@+id/editMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Phone"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view1" />
+
+            <ImageView
+                android:id="@+id/editMobileImage"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_navigate_next"
+                app:layout_constraintBottom_toBottomOf="@id/editMobile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editMobile" />
+
+            <TextView
+                android:id="@+id/editMobileValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="+91-8309096401"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/editMobile"
+                app:layout_constraintRight_toLeftOf="@+id/editMobileImage"
+                app:layout_constraintTop_toTopOf="@id/editMobile" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/editMobile" />
+
+            <TextView
+                android:id="@+id/editEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="E-mail"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view2" />
+
+            <ImageView
+                android:id="@+id/editEmailImage"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_navigate_next"
+                app:layout_constraintBottom_toBottomOf="@id/editEmail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editEmail" />
+
+            <TextView
+                android:id="@+id/editEmailValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="rohanpandey2210@gmail.com"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/editEmail"
+                app:layout_constraintRight_toLeftOf="@+id/editEmailImage"
+                app:layout_constraintTop_toTopOf="@id/editEmail" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
