@@ -2,7 +2,6 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,13 +13,12 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@color/white"
-            android:backgroundTint="@color/white"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:background="#f9f9f9"
                 android:layout_height="match_parent">
 
                 <ImageView
@@ -60,17 +58,15 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
         android:layout_marginTop="?actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp"
-            android:background="@color/white"
-            android:backgroundTint="@color/white"
+            android:background="#f9f9f9"
             android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -84,120 +80,84 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/editName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:text="PUBLIC"
                 android:fontFamily="@font/dm_sans_regular"
-                android:text="Name"
-                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="10dp"
+                android:id="@+id/textPublic"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editImage" />
+                android:layout_marginLeft="16dp"
+                app:layout_constraintTop_toBottomOf="@id/editImage"
+                android:layout_marginTop="24dp"/>
 
-            <ImageView
-                android:id="@+id/editImageName"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_navigate_next"
-                app:layout_constraintBottom_toBottomOf="@id/editName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/editName" />
-
-            <TextView
-                android:id="@+id/editNameValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:fontFamily="@font/dm_sans_regular"
-                android:text="Rohan"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@id/editName"
-                app:layout_constraintRight_toLeftOf="@+id/editImageName"
-                app:layout_constraintTop_toTopOf="@id/editName" />
-
-            <View
-                android:id="@+id/view1"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/editRecycler"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="-16dp"
-                android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@id/editName" />
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                android:background="@color/white"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textPublic"
+                />
 
             <TextView
-                android:id="@+id/editMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:text="PRIVATE"
                 android:fontFamily="@font/dm_sans_regular"
-                android:text="Phone"
-                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="10dp"
+                android:id="@+id/textPrivate"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view1" />
+                android:layout_marginLeft="16dp"
+                app:layout_constraintTop_toBottomOf="@id/editRecycler"
+                android:layout_marginTop="24dp"/>
 
-            <ImageView
-                android:id="@+id/editMobileImage"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_navigate_next"
-                app:layout_constraintBottom_toBottomOf="@id/editMobile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/editMobile" />
-
-            <TextView
-                android:id="@+id/editMobileValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:fontFamily="@font/dm_sans_regular"
-                android:text="+91-8309096401"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@id/editMobile"
-                app:layout_constraintRight_toLeftOf="@+id/editMobileImage"
-                app:layout_constraintTop_toTopOf="@id/editMobile" />
-
-            <View
-                android:id="@+id/view2"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/editRecycler1"
+                android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@id/editMobile" />
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textPrivate"
+                />
 
             <TextView
-                android:id="@+id/editEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:text="ADDRESS"
                 android:fontFamily="@font/dm_sans_regular"
-                android:text="E-mail"
-                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="10dp"
+                android:id="@+id/textAddress"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view2" />
-
-            <ImageView
-                android:id="@+id/editEmailImage"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_navigate_next"
-                app:layout_constraintBottom_toBottomOf="@id/editEmail"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/editEmail" />
+                android:layout_marginLeft="16dp"
+                app:layout_constraintTop_toBottomOf="@id/editRecycler1"
+                android:layout_marginTop="24dp"/>
 
             <TextView
-                android:id="@+id/editEmailValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="16dp"
                 android:fontFamily="@font/dm_sans_regular"
-                android:text="rohanpandey2210@gmail.com"
+                android:textSize="12dp"
+                android:layout_width="match_parent"
+                android:lineSpacingExtra="5dp"
+                android:lines="5"
+                android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@id/editEmail"
-                app:layout_constraintRight_toLeftOf="@+id/editEmailImage"
-                app:layout_constraintTop_toTopOf="@id/editEmail" />
+                app:layout_constraintTop_toBottomOf="@id/textAddress"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Rohan pandey, \nMurli nagar, Bahadurpura, \nHyderabad, \nTelangana\nPIN - 500064"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
