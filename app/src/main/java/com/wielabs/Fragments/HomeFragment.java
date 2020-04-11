@@ -60,7 +60,6 @@ import java.util.Date;
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private ArrayList<Current_Product> current_products = new ArrayList<>();
-    private Dialog dialog;
     private View view;
     public RecyclerViewAdapterCurrent adapter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -75,9 +74,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        dialog = new Dialog(view.getContext());
-        dialog.setContentView(R.layout.bid_dialog);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         loadCurrentProducts(view);
         return view;
     }

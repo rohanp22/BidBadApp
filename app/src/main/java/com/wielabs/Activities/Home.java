@@ -1,6 +1,7 @@
 package com.wielabs.Activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -50,6 +51,10 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_NoactionBar);
+        if(!SharedPrefManager.getInstance(Home.this).isLoggedIn()){
+            startActivity(new Intent(Home.this, Login.class));
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         home = findViewById(R.id.homeIcon);

@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
 
 
@@ -31,6 +33,14 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        TextView profileLogout = view.findViewById(R.id.profileLogout);
+        profileLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPrefManager.getInstance(view.getContext()).logout();
+            }
+        });
 
         ImageView profileEdit = view.findViewById(R.id.profileEdit);
         profileEdit.setOnClickListener(new View.OnClickListener() {
