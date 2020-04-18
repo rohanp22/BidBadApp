@@ -3,7 +3,7 @@
     <color name="colorPrimaryLight">#ffbc00</color>
     <color name="colorPrimary">#ffbc00</color>
     <color name="colorPrimaryDark">#ffbc00</color>
-    <color name="colorAccent">#ff4b2b</color>
+    <color name="colorAccent">#ffbc00</color>
 
     <color name="orange">#f77328</color>
     <color name="pink">#f95063</color>
@@ -20,5 +20,12 @@
 
     <color name="gray">#ddd</color>
     <color name="com_accountkit_button_background_color">@color/gradient_color</color>
+
+    <color name="color1">#f5b0ea</color>
+    <color name="color2">#c5d7a2</color>
+    <color name="color3">#ffc599</color>
+    <color name="color4">#f1aeaf</color>
+    <color name="color5">#eaeef1</color>
+    <color name="color6">#84cbff</color>
 
 </resources>

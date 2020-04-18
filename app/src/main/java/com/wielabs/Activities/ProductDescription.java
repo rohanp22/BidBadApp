@@ -34,7 +34,7 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.wielabs.Fragments.ActionBottomDialogFragment;
-import com.wielabs.Fragments.HomeFragment;
+import com.wielabs.Fragments.HomeFragment1;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
 
@@ -103,7 +103,7 @@ public class ProductDescription extends Fragment implements ActionBottomDialogFr
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment1()).commit();
             }
         });
 

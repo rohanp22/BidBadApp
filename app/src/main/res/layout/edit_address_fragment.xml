@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="16dp"
+            android:background="@color/white"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ralewayregualr"
+                android:textStyle="bold"
+                android:text="Who are you sending to?"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter recipient address or choose from recent addresses."
+                app:layout_constraintTop_toBottomOf="@id/editText"
+                android:id="@+id/enterrecipient"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp"
+                android:textSize="14dp"
+                />
+
+            <TextView
+                android:id="@+id/nametextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Name"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/enterrecipient" />
+
+            <EditText
+                android:id="@+id/nameedittext"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="12dp"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/round_edittext_gray"
+                app:layout_constraintTop_toBottomOf="@id/nametextview" />
+
+            <TextView
+                android:id="@+id/addresstextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Address"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameedittext" />
+
+            <EditText
+                android:id="@+id/addressline1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/round_edittext_gray"
+                android:fontFamily="@font/dm_sans_regular"
+                android:textSize="12dp"
+                android:hint="House no."
+                android:padding="10dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/addresstextview" />
+
+            <EditText
+                android:id="@+id/addressline2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:textSize="12dp"
+                android:background="@drawable/round_edittext_gray"
+                android:fontFamily="@font/dm_sans_regular"
+                android:hint="Area"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/addressline1" />
+
+            <EditText
+                android:id="@+id/addressCity"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:background="@drawable/round_edittext_gray"
+                android:fontFamily="@font/dm_sans_regular"
+                android:hint="City"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/addressline2" />
+
+            <LinearLayout
+                android:id="@+id/linearlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="5"
+                app:layout_constraintTop_toBottomOf="@id/addressCity">
+
+                <EditText
+                    android:id="@+id/addressState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/round_edittext_gray"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:hint="State"
+                    android:padding="10dp"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/addresspin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/round_edittext_gray"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:hint="Pin"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/addressCountry"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:background="@drawable/round_edittext_gray"
+                android:fontFamily="@font/dm_sans_regular"
+                android:hint="Country"
+                android:textSize="12dp"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/linearlayout" />
+
+            <Switch
+                android:id="@+id/shareToggle"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addressCountry"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share Tracking"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/shareToggle"
+                app:layout_constraintTop_toTopOf="@id/shareToggle"
+                app:layout_constraintStart_toEndOf="@id/shareToggle"/>
+
+            <EditText
+                android:id="@+id/addressemail"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:background="@drawable/round_edittext_gray"
+                android:fontFamily="@font/dm_sans_regular"
+                android:hint="E-mail"
+                android:textSize="12dp"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/shareToggle" />
+
+            <FrameLayout
+                android:id="@+id/frameaddress"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/addressemail"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:id="@+id/mobile_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/round_edittext_gray"
+                    android:ems="10"
+                    android:hint="Phone number"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="48dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="10dp" >
+
+                </EditText>
+
+                <TextView
+                    android:id="@+id/prefix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="8dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:text="+91" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/textshipment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="Your receipient will be able to track shipments"
+                app:layout_constraintTop_toBottomOf="@id/frameaddress"
+                android:layout_marginTop="4dp"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:layout_marginTop="4dp"
+                android:textAllCaps="false"
+                app:layout_constraintTop_toBottomOf="@id/textshipment"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

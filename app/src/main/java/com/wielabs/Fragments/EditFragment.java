@@ -1,17 +1,12 @@
 package com.wielabs.Fragments;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.wielabs.R;
 
 import java.util.ArrayList;
@@ -52,7 +48,7 @@ public class EditFragment extends Fragment {
 
         items.add(new Item("Name", "Rohan"));
         items.add(new Item("Referral code", "rohan3241"));
-        items.add(new Item("Address", "19-1-924/A/11/1 \nMurli nagar,\nHyderabad - 500064"));
+        items.add(new Item("Manage Address", ""));
         items.add(new Item("Change password", ""));
 
         items1.add(new Item("Gender", "Male"));
@@ -82,7 +78,7 @@ public class EditFragment extends Fragment {
         Context context;
         ArrayList<Item> heroList;
 
-        EditAdapter(Context context, ArrayList<Item> heroList){
+        EditAdapter(Context context, ArrayList<Item> heroList) {
             this.context = context;
             this.heroList = heroList;
         }
@@ -118,11 +114,17 @@ public class EditFragment extends Fragment {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, heroList.get(getAdapterPosition()).getValue(), Toast.LENGTH_SHORT).show();
-                        if(heroList.get(getAdapterPosition()).getTitle().equals("Change password")){
-                            dialog.setContentView(R.layout.change_password_dialog);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                            dialog.show();
+                        switch (heroList.get(getAdapterPosition()).getTitle()) {
+
+                            case "Change password":
+                                dialog.setContentView(R.layout.change_password_dialog);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                                dialog.show();
+                                break;
+
+                            case "Manage Address":
+                                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddressFragment()).commit();
+                                break;
                         }
                     }
                 });
@@ -130,7 +132,7 @@ public class EditFragment extends Fragment {
         }
     }
 
-    class Item{
+    class Item {
         String title;
         String value;
 

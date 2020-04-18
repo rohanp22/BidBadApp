@@ -10,20 +10,11 @@ public class PastProducts implements Serializable {
     private String end_date;
     private String mrp;
     private String sp;
+    private String bidamount;
     private String description;
+    private String winner;
 
-    public boolean isExpanded() {
-        return expanded;
-    }
-
-    public void setExpanded(boolean expanded) {
-        this.expanded = expanded;
-    }
-
-    private boolean expanded = false;
-
-
-    public PastProducts(String id, String image_url, String title, String end_date, String mrp, String sp, String description, String image_url2, String image_url3){
+    public PastProducts(String id, String image_url, String title, String end_date, String mrp, String sp, String description, String image_url2, String image_url3, String winner, String bidamount){
         this.end_date = end_date;
         this.title = title;
         this.image_url = image_url;
@@ -31,11 +22,16 @@ public class PastProducts implements Serializable {
         this.mrp = mrp;
         this.description = description;
         this.sp = sp;
-        this.expanded = false;
+        this.winner = winner;
+        this.bidamount = bidamount;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public String getBidamount() {
+        return bidamount;
     }
 
     public String getImage_url2() {
@@ -70,4 +66,7 @@ public class PastProducts implements Serializable {
         return title;
     }
 
+    public String getWinner() {
+        return winner;
+    }
 }

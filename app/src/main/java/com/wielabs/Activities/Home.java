@@ -1,7 +1,9 @@
 package com.wielabs.Activities;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -10,7 +12,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.wielabs.Fragments.BidsHistory;
+import com.wielabs.Fragments.HomeFragment;
 import com.wielabs.Fragments.ProfileFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,7 +24,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.wielabs.Fragments.ActionBottomDialogFragment;
 import com.wielabs.Fragments.FeedbackBottomDialogFragment;
-import com.wielabs.Fragments.HomeFragment;
+import com.wielabs.Fragments.HomeFragment1;
 import com.wielabs.Fragments.MyBidsFragment;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
@@ -32,6 +36,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -43,11 +48,21 @@ import android.widget.Toast;
 public class Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ActionBottomDialogFragment.ItemClickListener, FeedbackBottomDialogFragment.ItemClickListener {
 
     FloatingActionButton fab;
+    BottomAppBar bottomAppBar;
     ImageView reward, profile, results, indicator, home;
     TextView homeText, rewardText, resultText, profileText;
     int TIME_OUT = 250;
     int dotPosition = 0;
 
+    private int[] getDeviceDimensions(){
+        Display display = getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        display.getSize(point);
+        int width = point.x;
+        int height = point.y;
+
+        return new int[]{width, height};
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +72,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        bottomAppBar = findViewById(R.id.bar);
         home = findViewById(R.id.homeIcon);
         reward = findViewById(R.id.rewardsIcon);
         profile = findViewById(R.id.profileIcon);
@@ -71,9 +87,15 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                loadFragment(new HomeFragment(), "home");
+                Fragment fragment = new HomeFragment();
+
+                Bundle b = new Bundle();
+                b.putIntArray("dimensions", getDeviceDimensions());
+                fragment.setArguments(b);
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
             }
-        }, 500);
+        }, 1000);
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -103,7 +125,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                         public void run() {
                             homeText.setVisibility(View.VISIBLE);
                             resultText.setVisibility(View.VISIBLE);
-                            profile.setVisibility(View.VISIBLE);
+                            profileText.setVisibility(View.VISIBLE);
                         }
                     }, TIME_OUT);
                 }

@@ -17,12 +17,13 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabhome"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        android:visibility="visible"
+        app:backgroundTint="@color/colorPrimary"
+        app:tint="@null"
         android:src="@drawable/ic_b_iocn"
-        app:backgroundTint="@color/gradient_color"
         app:fabCustomSize="48dp"
         app:layout_anchor="@id/bar" />
 
@@ -38,8 +39,9 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:layout_gravity="bottom"
-        app:fabCradleMargin="0dp"
-        app:fabCradleRoundedCornerRadius="0dp"
+        app:fabAnimationMode="scale"
+        app:fabCradleMargin="6dp"
+        app:fabCradleRoundedCornerRadius="60dp"
         app:backgroundTint="@color/white"
         app:fabAlignmentMode="center"
         app:hideOnScroll="false">

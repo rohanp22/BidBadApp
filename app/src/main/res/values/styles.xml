@@ -11,7 +11,7 @@
     </style>
 
     <!-- Base application theme. -->
-    <style name="AppTheme.NoactionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme.NoactionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

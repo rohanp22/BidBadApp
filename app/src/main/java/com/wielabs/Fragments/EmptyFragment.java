@@ -106,7 +106,9 @@ public class EmptyFragment extends Fragment {
                                             heroObject.getString("sp"),
                                             heroObject.getString("description"),
                                             heroObject.getString("image_url2"),
-                                            heroObject.getString("image_url3")
+                                            heroObject.getString("image_url3"),
+                                            heroObject.getString("firstname"),
+                                            heroObject.getString("bidamount")
                                     );
                                     if (!(a1.compareTo(new java.sql.Date(System.currentTimeMillis())) > 0))
                                         cartItems.add(c);
@@ -152,7 +154,9 @@ public class EmptyFragment extends Fragment {
                                             heroObject.getString("sp"),
                                             heroObject.getString("description"),
                                             heroObject.getString("image_url2"),
-                                            heroObject.getString("image_url3")
+                                            heroObject.getString("image_url3"),
+                                            heroObject.getString("firstname"),
+                                            heroObject.getString("bidamount")
                                     );
                                     cartItems.add(c);
                                 }
