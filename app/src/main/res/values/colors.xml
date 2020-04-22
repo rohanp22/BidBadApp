@@ -21,11 +21,25 @@
     <color name="gray">#ddd</color>
     <color name="com_accountkit_button_background_color">@color/gradient_color</color>
 
-    <color name="color1">#f5b0ea</color>
-    <color name="color2">#c5d7a2</color>
-    <color name="color3">#ffc599</color>
-    <color name="color4">#f1aeaf</color>
-    <color name="color5">#eaeef1</color>
-    <color name="color6">#84cbff</color>
+    <color name="c1">#fafafa</color>
+    <color name="c2">#ffc09f</color>
+    <color name="c3">#c1d5fb</color>
+    <color name="c4">#c4ffb2</color>
+    <color name="c5">#ffee93</color>
+    <color name="c6">#9cf6f6</color>
+    <color name="c7">#c8a9ea</color>
+
+    <color name="colorWindowBackground">#fff</color>
+    <color name="color1">#d90368</color>
+    <color name="color2">#08b2e3</color>
+    <color name="color3">#ee642e</color>
+    <color name="color4">#820263</color>
+    <color name="color5">#44e12e</color>
+    <color name="color6">#c1d5fa</color>
+    <color name="color7">#ffc09f</color>
+    <color name="color8">#ffee94</color>
+    <color name="color9">#c5ffb2</color>
+    <color name="color10">#96eced</color>
+    <color name="color11">#f9f9f9</color>
 
 </resources>

@@ -118,13 +118,13 @@ public class ProductDescription extends Fragment implements ActionBottomDialogFr
             }
         }, 1000);
 
-        if(show.equals("no")){
+        if (show.equals("no")) {
             //place.setVisibility(View.GONE);
         }
 
         String value = getArguments().getString("YourKey");
         productId = value;
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getproductinfo.php?id="+value,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getproductinfo.php?id=" + value,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -145,9 +145,9 @@ public class ProductDescription extends Fragment implements ActionBottomDialogFr
                                 sp = heroObject.getString("sp");
                                 title.setText(titleString);
                                 //mrp.setText("MRP: ₹"+mrpString);
-                                entry.setText("Entry : ₹"+sp);
+                                entry.setText("Entry : ₹" + sp);
                                 String h = "Hello \n world";
-                                String d = heroObject.getString("description")+"<u>Read more</u>";
+                                String d = heroObject.getString("description") + "<u>Read more</u>";
                                 Log.d("Text", heroObject.getString("description"));
                                 //productDescription.setText(d);
                                 //adapter.notifyDataSetChanged();
@@ -216,44 +216,17 @@ public class ProductDescription extends Fragment implements ActionBottomDialogFr
 
                                         final long elapsedSeconds = different / secondsInMilli;
                                         String curtime = "";
-                                        if(elapsedHours > 0) {
+                                        if (elapsedHours > 0) {
                                             curtime = elapsedHours + " hr " + String.format("%02d", elapsedMinutes) + " m ";
-                                        }
-                                        else {
+                                        } else {
                                             curtime = String.format("%02d", elapsedMinutes) + " m " + String.format("%02d", elapsedSeconds) + " s ";
                                         }
                                         //clock.setText(curtime);
                                     }
-
-                                    public void onFinish() {
-
-//                    StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/currentmove.php?id=" + current_products.get(position).getId(),
-//                            new Response.Listener<String>() {
-//                                @Override
-//                                public void onResponse(String response) {
-//                                    Toast.makeText(mContext, response, Toast.LENGTH_LONG);
-//                                    initRecyclerView();
-//                                }
-//                            },
-//                            new Response.ErrorListener() {
-//                                @Override
-//                                public void onErrorResponse(VolleyError error) {
-//
-//                                }
-//                            });
-//                    RequestQueue requestQueue = Volley.newRequestQueue(mContext);
-//                    requestQueue.add(stringRequest);
-                                    }
+                                    public void onFinish() {}
                                 }.start();
-
-                                //ImageView i2 = getView().findViewById(R.id.productImage);
-
-//                                Glide.with(getView().getContext())
-//                                        .asBitmap()
-//                                        .load(imageurl)
-//                                        .into(i2);
                             }
-                        }catch (JSONException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -319,7 +292,7 @@ public class ProductDescription extends Fragment implements ActionBottomDialogFr
 //                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 //                requestQueue.add(stringRequest);
 //                    //EditText myBid = (EditText) dialog.findViewById(R.id.bidAmount);
-                }
+            }
         });
     }
 
@@ -340,7 +313,7 @@ public class ProductDescription extends Fragment implements ActionBottomDialogFr
     }
 
     public void showBottomSheet() {
-        Log.d("yes","yes");
+        Log.d("yes", "yes");
         ActionBottomDialogFragment addPhotoBottomDialogFragment =
                 ActionBottomDialogFragment.newInstance(productId, imageurl, titleString, sp);
         addPhotoBottomDialogFragment.show(getFragmentManager(),

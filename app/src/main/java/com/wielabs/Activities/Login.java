@@ -42,8 +42,6 @@ public class Login extends AppCompatActivity {
         etpassword = (EditText) findViewById(R.id.et_pass);
         welcome = (TextView) findViewById(R.id.txt_wel);
 
-
-
         Typeface custom_font = Typeface.createFromAsset(getAssets(), "fonts/round.otf");
 
         welcome.setTypeface(custom_font);

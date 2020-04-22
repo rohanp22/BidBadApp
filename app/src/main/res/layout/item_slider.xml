@@ -1,105 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/sliderCoordinator"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp">
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/sliderCardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
-            android:layout_width="wrap_content"
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:clipToPadding="false"
+            android:background="@drawable/bg_slider_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/sliderWinnerTitle"
+            <ImageView
+                android:id="@+id/backgroundScaled"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:alpha="0.3"
+                android:scaleType="centerCrop"
+                android:scaleX="-1.2"
+                android:scaleY="1"
+                android:src="@drawable/headphones"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/sliderImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/party_01"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/sliderImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/sliderImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/headphones"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sliderProductTitle"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/dm_sans_regular"
-                android:gravity="center"
-                android:text="Product won by price 1000"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:text="Samsung TV 32 inch"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:letterSpacing="0.05"
+                app:autoSizeMaxTextSize="16sp"
+                app:autoSizeMinTextSize="10sp"
+                app:autoSizeStepGranularity="2sp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toStartOf="@+id/sliderImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/underline"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@drawable/leaderboard_item_bg"
+                app:layout_constraintEnd_toStartOf="@+id/sliderImage"
+                app:layout_constraintStart_toStartOf="@id/sliderProductTitle"
+                app:layout_constraintTop_toBottomOf="@id/sliderProductTitle" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:includeFontPadding="false"
+                android:text="Spent"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/underline"
+                app:layout_constraintTop_toBottomOf="@+id/underline" />
+
+            <TextView
+                android:id="@+id/sliderBidAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:fontFamily="@font/rubik_bold"
+                android:includeFontPadding="false"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp"
+                android:text="₹200"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:textColor="#fff"
+                app:layout_constraintEnd_toEndOf="@id/sliderSupercash"
+                app:layout_constraintStart_toStartOf="@+id/sliderSupercash"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <TextView
+                android:id="@+id/sliderSupercash"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:fontFamily="@font/rubik_bold"
+                android:includeFontPadding="false"
+                android:paddingTop="0dp"
+                android:layout_marginStart="16dp"
+                android:paddingBottom="0dp"
+                android:text="Bid Winner"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sliderBidAmount" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="12dp"
+                android:alpha="0.7"
+                android:src="@drawable/winner_stage_01"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/sliderSupercash"
+                app:layout_constraintStart_toStartOf="@+id/sliderSupercash"
+                app:layout_constraintTop_toBottomOf="@+id/sliderSupercash" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/sliderDetailRoot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <TextView
+                android:id="@+id/sliderTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:gravity="start"
+                android:text="Jason"
                 android:textColor="?android:textColorPrimary"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/sliderProfilePic"
+                app:layout_constraintEnd_toStartOf="@+id/textView9"
+                app:layout_constraintStart_toEndOf="@+id/sliderProfilePic"
+                app:layout_constraintTop_toTopOf="@+id/sliderProfilePic" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/sliderProfilePic"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/profile_pic_sample"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/sliderWinnerName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/dm_sans_regular"
-                android:gravity="start"
-                android:text="Anonymous"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/circleImageView"
-                app:layout_constraintStart_toStartOf="@+id/sliderWinnerTitle"
-                app:layout_constraintTop_toBottomOf="@+id/sliderMrpAmount" />
-
-            <TextView
-                android:id="@+id/sliderMrpText"
+                android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/dm_sans_regular"
+                android:layout_marginTop="8dp"
                 android:text="MRP"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/sliderWinnerTitle"
-                app:layout_constraintStart_toStartOf="@+id/sliderWinnerTitle"
-                app:layout_constraintTop_toBottomOf="@+id/sliderWinnerTitle" />
+                app:layout_constraintBottom_toTopOf="@+id/sliderMrp"
+                app:layout_constraintStart_toStartOf="@+id/sliderMrp"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/sliderMrpAmount"
+                android:id="@+id/sliderMrp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="10000"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/sliderWinnerTitle"
-                app:layout_constraintStart_toStartOf="@+id/sliderWinnerTitle"
-                app:layout_constraintTop_toBottomOf="@+id/sliderMrpText" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/profile_pic_sample"
-                app:layout_constraintBottom_toBottomOf="@id/sliderWinnerName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/sliderWinnerName" />
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:text="₹100000"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <ImageView
-        android:id="@+id/sliderImage"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="-16dp"
-        android:src="@drawable/headphones"
-        app:layout_anchor="@id/sliderCardView"
-        app:layout_anchorGravity="center|top" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

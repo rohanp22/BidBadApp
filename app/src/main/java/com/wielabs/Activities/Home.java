@@ -24,7 +24,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.wielabs.Fragments.ActionBottomDialogFragment;
 import com.wielabs.Fragments.FeedbackBottomDialogFragment;
-import com.wielabs.Fragments.HomeFragment1;
 import com.wielabs.Fragments.MyBidsFragment;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
@@ -35,6 +34,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
@@ -54,7 +54,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     int TIME_OUT = 250;
     int dotPosition = 0;
 
-    private int[] getDeviceDimensions(){
+    private int[] getDeviceDimensions() {
         Display display = getWindowManager().getDefaultDisplay();
         Point point = new Point();
         display.getSize(point);
@@ -67,11 +67,12 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme_NoactionBar);
-        if(!SharedPrefManager.getInstance(Home.this).isLoggedIn()){
-            startActivity(new Intent(Home.this, Login.class));
-        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        loadFragment(new HomeFragment(), "home");
+
+
+
         bottomAppBar = findViewById(R.id.bar);
         home = findViewById(R.id.homeIcon);
         reward = findViewById(R.id.rewardsIcon);
@@ -83,19 +84,6 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         profileText = findViewById(R.id.profileText);
         indicator = (ImageView) findViewById(R.id.indicator);
         fab = findViewById(R.id.fabhome);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Fragment fragment = new HomeFragment();
-
-                Bundle b = new Bundle();
-                b.putIntArray("dimensions", getDeviceDimensions());
-                fragment.setArguments(b);
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
-            }
-        }, 1000);
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -135,7 +123,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dotPosition != 0){
+                if (dotPosition != 0) {
                     moveLeft(home, indicator);
                     dotPosition = 0;
                     homeText.setVisibility(View.INVISIBLE);
@@ -178,7 +166,10 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if(dotPosition != 3){
+                if (dotPosition != 3) {Window window = Home.this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(Home.this, android.R.color.transparent));
                     moveRight(profile, indicator);
                     dotPosition = 3;
                     profileText.setVisibility(View.INVISIBLE);
@@ -202,10 +193,19 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             }
         });
 
+
+
         Window window = Home.this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(Home.this, R.color.colorPrimary));
+       window.setStatusBarColor(ContextCompat.getColor(Home.this, android.R.color.transparent));
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+//            }
+//        }, 1000);
     }
 
     void sendToken(String token) {

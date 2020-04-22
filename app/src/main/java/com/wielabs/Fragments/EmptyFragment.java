@@ -56,7 +56,7 @@ public class EmptyFragment extends Fragment {
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 
-    EmptyFragment(String bid){
+    EmptyFragment(String bid) {
         this.bid = bid;
     }
 
@@ -82,8 +82,7 @@ public class EmptyFragment extends Fragment {
         cartItems = new ArrayList<>();
         progressBar = view.findViewById(R.id.mybidsprogress);
 
-        if(bid.equals("mybids"))
-        {
+        if (bid.equals("mybids")) {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getmybids.php?id=" + SharedPrefManager.getInstance(getActivity()).getUser().getId(),
                     new Response.Listener<String>() {
                         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -131,9 +130,7 @@ public class EmptyFragment extends Fragment {
 
             RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
             requestQueue.add(stringRequest);
-        }
-        else if(bid.equals("allbids"))
-        {
+        } else if (bid.equals("allbids")) {
             StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/pastproducts.php",
                     new Response.Listener<String>() {
                         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -177,8 +174,8 @@ public class EmptyFragment extends Fragment {
 
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
             requestQueue.add(stringRequest);
-        } else if(bid.equals("wonbids")){
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getwonitems.php?id="+ SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
+        } else if (bid.equals("wonbids")) {
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getwonitems.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
                     new Response.Listener<String>() {
                         @RequiresApi(api = Build.VERSION_CODES.N)
                         @Override
@@ -197,7 +194,7 @@ public class EmptyFragment extends Fragment {
                                             heroObject.getString("mrp"),
                                             heroObject.getString("sp"),
                                             heroObject.getString("description"),
-                                            heroObject.getString("bidamount"),"Won", heroObject.getString("orderplaced"));
+                                            heroObject.getString("bidamount"), "Won", heroObject.getString("orderplaced"));
                                     pastItems.add(c);
                                 }
                                 pastItems.sort(new sortTime2());
@@ -259,7 +256,7 @@ public class EmptyFragment extends Fragment {
         Context context;
         ArrayList<PastProducts> heroList;
 
-        BidHistoryAdapterAll(Context context, ArrayList<PastProducts> heroList){
+        BidHistoryAdapterAll(Context context, ArrayList<PastProducts> heroList) {
             this.context = context;
             this.heroList = heroList;
         }
@@ -309,7 +306,7 @@ public class EmptyFragment extends Fragment {
         Context context;
         ArrayList<WonItem> heroList;
 
-        WonItemsAdapter(Context context, ArrayList<WonItem> heroList){
+        WonItemsAdapter(Context context, ArrayList<WonItem> heroList) {
             this.context = context;
             this.heroList = heroList;
         }
@@ -329,7 +326,7 @@ public class EmptyFragment extends Fragment {
             Glide.with(context)
                     .load(heroList.get(position).getImage_url())
                     .into(holder.bidHistoryImage);
-            if(pastItems.get(position).getOrderplaced().equals("1")){
+            if (pastItems.get(position).getOrderplaced().equals("1")) {
                 holder.bidHistoryRank.setVisibility(View.GONE);
             } else {
                 holder.bidHistoryRank.setText("Place order");
@@ -338,30 +335,33 @@ public class EmptyFragment extends Fragment {
             holder.bidHistoryRank.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    RequestQueue MyRequestQueue = Volley.newRequestQueue(context);
-                    String url = "http://easyvela.esy.es/AndroidAPI/placeorder.php?id="+ SharedPrefManager.getInstance(context).getUser().getId(); // <----enter your post url here
-                    StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            //This code is executed if the server responds, whether or not the response contains data.
-                            //The String 'response' contains the server's response.
-                            holder.bidHistoryRank.setVisibility(View.GONE);
-                        }
-                    }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            //This code is executed if there is an error.
-                        }
-                    }) {
-                        protected Map<String, String> getParams() {
-                            Map<String, String> params = new HashMap<String, String>();
-                            params.put("productid", heroList.get(position).getId());
-                            params.put("status", "Order placed");
-                            params.put("address", SharedPrefManager.getInstance(context).getUser().getAddress());
-                            return params;
-                        }
-                    };
-                    MyRequestQueue.add(MyStringRequest);
+//                    RequestQueue MyRequestQueue = Volley.newRequestQueue(context);
+//                    String url = "http://easyvela.esy.es/AndroidAPI/placeorder.php?id="+ SharedPrefManager.getInstance(context).getUser().getId(); // <----enter your post url here
+//                    StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+//                        @Override
+//                        public void onResponse(String response) {
+//                            //This code is executed if the server responds, whether or not the response contains data.
+//                            //The String 'response' contains the server's response.
+//                            holder.bidHistoryRank.setVisibility(View.GONE);
+//                            getParentFragment().getFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlaceOrderFragment()).commit();
+//                        }
+//                    }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
+//                        @Override
+//                        public void onErrorResponse(VolleyError error) {
+//                            //This code is executed if there is an error.
+//                        }
+//                    }) {
+//                        protected Map<String, String> getParams() {
+//                            Map<String, String> params = new HashMap<String, String>();
+//                            params.put("productid", heroList.get(position).getId());
+//                            params.put("status", "Order placed");
+//                            params.put("address", SharedPrefManager.getInstance(context).getUser().getAddress());
+//                            return params;
+//                        }
+//                    };
+//                    MyRequestQueue.add(MyStringRequest);
+                    getParentFragment().getFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlaceOrderFragment()).commit();
+
                 }
             });
         }

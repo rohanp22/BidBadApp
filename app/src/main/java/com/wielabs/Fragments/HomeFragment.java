@@ -7,7 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -25,8 +27,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.wielabs.CenterZoomLayoutManager;
-import com.wielabs.HomeGridAdapter;
+import com.google.android.material.card.MaterialCardView;
+import com.wielabs.HomeGridAdapter1;
 import com.wielabs.Models.Current_Product;
 import com.wielabs.Models.PastProducts;
 import com.wielabs.Others.SharedPrefManager;
@@ -52,6 +54,10 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -179,11 +185,63 @@ public class HomeFragment extends Fragment {
                                 pastProducts.add(c);
                             }
                             pastProducts.sort(new sortTime2());
-                            RecyclerView sliderRecyclerView = view.findViewById(R.id.sliderRecyclerView);
+
+                            final RecyclerView sliderRecyclerView = view.findViewById(R.id.sliderRecyclerView);
                             PagerSnapHelper snapHelper = new PagerSnapHelper();
                             snapHelper.attachToRecyclerView(sliderRecyclerView);
-                            sliderRecyclerView.setAdapter(new SliderAdapter(view.getContext(), deviceWidth, pastProducts));
-                            sliderRecyclerView.setLayoutManager(new CenterZoomLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+                            final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+
+                            sliderRecyclerView.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    sliderRecyclerView.setAdapter(new SliderAdapter(view.getContext(), sliderRecyclerView, pastProducts));
+                                    sliderRecyclerView.setLayoutManager(layoutManager);
+                                    sliderRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                                        @Override
+                                        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                                            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                                                int position = layoutManager.findFirstVisibleItemPosition() + 1;
+                                                int nextPosition = position + 1;
+                                                int previousPosition = position - 1;
+                                                Log.d("Frag", previousPosition + " " + position + " " + nextPosition);
+                                                ConstraintLayout nextSliderDetail = null;
+                                                ConstraintLayout previousSliderDetail = layoutManager.findViewByPosition(previousPosition).findViewById(R.id.sliderDetailRoot);
+                                                ConstraintLayout currentSliderDetail = layoutManager.findViewByPosition(position).findViewById(R.id.sliderDetailRoot);
+                                                if (nextPosition < 10) {
+                                                    MaterialCardView cardView = (MaterialCardView) layoutManager.findViewByPosition(nextPosition);
+                                                    if (cardView != null)
+                                                        nextSliderDetail = cardView.findViewById(R.id.sliderDetailRoot);
+                                                }
+                                                if (position == 9) {
+                                                    if (previousSliderDetail != null) {
+                                                        previousSliderDetail.animate().alpha(0.0f).start();
+                                                        previousSliderDetail.setVisibility(View.GONE);
+                                                    }
+                                                    currentSliderDetail.setVisibility(View.VISIBLE);
+                                                    currentSliderDetail.animate().alpha(1.0f).start();
+                                                } else {
+                                                    if (previousSliderDetail != null) {
+                                                        previousSliderDetail.animate().alpha(0.0f).start();
+                                                        previousSliderDetail.setVisibility(View.GONE);
+                                                    }
+                                                    if (nextSliderDetail != null) {
+                                                        nextSliderDetail.animate().alpha(0.0f).start();
+                                                        nextSliderDetail.setVisibility(View.GONE);
+                                                    } else {
+                                                        currentSliderDetail.animate().alpha(0.0f).start();
+                                                        currentSliderDetail.setVisibility(View.GONE);
+                                                        previousSliderDetail.setVisibility(View.VISIBLE);
+                                                        previousSliderDetail.animate().alpha(1.0f).start();
+                                                        return;
+                                                    }
+                                                    currentSliderDetail.setVisibility(View.VISIBLE);
+                                                    currentSliderDetail.animate().alpha(1.0f).start();
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            });
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -207,7 +265,7 @@ public class HomeFragment extends Fragment {
         Log.d("HomeFragment", deviceWidth + "");
         loadCurrentProducts(view);
         RecyclerView recyclerView = view.findViewById(R.id.homeRecyclerView);
-        recyclerView.setAdapter(new HomeGridAdapter(getContext(), deviceWidth, current_products));
+        recyclerView.setAdapter(new HomeGridAdapter1(getContext(), deviceWidth, current_products, getFragmentManager()));
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL));
 
         loadPastProducts(view, deviceWidth);
