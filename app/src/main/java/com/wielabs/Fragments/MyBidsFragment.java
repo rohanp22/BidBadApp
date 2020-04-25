@@ -29,7 +29,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.wielabs.Activities.ProductDescription;
 import com.wielabs.Models.CartItems;
 import com.bumptech.glide.Glide;
 import com.wielabs.R;
@@ -164,13 +163,13 @@ public class MyBidsFragment extends Fragment {
             holder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ProductDescription ldf = new ProductDescription();
-                    Bundle args = new Bundle();
-                    args.putString("YourKey", cartItems.get(position).getId());
-                    args.putString("show", "no");
-                    args.putString("im", cartItems.get(position).getImage_url());
-                    ldf.setArguments(args);
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack(null).commit();
+//                    ProductDescription ldf = new ProductDescription();
+//                    Bundle args = new Bundle();
+//                    args.putString("YourKey", cartItems.get(position).getId());
+//                    args.putString("show", "no");
+//                    args.putString("im", cartItems.get(position).getImage_url());
+//                    ldf.setArguments(args);
+//                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack(null).commit();
                 }
             });
 

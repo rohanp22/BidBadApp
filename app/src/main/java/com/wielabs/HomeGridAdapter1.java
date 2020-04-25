@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.HomeGridViewHolder> {
-    private Context context;
     private int deviceWidth;
     private boolean isDimensionChanged = false;
     private ArrayList<Integer> colors = new ArrayList<>();
@@ -44,17 +43,11 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
     private ArrayList<Current_Product> current_products;
     private FragmentManager fragmentManager;
 
-    public HomeGridAdapter1(Context context, int deviceWidth, ArrayList<Current_Product> current_products, FragmentManager fragmentManager) {
-        this.context = context;
+    public HomeGridAdapter1(int deviceWidth, ArrayList<Current_Product> current_products, FragmentManager fragmentManager) {
         this.deviceWidth = deviceWidth;
         this.current_products = current_products;
         this.fragmentManager = fragmentManager;
-        this.colors.add(ContextCompat.getColor(context, R.color.color6));
-        this.colors.add(ContextCompat.getColor(context, R.color.color7));
-        this.colors.add(ContextCompat.getColor(context, R.color.color8));
-        this.colors.add(ContextCompat.getColor(context, R.color.color9));
-        this.colors.add(ContextCompat.getColor(context, R.color.color10));
-        this.colors.add(ContextCompat.getColor(context, R.color.color11));
+
     }
 
     @NonNull
@@ -67,9 +60,16 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
     String date;
     Date startDate1;
 
-
     @Override
     public void onBindViewHolder(@NonNull final HomeGridViewHolder holder, final int position) {
+
+        this.colors.add(ContextCompat.getColor(holder.constraintLayout.getContext(), R.color.color6));
+        this.colors.add(ContextCompat.getColor(holder.constraintLayout.getContext(), R.color.color7));
+        this.colors.add(ContextCompat.getColor(holder.constraintLayout.getContext(), R.color.color8));
+        this.colors.add(ContextCompat.getColor(holder.constraintLayout.getContext(), R.color.color9));
+        this.colors.add(ContextCompat.getColor(holder.constraintLayout.getContext(), R.color.color10));
+        this.colors.add(ContextCompat.getColor(holder.constraintLayout.getContext(), R.color.color11));
+
         if (position == getItemCount())
             isDimensionChanged = true;
 
@@ -87,7 +87,7 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
                 b.putInt("width", deviceWidth);
                 b.putString("YourKey", current_products.get(position).getId());
                 fragment.setArguments(b);
-                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
             }
         });
 
@@ -151,7 +151,7 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
 
         }.start();
 
-        Glide.with(context)
+        Glide.with(holder.constraintLayout.getContext())
                 .asBitmap()
                 .load(current_products.get(position).getImage_url())
                 .into(new SimpleTarget<Bitmap>() {
@@ -213,7 +213,6 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
 
     @Override
     public int getItemCount() {
-        Log.d("Current product size", ""+current_products.size());
         return current_products.size();
     }
 

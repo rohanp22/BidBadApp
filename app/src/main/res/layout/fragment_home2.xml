@@ -6,48 +6,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:nestedScrollingEnabled="false"
+    android:fitsSystemWindows="false"
     android:overScrollMode="never">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:elevation="10dp"
-        app:elevation="0dp">
+        app:elevation="0dp"
+        android:background="@color/white">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="@color/white"
+            android:layout_height="match_parent"
             app:contentInsetStart="0dp"
-            android:paddingEnd="0dp"
-            app:title="Bidbad"
-            style="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:contentInsetLeft="0dp"
-            app:titleTextAppearance="@style/ToolbarTitle">
+            app:title="BidBad"
+            >
 
             <RelativeLayout
-                android:elevation="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
-            <ImageView
-                android:id="@+id/logo_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_centerVertical="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_bidbadlogo" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.25dp"
+                    android:background="@color/gray"
+                    android:layout_alignParentBottom="true"/>
 
-            <ImageView
-                android:id="@+id/walletimg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ic_wallet" />
+                <ImageView
+                    android:layout_marginStart="16dp"
+                    android:layout_width="90dp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_bidbad_brand_logo_final"
+                    />
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_wallet"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="16dp"/>
 
             </RelativeLayout>
 
@@ -55,11 +56,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?actionBarSize"
-        android:nestedScrollingEnabled="false"
         android:overScrollMode="never">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,7 +88,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/dm_sans_regular"
-                android:text="Ongoing Bids"
+                android:text="Which product will be yours today?"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,14 +100,15 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"
-                android:nestedScrollingEnabled="false"
                 android:overScrollMode="never"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/homeOngoingText"
                 app:layout_constraintTop_toBottomOf="@+id/homeOngoingText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

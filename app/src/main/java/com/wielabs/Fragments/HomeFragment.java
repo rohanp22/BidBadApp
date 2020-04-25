@@ -3,6 +3,14 @@ package com.wielabs.Fragments;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,13 +22,6 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
-import android.view.Display;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.card.MaterialCardView;
+import com.wielabs.HomeGridAdapter;
 import com.wielabs.HomeGridAdapter1;
 import com.wielabs.Models.Current_Product;
 import com.wielabs.Models.PastProducts;
@@ -45,6 +47,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -54,19 +57,34 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-
-    }
+    RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home2, container, false);
+        getActivity().findViewById(R.id.fabhome).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.bar).setVisibility(View.VISIBLE);
+        View view = inflater.inflate(R.layout.fragment_home2, container, false);
+        recyclerView = view.findViewById(R.id.homeRecyclerView);
+
+        int deviceWidth = getDeviceWidth();
+        if (getArguments() != null)
+            deviceWidth = getArguments().getInt("width");
+        Log.d("HomeFragment", deviceWidth + "");
+        loadCurrentProducts(view);
+        recyclerView.setAdapter(new HomeGridAdapter1(deviceWidth, current_products, getFragmentManager()));
+        StaggeredGridLayoutManager l = new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL);
+        l.setItemPrefetchEnabled(true);
+        recyclerView.setDrawingCacheEnabled(true);
+        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        recyclerView.setLayoutManager(l);
+        recyclerView.setItemViewCacheSize(4);
+        loadPastProducts(view, getDeviceWidth());
+        return view;
     }
 
-    private int getDeviceDimensions(){
+    int getDeviceWidth(){
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point point = new Point();
         display.getSize(point);
@@ -74,6 +92,16 @@ public class HomeFragment extends Fragment {
         int height = point.y;
 
         return width;
+    }
+
+    int getDeviceHeight(){
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        display.getSize(point);
+        int width = point.x;
+        int height = point.y;
+
+        return height;
     }
 
     private ArrayList<Current_Product> current_products;
@@ -106,7 +134,7 @@ public class HomeFragment extends Fragment {
                                 );
                                 current_products.add(c);
                             }
-                            current_products.sort(new HomeFragment.sortTime());
+                            current_products.sort(new sortTime());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -138,28 +166,12 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    class sortTime2 implements Comparator<PastProducts> {
-        public int compare(PastProducts a, PastProducts b) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
-            Date a1 = null, b1 = null;
-            try {
-                a1 = simpleDateFormat.parse(a.getEnd_date());
-                b1 = simpleDateFormat.parse(b.getEnd_date());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-            return a1.compareTo(b1);
-        }
-    }
-
     private ArrayList<PastProducts> pastProducts;
 
     private void loadPastProducts(final View view,final int deviceWidth){
         pastProducts = new ArrayList<>();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/pastproducts.php",
                 new Response.Listener<String>() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -184,64 +196,11 @@ public class HomeFragment extends Fragment {
                                 );
                                 pastProducts.add(c);
                             }
-                            pastProducts.sort(new sortTime2());
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                pastProducts.sort(new sortTime2());
+                            }
+                            loadSlideProducts(view);
 
-                            final RecyclerView sliderRecyclerView = view.findViewById(R.id.sliderRecyclerView);
-                            PagerSnapHelper snapHelper = new PagerSnapHelper();
-                            snapHelper.attachToRecyclerView(sliderRecyclerView);
-                            final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-
-                            sliderRecyclerView.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    sliderRecyclerView.setAdapter(new SliderAdapter(view.getContext(), sliderRecyclerView, pastProducts));
-                                    sliderRecyclerView.setLayoutManager(layoutManager);
-                                    sliderRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                                        @Override
-                                        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                                            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                                                int position = layoutManager.findFirstVisibleItemPosition() + 1;
-                                                int nextPosition = position + 1;
-                                                int previousPosition = position - 1;
-                                                Log.d("Frag", previousPosition + " " + position + " " + nextPosition);
-                                                ConstraintLayout nextSliderDetail = null;
-                                                ConstraintLayout previousSliderDetail = layoutManager.findViewByPosition(previousPosition).findViewById(R.id.sliderDetailRoot);
-                                                ConstraintLayout currentSliderDetail = layoutManager.findViewByPosition(position).findViewById(R.id.sliderDetailRoot);
-                                                if (nextPosition < 10) {
-                                                    MaterialCardView cardView = (MaterialCardView) layoutManager.findViewByPosition(nextPosition);
-                                                    if (cardView != null)
-                                                        nextSliderDetail = cardView.findViewById(R.id.sliderDetailRoot);
-                                                }
-                                                if (position == 9) {
-                                                    if (previousSliderDetail != null) {
-                                                        previousSliderDetail.animate().alpha(0.0f).start();
-                                                        previousSliderDetail.setVisibility(View.GONE);
-                                                    }
-                                                    currentSliderDetail.setVisibility(View.VISIBLE);
-                                                    currentSliderDetail.animate().alpha(1.0f).start();
-                                                } else {
-                                                    if (previousSliderDetail != null) {
-                                                        previousSliderDetail.animate().alpha(0.0f).start();
-                                                        previousSliderDetail.setVisibility(View.GONE);
-                                                    }
-                                                    if (nextSliderDetail != null) {
-                                                        nextSliderDetail.animate().alpha(0.0f).start();
-                                                        nextSliderDetail.setVisibility(View.GONE);
-                                                    } else {
-                                                        currentSliderDetail.animate().alpha(0.0f).start();
-                                                        currentSliderDetail.setVisibility(View.GONE);
-                                                        previousSliderDetail.setVisibility(View.VISIBLE);
-                                                        previousSliderDetail.animate().alpha(1.0f).start();
-                                                        return;
-                                                    }
-                                                    currentSliderDetail.setVisibility(View.VISIBLE);
-                                                    currentSliderDetail.animate().alpha(1.0f).start();
-                                                }
-                                            }
-                                        }
-                                    });
-                                }
-                            });
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -253,23 +212,86 @@ public class HomeFragment extends Fragment {
                         Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
     }
 
+    class sortTime2 implements Comparator<PastProducts> {
+        public int compare(PastProducts a, PastProducts b) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+            Date a1 = null, b1 = null;
+            try {
+                a1 = simpleDateFormat.parse(a.getEnd_date());
+                b1 = simpleDateFormat.parse(b.getEnd_date());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            return a1.compareTo(b1);
+        }
+    }
+
+    void loadSlideProducts(View view){
+        final RecyclerView sliderRecyclerView = view.findViewById(R.id.sliderRecyclerView);
+        PagerSnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(sliderRecyclerView);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+
+        sliderRecyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                sliderRecyclerView.setAdapter(new SliderAdapter(sliderRecyclerView, pastProducts));
+                sliderRecyclerView.setLayoutManager(layoutManager);
+                //sliderRecyclerView.getLayoutManager().scrollToPosition(Integer.MAX_VALUE/2);
+                layoutManager.scrollToPositionWithOffset(Integer.MAX_VALUE/2, (int) (getDeviceWidth() * .175));
+                sliderRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            int position = layoutManager.findFirstVisibleItemPosition() + 1;
+                            int nextPosition = position + 1;
+                            int previousPosition = position - 1;
+                            Log.d("Frag", previousPosition + " " + position + " " + nextPosition);
+                            ConstraintLayout nextSliderDetail = null;
+                            ConstraintLayout previousSliderDetail = layoutManager.findViewByPosition(previousPosition).findViewById(R.id.sliderDetailRoot);
+                            ConstraintLayout currentSliderDetail = layoutManager.findViewByPosition(position).findViewById(R.id.sliderDetailRoot);
+                                MaterialCardView cardView = (MaterialCardView) layoutManager.findViewByPosition(nextPosition);
+                                if (cardView != null)
+                                    nextSliderDetail = cardView.findViewById(R.id.sliderDetailRoot);
+//                            if (position == pastProducts.size() - 1) {
+//                                if (previousSliderDetail != null) {
+//                                    previousSliderDetail.animate().alpha(0.0f).start();
+//                                    previousSliderDetail.setVisibility(View.GONE);
+//                                }
+//                                currentSliderDetail.setVisibility(View.VISIBLE);
+//                                currentSliderDetail.animate().alpha(1.0f).start();
+//                            } else {
+                                if (previousSliderDetail != null) {
+                                    previousSliderDetail.animate().alpha(0.0f).start();
+                                    previousSliderDetail.setVisibility(View.GONE);
+                                }
+                                if (nextSliderDetail != null) {
+                                    nextSliderDetail.animate().alpha(0.0f).start();
+                                    nextSliderDetail.setVisibility(View.GONE);
+                                } else {
+                                    currentSliderDetail.animate().alpha(0.0f).start();
+                                    currentSliderDetail.setVisibility(View.GONE);
+                                    previousSliderDetail.setVisibility(View.VISIBLE);
+                                    previousSliderDetail.animate().alpha(1.0f).start();
+                                    return;
+                                }
+                                currentSliderDetail.setVisibility(View.VISIBLE);
+                                currentSliderDetail.animate().alpha(1.0f).start();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        int deviceWidth = getDeviceDimensions();
 
-        Log.d("HomeFragment", deviceWidth + "");
-        loadCurrentProducts(view);
-        RecyclerView recyclerView = view.findViewById(R.id.homeRecyclerView);
-        recyclerView.setAdapter(new HomeGridAdapter1(getContext(), deviceWidth, current_products, getFragmentManager()));
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL));
-
-        loadPastProducts(view, deviceWidth);
         // Slider recyclerview setup
-
     }
 }

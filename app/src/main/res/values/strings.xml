@@ -49,5 +49,6 @@
     <string name="bid">Bid</string>
     <string name="title_of_product">Title of product</string>
     <string name="enter_your_bid">Enter your bid</string>
+    <string name="ruppesymbol">₹</string>
 
 </resources>

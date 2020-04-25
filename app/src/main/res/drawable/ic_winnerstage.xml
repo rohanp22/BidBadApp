@@ -1,0 +1,56 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="394dp"
+    android:height="133.57dp"
+    android:viewportWidth="394"
+    android:viewportHeight="133.57">
+  <group>
+    <clip-path
+        android:pathData="M9.55,37.56V95.87c0,20.82 83.92,37.7 187.45,37.7s187.45,-16.88 187.45,-37.7V37.56Z"/>
+    <path
+        android:pathData="M9.55,43.39V80.24c0,13.16 83.92,23.83 187.45,23.83S384.45,93.4 384.45,80.24V43.39Z">
+      <aapt:attr name="android:fillColor">
+        <gradient 
+            android:startY="73.9392"
+            android:startX="9.55"
+            android:endY="73.9392"
+            android:endX="384.45"
+            android:type="linear">
+          <item android:offset="0" android:color="#FFDBDBDB"/>
+          <item android:offset="0.11" android:color="#FFD6D6D6"/>
+          <item android:offset="0.5" android:color="#FFE0E0E0"/>
+          <item android:offset="0.78" android:color="#FFC9C9C9"/>
+          <item android:offset="0.9" android:color="#FFCECECE"/>
+          <item android:offset="1" android:color="#FFD9D9D9"/>
+        </gradient>
+      </aapt:attr>
+    </path>
+  </group>
+  <path
+      android:pathData="M384.45,43.39c0,13.16 -83.92,23.83 -187.45,23.83S9.55,56.55 9.55,43.39 93.47,19.57 197,19.57 384.45,30.24 384.45,43.39Z">
+    <aapt:attr name="android:fillColor">
+      <gradient 
+          android:gradientRadius="555.74"
+          android:centerX="171.21"
+          android:centerY="116.44"
+          android:type="radial">
+        <item android:offset="0" android:color="#FFFFFFFD"/>
+        <item android:offset="0.19" android:color="#FFFBFBF9"/>
+        <item android:offset="0.41" android:color="#FFEFEFEB"/>
+        <item android:offset="0.63" android:color="#FFDCDAD5"/>
+        <item android:offset="0.86" android:color="#FFC1BEB7"/>
+        <item android:offset="1" android:color="#FFACA9A0"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <group>
+    <clip-path
+        android:pathData="M47.86,11.86V50.28c0,13.72 67.54,24.85 150.85,24.85S349.57,64 349.57,50.28V11.86Z"/>
+    <path
+        android:pathData="M47.86,15.7V40c0,8.68 67.54,15.7 150.85,15.7s150.86,-7 150.86,-15.7V15.7Z">
+    </path>
+  </group>
+  <path
+      android:pathData="M349.57,15.7c0,8.67 -67.55,15.7 -150.86,15.7s-150.85,-7 -150.85,-15.7S115.4,0 198.71,0 349.57,7 349.57,15.7Z">
+  </path>
+</vector>

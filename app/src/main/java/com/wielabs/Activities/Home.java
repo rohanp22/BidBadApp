@@ -1,8 +1,6 @@
 package com.wielabs.Activities;
 
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 
@@ -34,7 +32,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
@@ -49,7 +46,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
 
     FloatingActionButton fab;
     BottomAppBar bottomAppBar;
-    ImageView reward, profile, results, indicator, home;
+    ImageView reward, profile, results, indicator, home, blank;
     TextView homeText, rewardText, resultText, profileText;
     int TIME_OUT = 250;
     int dotPosition = 0;
@@ -71,10 +68,9 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         setContentView(R.layout.activity_home);
         loadFragment(new HomeFragment(), "home");
 
-
-
         bottomAppBar = findViewById(R.id.bar);
         home = findViewById(R.id.homeIcon);
+        blank = findViewById(R.id.blank);
         reward = findViewById(R.id.rewardsIcon);
         profile = findViewById(R.id.profileIcon);
         results = findViewById(R.id.resultIcon);
@@ -84,6 +80,15 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         profileText = findViewById(R.id.profileText);
         indicator = (ImageView) findViewById(R.id.indicator);
         fab = findViewById(R.id.fabhome);
+
+        if (fab.getVisibility() == View.GONE || fab.getVisibility() == View.INVISIBLE) {
+            fab.show();
+            blank.setVisibility(View.VISIBLE);
+        }
+        else {
+            fab.hide();
+            blank.setVisibility(View.GONE);
+        }
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -101,6 +106,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         reward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (dotPosition != 2) {
                     if (dotPosition > 2)
                         moveLeft(reward, indicator);
@@ -108,6 +114,8 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                         moveRight(reward, indicator);
                     dotPosition = 2;
                     rewardText.setVisibility(View.INVISIBLE);
+
+                    //animatefab();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -116,6 +124,14 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                             profileText.setVisibility(View.VISIBLE);
                         }
                     }, TIME_OUT);
+                }
+                if (fab.getVisibility() == View.GONE || fab.getVisibility() == View.INVISIBLE) {
+                    fab.show();
+                    blank.setVisibility(View.VISIBLE);
+                }
+                else {
+                    fab.hide();
+                    blank.setVisibility(View.GONE);
                 }
             }
         });
@@ -166,10 +182,11 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if (dotPosition != 3) {Window window = Home.this.getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(Home.this, android.R.color.transparent));
+                if (dotPosition != 3) {
+                    Window window = Home.this.getWindow();
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(ContextCompat.getColor(Home.this, android.R.color.transparent));
                     moveRight(profile, indicator);
                     dotPosition = 3;
                     profileText.setVisibility(View.INVISIBLE);
@@ -193,19 +210,10 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             }
         });
 
+    }
 
+    private void animatefab() {
 
-        Window window = Home.this.getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-       window.setStatusBarColor(ContextCompat.getColor(Home.this, android.R.color.transparent));
-
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-//            }
-//        }, 1000);
     }
 
     void sendToken(String token) {
@@ -234,6 +242,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
+                    .addToBackStack(null)
                     .commit();
             return true;
         }
@@ -242,7 +251,6 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
 
     boolean doubleBackToExitPressedOnce = false;
 
-    @SuppressLint("RestrictedApi")
     @Override
     public void onBackPressed() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
@@ -262,6 +270,8 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                     doubleBackToExitPressedOnce = false;
                 }
             }, 2000);
+        } else {
+            super.onBackPressed();
         }
     }
 
@@ -272,10 +282,12 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
 
     private void moveLeft(ImageView target, ImageView imageView) {
         imageView.animate().setDuration(TIME_OUT).translationXBy(-(imageView.getX() - target.getX() + target.getWidth() / 6) + target.getWidth() / 2).start();
+
     }
 
     private void moveRight(ImageView target, ImageView imageView) {
         imageView.animate().setDuration(TIME_OUT).translationXBy(target.getX() + target.getWidth() / 2 - imageView.getX() - target.getWidth() / 6).start();
+
     }
 
     @Override

@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.wielabs.Fragments.HomeFragment;
 import com.wielabs.Others.SharedPrefManager;
-import com.wielabs.R;
 
 public class Splash extends AppCompatActivity {
 
@@ -17,10 +15,12 @@ public class Splash extends AppCompatActivity {
 
         if(!SharedPrefManager.getInstance(Splash.this).isLoggedIn()){
             startActivity(new Intent(Splash.this, Login.class));
+            finish();
         }
 
         else{
             startActivity(new Intent(Splash.this, Home.class));
+            finish();
         }
     }
 }

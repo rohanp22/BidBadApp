@@ -33,9 +33,7 @@
             android:label="@string/title_activity_scrolling"
             android:parentActivityName=".Activities.AddMoney"
             android:theme="@style/AppTheme.NoactionBar.NoActionBar" />
-        <activity android:name=".Activities.PlaceBid" />
         <activity android:name=".Activities.AddMoney" />
-        <activity android:name=".Activities.ProductDescription" />
         <activity
             android:name=".Activities.ForgotPassword"
             android:theme="@style/AppTheme.CustomSignal" />
@@ -46,7 +44,8 @@
             android:name=".Activities.Login"
             android:theme="@style/AppTheme.CustomSignal" />
         <activity
-            android:name=".Activities.Home">
+            android:name=".Activities.Home"
+            android:theme="@style/AppTheme.TransparentTheme">
         </activity>
 
         <meta-data

@@ -3,21 +3,16 @@ package com.wielabs.Fragments;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,12 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
-import com.smarteist.autoimageslider.IndicatorAnimations;
-import com.smarteist.autoimageslider.SliderAnimations;
-import com.smarteist.autoimageslider.SliderView;
-import com.wielabs.Activities.ProductDescription;
 import com.wielabs.DeliveryDetails;
-import com.wielabs.Models.Current_Product;
 import com.wielabs.ProductDetails;
 import com.wielabs.R;
 
@@ -45,11 +35,15 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ProductDetail extends Fragment {
     private float deliveryXCoordinate;
     private float productXCoordinate;
     String productId;
+    long diff = 0;
+    private TextView time;
+    Date startDate1;
     private String currentid, imageurl, imageurl2, imageurl3, titleString, mrpString, sp, endtime, description;
 
     @Override
@@ -64,14 +58,15 @@ public class ProductDetail extends Fragment {
 
         getActivity().findViewById(R.id.fabhome).setVisibility(View.GONE);
         getActivity().findViewById(R.id.bar).setVisibility(View.GONE);
+        time = view.findViewById(R.id.timeProductDetails);
 
-        final TextView detailPrice = view.findViewById(R.id.detailPrice);
+        final TextView detailPrice = view.findViewById(R.id.productMrp);
         final TextView detailAmount = view.findViewById(R.id.detailOfferCalculatedAmt);
         final TextView detailTitle = view.findViewById(R.id.detailProductTitle);
         int deviceWidth = 0;
         if (getArguments() != null)
             deviceWidth = getArguments().getInt("width");
-        final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        final RecyclerView recyclerView = view.findViewById(R.id.recyclerView1);
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(recyclerView);
         final int finalDeviceWidth = deviceWidth;
@@ -106,9 +101,8 @@ public class ProductDetail extends Fragment {
                                 description = heroObject.getString("description");
                                 sp = heroObject.getString("sp");
                                 final String[] imageurls = new String[]{imageurl, imageurl2, imageurl3};
-
-                                detailPrice.setText(mrpString);
-                                detailAmount.setText(sp);
+                                detailPrice.setText(view.getContext().getResources().getString(R.string.ruppesymbol) + mrpString);
+                                detailAmount.setText(view.getContext().getResources().getString(R.string.ruppesymbol) + sp);
                                 detailTitle.setText(titleString);
 
                                 recyclerView.post(new Runnable() {
@@ -119,59 +113,59 @@ public class ProductDetail extends Fragment {
                                     }
                                 });
 
-//                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
-//
-//                                try {
-//                                    startDate1 = simpleDateFormat.parse(endtime);
-//                                    diff = startDate1.getTime() - System.currentTimeMillis();
-//                                } catch (ParseException e) {
-//                                    e.printStackTrace();
-//                                }
-//
-//                                final long secondsInMilli = 1000;
-//                                final long minutesInMilli = secondsInMilli * 60;
-//                                final long hoursInMilli = minutesInMilli * 60;
-//                                final long daysInMilli = hoursInMilli * 24;
-//
-//                                final long finalDiff = diff;
-//
-//                                new CountDownTimer(finalDiff, 1000) {
-//
-//                                    long dif = finalDiff;
-//
-//                                    public void onTick(long millisUntilFinished) {
-//
-//                                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
-//
-//                                        try {
-//                                            startDate1 = simpleDateFormat.parse(endtime);
-//                                        } catch (ParseException e) {
-//                                            e.printStackTrace();
-//                                        }
-//
-//                                        long different = Math.abs(startDate1.getTime() - System.currentTimeMillis());
-//
-//                                        final long elapsedDays = different / daysInMilli;
-//
-//                                        final long elapsedHours = different / hoursInMilli;
-//                                        different = different % hoursInMilli;
-//
-//                                        final long elapsedMinutes = different / minutesInMilli;
-//                                        different = different % minutesInMilli;
-//
-//                                        final long elapsedSeconds = different / secondsInMilli;
-//                                        String curtime = "";
-//                                        if (elapsedHours > 0) {
-//                                            curtime = elapsedHours + " hr " + String.format("%02d", elapsedMinutes) + " m ";
-//                                        } else {
-//                                            curtime = String.format("%02d", elapsedMinutes) + " m " + String.format("%02d", elapsedSeconds) + " s ";
-//                                        }
-//                                        //clock.setText(curtime);
-//                                    }
-//
-//                                    public void onFinish() {
-//                                    }
-//                                }.start();
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+
+                                try {
+                                    startDate1 = simpleDateFormat.parse(endtime);
+                                    diff = startDate1.getTime() - System.currentTimeMillis();
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                final long secondsInMilli = 1000;
+                                final long minutesInMilli = secondsInMilli * 60;
+                                final long hoursInMilli = minutesInMilli * 60;
+                                final long daysInMilli = hoursInMilli * 24;
+
+                                final long finalDiff = diff;
+
+                                new CountDownTimer(finalDiff, 1000) {
+
+                                    long dif = finalDiff;
+
+                                    public void onTick(long millisUntilFinished) {
+
+                                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+
+                                        try {
+                                            startDate1 = simpleDateFormat.parse(endtime);
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        long different = Math.abs(startDate1.getTime() - System.currentTimeMillis());
+
+                                        final long elapsedDays = different / daysInMilli;
+
+                                        final long elapsedHours = different / hoursInMilli;
+                                        different = different % hoursInMilli;
+
+                                        final long elapsedMinutes = different / minutesInMilli;
+                                        different = different % minutesInMilli;
+
+                                        final long elapsedSeconds = different / secondsInMilli;
+                                        String curtime = "";
+                                        if (elapsedHours > 0) {
+                                            curtime = elapsedHours + " hr " + String.format("%02d", elapsedMinutes) + " m ";
+                                        } else {
+                                            curtime = String.format("%02d", elapsedMinutes) + " m " + String.format("%02d", elapsedSeconds) + " s ";
+                                        }
+                                        time.setText(curtime);
+                                    }
+
+                                    public void onFinish() {
+                                    }
+                                }.start();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -247,15 +241,15 @@ public class ProductDetail extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull ProductDescriptionImageViewHolder holder, int position) {
-            holder.backgroundShape.setTransitionName("transition_" + position);
+//            holder.backgroundShape.setTransitionName("transition_" + position);
             Glide.with(holder.itemView)
                     .load(imageurls[position])
                     .into(holder.productImage);
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-            if (position == 0) {
-                layoutParams.width = deviceHalfWidth;
-                layoutParams.height = deviceHalfWidth;
-            }
+//            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+//            if (position == 0) {
+//                layoutParams.width = deviceHalfWidth;
+//                layoutParams.height = deviceHalfWidth;
+//            }
 
         }
 
@@ -265,13 +259,12 @@ public class ProductDetail extends Fragment {
         }
 
         class ProductDescriptionImageViewHolder extends RecyclerView.ViewHolder {
-            private ImageView backgroundShape;
             private ImageView productImage;
 
             ProductDescriptionImageViewHolder(@NonNull View itemView) {
                 super(itemView);
                 productImage = itemView.findViewById(R.id.productImage);
-                backgroundShape = itemView.findViewById(R.id.backgroundShape);
+                //backgroundShape = itemView.findViewById(R.id.backgroundShape);
             }
         }
     }
