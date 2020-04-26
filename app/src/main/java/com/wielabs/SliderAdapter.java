@@ -31,11 +31,19 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
         this.recyclerView = recyclerView;
         this.pastProducts = pastProducts;
         this.SIZE = pastProducts.size();
-        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{Color.parseColor("#E35588"), Color.parseColor("#FCC190")}));
-        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{Color.parseColor("#4A59EA"), Color.parseColor("#A0A3FD")}));
-        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{Color.parseColor("#42D6B8"), Color.parseColor("#5E96E8")}));
-        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{Color.parseColor("#D756C9"), Color.parseColor("#464CDC")}));
-        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{Color.parseColor("#64C0EA"), Color.parseColor("#5E8DE4")}));
+  //      this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[]{Color.parseColor("#006fff"), Color.parseColor("#00e5e5"), Color.parseColor("#0bff96")}));
+  //      this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[]{Color.parseColor("#ec038b"), Color.parseColor("#fb6468"), Color.parseColor("#fbb936")}));
+        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[]{Color.parseColor("#ffb8b7"), Color.parseColor("#ff5da9"), Color.parseColor("#a115ad")}));
+        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[]{Color.parseColor("#13ffff"), Color.parseColor("#3ba3ff"), Color.parseColor("#9c00ff")}));
+        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[]{Color.parseColor("#b6feff"), Color.parseColor("#5bfeb0"), Color.parseColor("#20ad16")}));
+        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[]{Color.parseColor("#ffecb6"), Color.parseColor("#ff8b5e"), Color.parseColor("#ad1646")}));
+        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[]{Color.parseColor("#ffadf2"), Color.parseColor("#d157fb"), Color.parseColor("#441dae")}));
+
+//        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{Color.parseColor("#E35588"), Color.parseColor("#FCC190")}));
+//        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{Color.parseColor("#4A59EA"), Color.parseColor("#A0A3FD")}));
+//        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{Color.parseColor("#42D6B8"), Color.parseColor("#5E96E8")}));
+//        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{Color.parseColor("#D756C9"), Color.parseColor("#464CDC")}));
+//        this.gradientDrawables.add(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, new int[]{Color.parseColor("#64C0EA"), Color.parseColor("#5E8DE4")}));
 
         this.colors.add(ContextCompat.getColor(recyclerView.getContext(), R.color.color1));
         this.colors.add(ContextCompat.getColor(recyclerView.getContext(), R.color.color2));

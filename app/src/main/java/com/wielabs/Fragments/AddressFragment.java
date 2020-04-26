@@ -127,7 +127,7 @@ public class AddressFragment extends Fragment {
             holder.edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EditAddressFragment()).commit();
+                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EditAddressFragment()).addToBackStack(null).commit();
                 }
             });
         }

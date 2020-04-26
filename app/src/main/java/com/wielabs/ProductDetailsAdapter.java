@@ -3,11 +3,20 @@ package com.wielabs;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class ProductDetailsAdapter extends RecyclerView.Adapter<ProductDetailsAdapter.ProductDetailsViewHolder> {
+
+    ArrayList<String> details;
+
+    public ProductDetailsAdapter(ArrayList<String> details){
+        this.details = details;
+    }
 
     @NonNull
     @Override
@@ -17,17 +26,19 @@ public class ProductDetailsAdapter extends RecyclerView.Adapter<ProductDetailsAd
 
     @Override
     public void onBindViewHolder(@NonNull ProductDetailsViewHolder holder, int position) {
-
+        holder.detail.setText(details.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return details.size();
     }
 
     public class ProductDetailsViewHolder extends RecyclerView.ViewHolder {
+        TextView detail;
         ProductDetailsViewHolder(View itemView) {
             super(itemView);
+            detail = itemView.findViewById(R.id.cardItem2);
         }
     }
 }

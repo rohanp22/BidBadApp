@@ -1,8 +1,11 @@
 package com.wielabs.Fragments;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +45,6 @@ public class ProductDetail extends Fragment {
     private float productXCoordinate;
     String productId;
     long diff = 0;
-    private TextView time;
     Date startDate1;
     private String currentid, imageurl, imageurl2, imageurl3, titleString, mrpString, sp, endtime, description;
 
@@ -58,7 +60,8 @@ public class ProductDetail extends Fragment {
 
         getActivity().findViewById(R.id.fabhome).setVisibility(View.GONE);
         getActivity().findViewById(R.id.bar).setVisibility(View.GONE);
-        time = view.findViewById(R.id.timeProductDetails);
+//        time = view.findViewById(R.id.timeProductDetails);
+        ConstraintLayout c = view.findViewById(R.id.backgroundShape);
 
         final TextView detailPrice = view.findViewById(R.id.productMrp);
         final TextView detailAmount = view.findViewById(R.id.detailOfferCalculatedAmt);
@@ -78,9 +81,14 @@ public class ProductDetail extends Fragment {
         final ConstraintLayout detailConstraintLayout = view.findViewById(R.id.detailConstraintLayout);
         final View dot = view.findViewById(R.id.view3);
         String value = "0";
+        int color = 0;
         if (getArguments() != null) {
             value = getArguments().getString("YourKey");
             productId = value;
+            color = getArguments().getInt("color");
+            Log.d("string", color+"");
+            ((GradientDrawable) c.getBackground()).setColor(color);
+            getActivity().getWindow().setStatusBarColor(color);
         }
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getproductinfo.php?id=" + value,
                 new Response.Listener<String>() {
@@ -104,6 +112,32 @@ public class ProductDetail extends Fragment {
                                 detailPrice.setText(view.getContext().getResources().getString(R.string.ruppesymbol) + mrpString);
                                 detailAmount.setText(view.getContext().getResources().getString(R.string.ruppesymbol) + sp);
                                 detailTitle.setText(titleString);
+
+                                Fragment fragment = new ProductDetails();
+                                Bundle b = new Bundle();
+                                b.putString("Description", description);
+                                Log.d("Description", description);
+                                fragment.setArguments(b);
+                                getFragmentManager().beginTransaction().replace(R.id.fragmentDetailsHolder, fragment).commit();
+
+
+                                productDetails.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dot.animate().setDuration(250).translationX(productXCoordinate).start();
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Fragment fragment = new ProductDetails();
+                                                Bundle b = new Bundle();
+                                                b.putString("Description", description);
+                                                fragment.setArguments(b);
+                                                Log.d("description", description);
+                                                getFragmentManager().beginTransaction().replace(R.id.fragmentDetailsHolder, fragment).commit();
+                                            }
+                                        }, 250);
+                                    }
+                                });
 
                                 recyclerView.post(new Runnable() {
                                     @Override
@@ -160,7 +194,7 @@ public class ProductDetail extends Fragment {
                                         } else {
                                             curtime = String.format("%02d", elapsedMinutes) + " m " + String.format("%02d", elapsedSeconds) + " s ";
                                         }
-                                        time.setText(curtime);
+                                       // time.setText(curtime);
                                     }
 
                                     public void onFinish() {
@@ -195,18 +229,8 @@ public class ProductDetail extends Fragment {
             }
         });
 
-        productDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dot.animate().setDuration(250).translationX(productXCoordinate).start();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getFragmentManager().beginTransaction().replace(R.id.fragmentDetailsHolder, new ProductDetails()).commit();
-                    }
-                }, 250);
-            }
-        });
+
+
 
         deliveryDetails.setOnClickListener(new View.OnClickListener() {
             @Override

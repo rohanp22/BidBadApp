@@ -86,6 +86,7 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
                 Bundle b = new Bundle();
                 b.putInt("width", deviceWidth);
                 b.putString("YourKey", current_products.get(position).getId());
+                b.putInt("color", colors.get(position % 6));
                 fragment.setArguments(b);
                 fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
             }

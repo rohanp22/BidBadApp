@@ -123,7 +123,7 @@ public class EditFragment extends Fragment {
                                 break;
 
                             case "Manage Address":
-                                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddressFragment()).commit();
+                                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddressFragment()).addToBackStack(null).commit();
                                 break;
                         }
                     }

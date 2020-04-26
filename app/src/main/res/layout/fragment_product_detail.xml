@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
+        android:id="@+id/scrollproduct"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
         android:overScrollMode="never">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/detailConstraintLayout"
             android:layout_width="match_parent"
-            android:fitsSystemWindows="false"
             android:layout_height="wrap_content"
             tools:context=".ProductDetail">
 
@@ -28,11 +30,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/backgroundShape"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:src="@drawable/bg_product_image_0"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:background="@drawable/bg_product_image_0"
                         android:layout_gravity="start" />
 
                 </RelativeLayout>
@@ -40,7 +42,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:fitsSystemWindows="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,22 +52,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/timeProductDetails"
-                    android:layout_width="wrap_content"
-                    android:text="24hr 25min"
-                    android:textColor="@color/black"
-                    android:padding="10dp"
-                    android:textSize="12dp"
-                    android:textStyle="bold"
-                    android:background="@drawable/circular_bg"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_chevron_left_black_24dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        />
+
+                    <ImageView
+                        android:id="@+id/wishlist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_bxs_heart"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="10dp"
+                        />
+
+                    <TextView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/ic_bxs_circle"
+                        android:layout_toLeftOf="@id/wishlist"
+                        android:layout_marginTop="10dp"
+                        android:text="2"/>
+
 
                 </RelativeLayout>
-
 
 
             </FrameLayout>
@@ -258,27 +276,40 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/materialCardView2"
                 app:layout_constraintStart_toStartOf="@+id/materialCardView2"
                 app:layout_constraintTop_toBottomOf="@id/view3" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bidNow"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:fontFamily="@font/dm_sans_regular"
-        android:padding="16dp"
-        android:text="Bid Now"
-        android:textAllCaps="false"
-        android:textColor="#000"
-        android:textStyle="bold"
-        app:backgroundTint="#f8c430"
-        app:elevation="16dp" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:id="@+id/relativeLayout"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bidNow"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom|center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/dm_sans_regular"
+            android:padding="16dp"
+            android:text="Bid Now"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            android:textStyle="bold"
+            app:backgroundTint="#f8c430"
+            app:elevation="16dp" />
+
+    </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

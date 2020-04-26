@@ -49,6 +49,7 @@ public class ProfileFragment extends Fragment {
                 getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container,new EditFragment())
+                        .addToBackStack(null)
                         .commit();
             }
         });
