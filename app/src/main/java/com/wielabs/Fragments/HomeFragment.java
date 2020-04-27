@@ -1,5 +1,6 @@
 package com.wielabs.Fragments;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,8 +9,6 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,7 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.card.MaterialCardView;
-import com.wielabs.HomeGridAdapter;
+import com.wielabs.Activities.AddMoney;
 import com.wielabs.HomeGridAdapter1;
 import com.wielabs.Models.Current_Product;
 import com.wielabs.Models.PastProducts;
@@ -58,6 +57,7 @@ public class HomeFragment extends Fragment {
     }
 
     RecyclerView recyclerView;
+    int deviceWidth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,18 +68,18 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home2, container, false);
         recyclerView = view.findViewById(R.id.homeRecyclerView);
 
-        int deviceWidth = getDeviceWidth();
+        view.findViewById(R.id.walleticon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AddMoney.class));
+            }
+        });
+
+        deviceWidth = getDeviceWidth();
         if (getArguments() != null)
             deviceWidth = getArguments().getInt("width");
         Log.d("HomeFragment", deviceWidth + "");
         loadCurrentProducts(view);
-        recyclerView.setAdapter(new HomeGridAdapter1(deviceWidth, current_products, getFragmentManager()));
-        StaggeredGridLayoutManager l = new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL);
-        l.setItemPrefetchEnabled(true);
-        recyclerView.setDrawingCacheEnabled(true);
-        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-        recyclerView.setLayoutManager(l);
-        recyclerView.setItemViewCacheSize(4);
         loadPastProducts(view, getDeviceWidth());
         return view;
     }
@@ -108,7 +108,6 @@ public class HomeFragment extends Fragment {
 
     private void loadCurrentProducts(final View view) {
         current_products = new ArrayList<>();
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/currentproducts.php?id=" + SharedPrefManager.getInstance(getContext()).getUser().getId(),
                 new Response.Listener<String>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -135,6 +134,9 @@ public class HomeFragment extends Fragment {
                                 current_products.add(c);
                             }
                             current_products.sort(new sortTime());
+                            recyclerView.setAdapter(new HomeGridAdapter1(deviceWidth, current_products, getFragmentManager()));
+                            StaggeredGridLayoutManager l = new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL);
+                            recyclerView.setLayoutManager(l);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -258,14 +260,6 @@ public class HomeFragment extends Fragment {
                                 MaterialCardView cardView = (MaterialCardView) layoutManager.findViewByPosition(nextPosition);
                                 if (cardView != null)
                                     nextSliderDetail = cardView.findViewById(R.id.sliderDetailRoot);
-//                            if (position == pastProducts.size() - 1) {
-//                                if (previousSliderDetail != null) {
-//                                    previousSliderDetail.animate().alpha(0.0f).start();
-//                                    previousSliderDetail.setVisibility(View.GONE);
-//                                }
-//                                currentSliderDetail.setVisibility(View.VISIBLE);
-//                                currentSliderDetail.animate().alpha(1.0f).start();
-//                            } else {
                                 if (previousSliderDetail != null) {
                                     previousSliderDetail.animate().alpha(0.0f).start();
                                     previousSliderDetail.setVisibility(View.GONE);

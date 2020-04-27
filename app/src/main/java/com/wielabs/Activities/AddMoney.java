@@ -51,8 +51,7 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
         findViewById(R.id.backAddMoney).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AddMoney.this, Home.class));
-                finish();
+                onBackPressed();
             }
         });
 
@@ -269,7 +268,6 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
 
     public void gotoTransactions(View view) {
         startActivity(new Intent(AddMoney.this, ScrollingActivity.class));
-        finish();
     }
 
     @Override
@@ -337,7 +335,6 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(AddMoney.this, Home.class));
-        finish();
+        super.onBackPressed();
     }
 }

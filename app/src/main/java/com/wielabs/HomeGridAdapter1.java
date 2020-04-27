@@ -1,6 +1,5 @@
 package com.wielabs;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -27,6 +26,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.card.MaterialCardView;
+import com.wielabs.Fragments.ActionBottomDialogFragment;
+import com.wielabs.Fragments.HomeFragment;
 import com.wielabs.Fragments.ProductDetail;
 import com.wielabs.Models.Current_Product;
 
@@ -148,9 +149,20 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
             }
 
             public void onFinish() {
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             }
 
         }.start();
+
+        holder.bid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActionBottomDialogFragment addPhotoBottomDialogFragment =
+                        ActionBottomDialogFragment.newInstance(current_products.get(position).getId(), current_products.get(position).getImage_url(), current_products.get(position).getTitle(), current_products.get(position).getSp());
+                addPhotoBottomDialogFragment.show(fragmentManager,
+                        ActionBottomDialogFragment.TAG);
+            }
+        });
 
         Glide.with(holder.constraintLayout.getContext())
                 .asBitmap()
@@ -224,11 +236,13 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
         private TextView bidEntry;
         private ConstraintLayout constraintLayout;
         private TextView bidTimer;
+        private TextView bid;
 
         public HomeGridViewHolder(@NonNull View itemView) {
             super(itemView);
             bidEntry = itemView.findViewById(R.id.homeItemBidAmount);
             cardView = itemView.findViewById(R.id.homeItemCard);
+            bid = itemView.findViewById(R.id.homeItemBid);
             productImage = itemView.findViewById(R.id.homeItemImage);
             constraintLayout = itemView.findViewById(R.id.itemHomeRootLayout);
             bidTimer = itemView.findViewById(R.id.homeItemBidTimer);
@@ -242,5 +256,9 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
     private int dpToPx(View view, int dp) {
         DisplayMetrics displayMetrics = view.getContext().getResources().getDisplayMetrics();
         return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    public void showBottomSheet() {
+
     }
 }

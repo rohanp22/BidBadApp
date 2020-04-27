@@ -63,9 +63,9 @@ public class Signup extends AppCompatActivity {
         terms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =
-                        new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.bidbad.com"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.bidbad.com"));
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -75,6 +75,7 @@ public class Signup extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Signup.this, Login.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -185,6 +186,7 @@ public class Signup extends AppCompatActivity {
 
                         //starting the profile activity
                         startActivity(new Intent(Signup.this, Home.class));
+                        finish();
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                     }

@@ -30,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Handler;
 import android.util.Log;
@@ -45,11 +46,14 @@ import android.widget.Toast;
 public class Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ActionBottomDialogFragment.ItemClickListener, FeedbackBottomDialogFragment.ItemClickListener {
 
     FloatingActionButton fab;
+    Fragment fragmentBefore, fragmentAfter;
     BottomAppBar bottomAppBar;
     ImageView reward, profile, results, indicator, home, blank;
     TextView homeText, rewardText, resultText, profileText;
     int TIME_OUT = 250;
     int dotPosition = 0;
+    String ad;
+
 
     private int[] getDeviceDimensions() {
         Display display = getWindowManager().getDefaultDisplay();
@@ -81,14 +85,49 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         indicator = (ImageView) findViewById(R.id.indicator);
         fab = findViewById(R.id.fabhome);
 
-        if (fab.getVisibility() == View.GONE || fab.getVisibility() == View.INVISIBLE) {
-            fab.show();
-            blank.setVisibility(View.VISIBLE);
-        }
-        else {
-            fab.hide();
-            blank.setVisibility(View.GONE);
-        }
+//        if (fab.getVisibility() == View.GONE || fab.getVisibility() == View.INVISIBLE) {
+//            fab.show();
+//            blank.setVisibility(View.VISIBLE);
+//        }
+//        else {
+//            fab.hide();
+//            blank.setVisibility(View.GONE);
+//        }
+
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+
+            }
+        });
+
+        rewardText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rewardsPressed();
+            }
+        });
+
+        homeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homePressed();
+            }
+        });
+
+        resultText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resultsPressed();
+            }
+        });
+
+        profileText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profilePressed();
+            }
+        });
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -106,100 +145,36 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         reward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (dotPosition != 2) {
-                    if (dotPosition > 2)
-                        moveLeft(reward, indicator);
-                    else
-                        moveRight(reward, indicator);
-                    dotPosition = 2;
-                    rewardText.setVisibility(View.INVISIBLE);
-
-                    //animatefab();
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            homeText.setVisibility(View.VISIBLE);
-                            resultText.setVisibility(View.VISIBLE);
-                            profileText.setVisibility(View.VISIBLE);
-                        }
-                    }, TIME_OUT);
-                }
-                if (fab.getVisibility() == View.GONE || fab.getVisibility() == View.INVISIBLE) {
-                    fab.show();
-                    blank.setVisibility(View.VISIBLE);
-                }
-                else {
-                    fab.hide();
-                    blank.setVisibility(View.GONE);
-                }
+                rewardsPressed();
             }
+//                if (fab.getVisibility() == View.GONE || fab.getVisibility() == View.INVISIBLE) {
+//                    fab.show();
+//                    blank.setVisibility(View.VISIBLE);
+//                }
+//                else {
+//                    fab.hide();
+//                    blank.setVisibility(View.GONE);
+//                }
         });
 
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (dotPosition != 0) {
-                    moveLeft(home, indicator);
-                    dotPosition = 0;
-                    homeText.setVisibility(View.INVISIBLE);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            rewardText.setVisibility(View.VISIBLE);
-                            resultText.setVisibility(View.VISIBLE);
-                            profileText.setVisibility(View.VISIBLE);
-                            loadFragment(new HomeFragment(), "home");
-                        }
-                    }, TIME_OUT);
-                }
+                homePressed();
             }
         });
 
         results.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (dotPosition != 1) {
-                    if (dotPosition > 1)
-                        moveLeft(results, indicator);
-                    else
-                        moveRight(results, indicator);
-                    dotPosition = 1;
-                    resultText.setVisibility(View.INVISIBLE);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            homeText.setVisibility(View.VISIBLE);
-                            rewardText.setVisibility(View.VISIBLE);
-                            profileText.setVisibility(View.VISIBLE);
-                            loadFragment(new BidsHistory(), "bidhistoy");
-                        }
-                    }, TIME_OUT);
-                }
+                resultsPressed();
             }
         });
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                if (dotPosition != 3) {
-                    Window window = Home.this.getWindow();
-                    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    window.setStatusBarColor(ContextCompat.getColor(Home.this, android.R.color.transparent));
-                    moveRight(profile, indicator);
-                    dotPosition = 3;
-                    profileText.setVisibility(View.INVISIBLE);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            homeText.setVisibility(View.VISIBLE);
-                            resultText.setVisibility(View.VISIBLE);
-                            rewardText.setVisibility(View.VISIBLE);
-                            loadFragment(new ProfileFragment(), "profile");
-                        }
-                    }, TIME_OUT);
-                }
+                profilePressed();
             }
         });
 
@@ -207,12 +182,35 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             @Override
             public void onClick(View view) {
                 loadFragment(new MyBidsFragment(), "mybids");
+                indicator.setVisibility(View.INVISIBLE);
+                homeText.setVisibility(View.VISIBLE);
+                resultText.setVisibility(View.VISIBLE);
+                rewardText.setVisibility(View.VISIBLE);
+                profileText.setVisibility(View.VISIBLE);
+            }
+        });
+
+        fragmentBefore = new HomeFragment();
+
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                Fragment fr = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                if(fr!=null){
+                    Log.e("fragment=", fr.getClass().getSimpleName());
+                    ad = fr.getClass().getSimpleName();
+                }
             }
         });
 
     }
 
     private void animatefab() {
+
+    }
+
+
+    void getFrag(){
 
     }
 
@@ -242,11 +240,20 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, fragment)
-                    .addToBackStack(null)
+                    .addToBackStack(name)
                     .commit();
             return true;
         }
         return false;
+    }
+
+
+    private Fragment getCurrentFragment(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        String fragmentTag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName();
+        Log.d("CurrentFrag", fragmentTag);
+        Fragment currentFragment = fragmentManager.findFragmentByTag(fragmentTag);
+        return currentFragment;
     }
 
     boolean doubleBackToExitPressedOnce = false;
@@ -254,11 +261,10 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     @Override
     public void onBackPressed() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-
         if (currentFragment instanceof HomeFragment) {
             if (doubleBackToExitPressedOnce) {
                 this.finish();
-                System.exit(0);
+                super.onBackPressed();
                 return;
             }
             this.doubleBackToExitPressedOnce = true;
@@ -270,9 +276,88 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                     doubleBackToExitPressedOnce = false;
                 }
             }, 2000);
-        } else {
+        } else if(currentFragment instanceof ProfileFragment || currentFragment instanceof BidsHistory || currentFragment instanceof MyBidsFragment){
+            homePressed();
+        }
+        else {
             super.onBackPressed();
         }
+    }
+
+    void homePressed() {
+        indicator.setVisibility(View.VISIBLE);
+        moveLeft(home, indicator);
+        dotPosition = 0;
+        homeText.setVisibility(View.INVISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                rewardText.setVisibility(View.VISIBLE);
+                resultText.setVisibility(View.VISIBLE);
+                profileText.setVisibility(View.VISIBLE);
+                loadFragment(new HomeFragment(), "home");
+            }
+        }, TIME_OUT);
+    }
+
+    void resultsPressed() {
+        indicator.setVisibility(View.VISIBLE);
+        if (dotPosition > 1)
+            moveLeft(results, indicator);
+        else
+            moveRight(results, indicator);
+        dotPosition = 1;
+        resultText.setVisibility(View.INVISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                homeText.setVisibility(View.VISIBLE);
+                rewardText.setVisibility(View.VISIBLE);
+                profileText.setVisibility(View.VISIBLE);
+                loadFragment(new BidsHistory(), "bidhistoy");
+            }
+        }, TIME_OUT);
+    }
+
+    void profilePressed() {
+        fragmentBefore = new ProfileFragment();
+        indicator.setVisibility(View.VISIBLE);
+        Window window = Home.this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(Home.this, android.R.color.transparent));
+        moveRight(profile, indicator);
+        dotPosition = 3;
+        profileText.setVisibility(View.INVISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                homeText.setVisibility(View.VISIBLE);
+                resultText.setVisibility(View.VISIBLE);
+                rewardText.setVisibility(View.VISIBLE);
+                loadFragment(new ProfileFragment(), "profile");
+            }
+        }, TIME_OUT);
+    }
+
+    void rewardsPressed() {
+        indicator.setVisibility(View.VISIBLE);
+        if (dotPosition > 2)
+            moveLeft(reward, indicator);
+        else
+            moveRight(reward, indicator);
+        dotPosition = 2;
+        rewardText.setVisibility(View.INVISIBLE);
+
+        //animatefab();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                homeText.setVisibility(View.VISIBLE);
+                resultText.setVisibility(View.VISIBLE);
+                profileText.setVisibility(View.VISIBLE);
+            }
+        }, TIME_OUT);
     }
 
     @Override
@@ -282,12 +367,10 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
 
     private void moveLeft(ImageView target, ImageView imageView) {
         imageView.animate().setDuration(TIME_OUT).translationXBy(-(imageView.getX() - target.getX() + target.getWidth() / 6) + target.getWidth() / 2).start();
-
     }
 
     private void moveRight(ImageView target, ImageView imageView) {
         imageView.animate().setDuration(TIME_OUT).translationXBy(target.getX() + target.getWidth() / 2 - imageView.getX() - target.getWidth() / 6).start();
-
     }
 
     @Override

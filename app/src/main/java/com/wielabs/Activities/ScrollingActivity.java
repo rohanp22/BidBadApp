@@ -234,7 +234,6 @@ public class ScrollingActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(ScrollingActivity.this, Home.class));
-        finish();
+        super.onBackPressed();
     }
 }

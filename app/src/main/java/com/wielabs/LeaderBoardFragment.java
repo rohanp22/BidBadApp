@@ -38,10 +38,22 @@ public class LeaderBoardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
+        // Inflate the layout for this fragment
         leaderboard = view.findViewById(R.id.leaderBoardRecyclerView);
         leaderboard.addItemDecoration(new ItemBackgroundDecoration());
-        leaderboard.setLayoutManager(new LinearLayoutManager(view.getContext(), RecyclerView.VERTICAL, false));
+        leaderboard.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
         leaderlist = new ArrayList<>();
         textRank = view.findViewById(R.id.textRank);
         textName = view.findViewById(R.id.someText1);
@@ -60,6 +72,8 @@ public class LeaderBoardFragment extends Fragment {
                             textName.setText(heroObject.getString("firstname"));
                             textRank.setText(heroObject.getString("position"));
                             textNumberofbids.setText(heroObject.getString("numberofbids"));
+                            loadLeaderBoard(view);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -74,11 +88,8 @@ public class LeaderBoardFragment extends Fragment {
 
         RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
         requestQueue.add(stringRequest);
-
-        loadLeaderBoard(view);
+        return view;
     }
-
-    LeaderBoardAdapter leaderBoardAdapter;
 
     private void loadLeaderBoard(final View view) {
 
@@ -98,11 +109,11 @@ public class LeaderBoardFragment extends Fragment {
                                         Integer.parseInt(heroObject.getString("numberofbids")),
                                         heroObject.getString("firstname")
                                 );
-
                                 leaderlist.add(c);
                             }
-                            leaderBoardAdapter = new LeaderBoardAdapter(view.getContext(), leaderlist);
+                            LeaderBoardAdapter leaderBoardAdapter = new LeaderBoardAdapter(view.getContext(), leaderlist);
                             leaderboard.setAdapter(leaderBoardAdapter);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -116,20 +127,6 @@ public class LeaderBoardFragment extends Fragment {
 
         RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
         requestQueue.add(stringRequest);
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
-        // Inflate the layout for this fragment
-        return view;
     }
 
 }

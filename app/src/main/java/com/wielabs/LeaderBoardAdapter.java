@@ -6,14 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.wielabs.Models.Leader;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 
 class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.LeaderBoardViewHolder> {
@@ -49,10 +46,11 @@ class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.LeaderB
     static class LeaderBoardViewHolder extends RecyclerView.ViewHolder {
 
         TextView name, numberofbids, badge;
+        ConstraintLayout constraintLayout;
 
         LeaderBoardViewHolder(View itemView) {
             super(itemView);
-
+            constraintLayout = itemView.findViewById(R.id.constraintLayout);
             name = (TextView) itemView.findViewById(R.id.userNameLeaderBoard);
             numberofbids = (TextView) itemView.findViewById(R.id.bidsCountLeaderBoard);
             badge = (TextView) itemView.findViewById(R.id.textBadge);

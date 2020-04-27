@@ -26,6 +26,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".PhoneVerification" />
+        <activity android:name=".Activities.PhoneInput" />
+        <activity android:name=".Activities.VerifyPhoneActivity" />
+
         <activity android:name=".BottomSheetProduct" />
         <activity android:name=".Activities.PlaceOrder" />
         <activity

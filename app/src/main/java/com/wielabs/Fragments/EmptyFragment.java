@@ -3,6 +3,7 @@ package com.wielabs.Fragments;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -269,10 +270,13 @@ public class EmptyFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull BidHistoryViewHolder holder, int position) {
+            if(getItemCount() == 0){
+                progressBar.setVisibility(View.GONE);
+            }
             progressBar.setVisibility(View.GONE);
             holder.bidHistoryTitle.setText(heroList.get(position).getTitle());
             holder.bidHistoryStartDate.setText(heroList.get(position).getEnd_date());
-            holder.bidHistoryAmount.setText(heroList.get(position).getSp());
+            holder.bidHistoryAmount.setText(getResources().getString(R.string.ruppesymbol) + heroList.get(position).getBidamount());
             Glide.with(context)
                     .load(heroList.get(position).getImage_url())
                     .into(holder.bidHistoryImage);
@@ -280,6 +284,10 @@ public class EmptyFragment extends Fragment {
 
         @Override
         public int getItemCount() {
+            if(cartItems.size() == 0){
+                progressBar.setVisibility(View.GONE);
+            }
+            Log.d("Size", cartItems.size()+"");
             return cartItems.size();
         }
 
@@ -322,7 +330,7 @@ public class EmptyFragment extends Fragment {
             progressBar.setVisibility(View.GONE);
             holder.bidHistoryTitle.setText(heroList.get(position).getTitle());
             holder.bidHistoryStartDate.setText(heroList.get(position).getEnd_date());
-            holder.bidHistoryAmount.setText(heroList.get(position).getSp());
+            holder.bidHistoryAmount.setText(getResources().getString(R.string.ruppesymbol) + heroList.get(position).getBidamount());
             Glide.with(context)
                     .load(heroList.get(position).getImage_url())
                     .into(holder.bidHistoryImage);
@@ -368,6 +376,8 @@ public class EmptyFragment extends Fragment {
 
         @Override
         public int getItemCount() {
+            if(heroList.size() == 0)
+                progressBar.setVisibility(View.GONE);
             return heroList.size();
         }
 

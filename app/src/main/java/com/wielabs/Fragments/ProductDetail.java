@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ public class ProductDetail extends Fragment {
     private float deliveryXCoordinate;
     private float productXCoordinate;
     String productId;
+    Button bidNow;
     long diff = 0;
     Date startDate1;
     private String currentid, imageurl, imageurl2, imageurl3, titleString, mrpString, sp, endtime, description;
@@ -63,6 +65,7 @@ public class ProductDetail extends Fragment {
 //        time = view.findViewById(R.id.timeProductDetails);
         ConstraintLayout c = view.findViewById(R.id.backgroundShape);
 
+        bidNow = view.findViewById(R.id.bidNow);
         final TextView detailPrice = view.findViewById(R.id.productMrp);
         final TextView detailAmount = view.findViewById(R.id.detailOfferCalculatedAmt);
         final TextView detailTitle = view.findViewById(R.id.detailProductTitle);
@@ -215,6 +218,16 @@ public class ProductDetail extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
 
+        bidNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActionBottomDialogFragment addPhotoBottomDialogFragment =
+                        ActionBottomDialogFragment.newInstance(currentid, imageurl, titleString, sp);
+                addPhotoBottomDialogFragment.show(getFragmentManager(),
+                        ActionBottomDialogFragment.TAG);
+            }
+        });
+
         detailConstraintLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -228,9 +241,6 @@ public class ProductDetail extends Fragment {
                 deliveryXCoordinate = deliveryDetails.getX();
             }
         });
-
-
-
 
         deliveryDetails.setOnClickListener(new View.OnClickListener() {
             @Override

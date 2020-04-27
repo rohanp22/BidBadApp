@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "180339207083-2tvvas96d2rqt7gltuvndnsosvgccpuc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wielabs",
+            "certificate_hash": "e16b70d9f8b3dc030c36d62a557c8c50d095126f"
+          }
+        },
+        {
           "client_id": "180339207083-97lq3l1bc4l842a3kgqtoekoc8athoae.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
