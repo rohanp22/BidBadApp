@@ -24,7 +24,7 @@ public class ItemBackgroundDecoration extends RecyclerView.ItemDecoration {
             case 2 : ((GradientDrawable)view.findViewById(R.id.constraintLayout).getBackground()).setColor(Color.parseColor("#f4aa6b"));
             break;
 
-            default:((GradientDrawable)view.findViewById(R.id.constraintLayout).getBackground()).setColor(Color.parseColor("#ffd94a"));
+            default:((GradientDrawable)view.findViewById(R.id.constraintLayout).getBackground()).setColor(Color.parseColor("#f9f9f9"));
         }
     }
 }

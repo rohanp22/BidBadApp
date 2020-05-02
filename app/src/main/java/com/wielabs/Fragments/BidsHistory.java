@@ -35,7 +35,6 @@ import java.util.ArrayList;
 public class BidsHistory extends Fragment {
 
     ViewPager viewPager;
-    ArrayList<Fragment> fragments;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,19 +47,20 @@ public class BidsHistory extends Fragment {
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         viewPager=(ViewPager) view.findViewById(R.id.viewPager);
 
-        tabLayout.addTab(tabLayout.newTab().setText("My Bids"));
-        tabLayout.addTab(tabLayout.newTab().setText("Won bids"));
         tabLayout.addTab(tabLayout.newTab().setText("All Bids"));
+        tabLayout.addTab(tabLayout.newTab().setText("My Bids"));
         tabLayout.addTab(tabLayout.newTab().setText("Leaderboard"));
 
         MyAdapter adapter = new MyAdapter(view.getContext(), getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
-
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorPrimary));
         tabLayout.setSelectedTabIndicatorHeight((int) (3 * getResources().getDisplayMetrics().density));
         tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#ffbc00"));
+
+
+
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -85,12 +85,10 @@ public class BidsHistory extends Fragment {
 
     class MyAdapter extends FragmentPagerAdapter {
 
-        private Context myContext;
         int totalTabs;
 
         public MyAdapter(Context context, FragmentManager fm, int totalTabs) {
             super(fm);
-            myContext = context;
             this.totalTabs = totalTabs;
         }
 
@@ -99,15 +97,12 @@ public class BidsHistory extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new EmptyFragment("mybids");
+                    return new AllBidsFragment();
 
                 case 1:
-                    return new EmptyFragment("wonbids");
+                    return new EmptyFragment("mybids");
 
                 case 2:
-                    return new EmptyFragment("allbids");
-
-                case 3:
                     return new LeaderBoardFragment();
                 default:
                     return null;
@@ -122,30 +117,6 @@ public class BidsHistory extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-    }
-
-    public class FragmentAdapter extends FragmentPagerAdapter {
-
-        Context context;
-        ArrayList<Fragment> fragments;
-
-        public FragmentAdapter(FragmentManager fm, Context context, ArrayList<Fragment> fragments) {
-            super(fm);
-            this.context = context;
-            this.fragments = fragments;
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-
-
-        @Override
-        public Fragment getItem(int i) {
-            return fragments.get(i);
-        }
-
     }
 }
 

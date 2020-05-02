@@ -1,6 +1,8 @@
 package com.wielabs.Fragments;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,12 +57,16 @@ public class EmptyFragment extends Fragment {
     String bid;
     BidHistoryAdapterAll adapterall;
     public ArrayList<WonItem> pastItems;
-
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+    TextView sortText;
+    WonItemsAdapter walletAdapter;
+    RadioButton mybids, wonbids;
+    TextView mybidstext, wonbidstext;
 
     EmptyFragment(String bid) {
         this.bid = bid;
     }
+
+    Dialog dialog;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -72,152 +79,158 @@ public class EmptyFragment extends Fragment {
         // Inflate the layout for this fragment
         pastItems = new ArrayList<>();
         final View view = inflater.inflate(R.layout.bid_history_fragments, container, false);
+        sortText = view.findViewById(R.id.wonbidstext);
+        ImageView sortImage = view.findViewById(R.id.sortImage);
         cartList = view.findViewById(R.id.bidHistoryRecyclerView);
-
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), RecyclerView.VERTICAL);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
         cartList.addItemDecoration(dividerItemDecoration);
         cartList.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-
         this.view = view;
         cartItems = new ArrayList<>();
         progressBar = view.findViewById(R.id.mybidsprogress);
 
-        if (bid.equals("mybids")) {
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getmybids.php?id=" + SharedPrefManager.getInstance(getActivity()).getUser().getId(),
-                    new Response.Listener<String>() {
-                        @RequiresApi(api = Build.VERSION_CODES.N)
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                cartItems.clear();
-                                JSONObject obj = new JSONObject(response);
-                                JSONArray heroArray = obj.getJSONArray("Bids");
-                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
-                                for (int i = 0; i < heroArray.length(); i++) {
-                                    JSONObject heroObject = heroArray.getJSONObject(i);
-                                    Date a1 = simpleDateFormat.parse(heroObject.getString("endtime"));
-                                    PastProducts c = new PastProducts(
-                                            heroObject.getString("past_id"),
-                                            heroObject.getString("image_url"),
-                                            heroObject.getString("title"),
-                                            heroObject.getString("endtime"),
-                                            heroObject.getString("mrp"),
-                                            heroObject.getString("sp"),
-                                            heroObject.getString("description"),
-                                            heroObject.getString("image_url2"),
-                                            heroObject.getString("image_url3"),
-                                            heroObject.getString("firstname"),
-                                            heroObject.getString("bidamount")
-                                    );
-                                    if (!(a1.compareTo(new java.sql.Date(System.currentTimeMillis())) > 0))
-                                        cartItems.add(c);
-                                }
-                                cartItems.sort(new sortTime());
-                                adapterall = new BidHistoryAdapterAll(view.getContext(), cartItems);
-                                cartList.setAdapter(adapterall);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                        }
-                    });
+        loadMyBids(view);
+        loadWonBids(view);
 
-            RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
-            requestQueue.add(stringRequest);
-        } else if (bid.equals("allbids")) {
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/pastproducts.php",
-                    new Response.Listener<String>() {
-                        @RequiresApi(api = Build.VERSION_CODES.N)
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                cartItems.clear();
-                                JSONObject obj = new JSONObject(response);
-                                JSONArray heroArray = obj.getJSONArray("Current_Products");
-                                for (int i = 0; i < heroArray.length(); i++) {
-                                    JSONObject heroObject = heroArray.getJSONObject(i);
-                                    PastProducts c = new PastProducts(
-                                            heroObject.getString("past_id"),
-                                            heroObject.getString("image_url"),
-                                            heroObject.getString("title"),
-                                            heroObject.getString("endtime"),
-                                            heroObject.getString("mrp"),
-                                            heroObject.getString("sp"),
-                                            heroObject.getString("description"),
-                                            heroObject.getString("image_url2"),
-                                            heroObject.getString("image_url3"),
-                                            heroObject.getString("firstname"),
-                                            heroObject.getString("bidamount")
-                                    );
-                                    cartItems.add(c);
-                                }
-                                cartItems.sort(new sortTime());
-                                adapterall = new BidHistoryAdapterAll(view.getContext(), cartItems);
-                                cartList.setAdapter(adapterall);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        dialog = new Dialog(view.getContext());
+        dialog.setContentView(R.layout.sort_dialog);
 
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-            requestQueue.add(stringRequest);
-        } else if (bid.equals("wonbids")) {
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getwonitems.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
-                    new Response.Listener<String>() {
-                        @RequiresApi(api = Build.VERSION_CODES.N)
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                pastItems.clear();
-                                JSONObject obj = new JSONObject(response);
-                                JSONArray heroArray = obj.getJSONArray("Bids");
-                                for (int i = 0; i < heroArray.length(); i++) {
-                                    JSONObject heroObject = heroArray.getJSONObject(i);
-                                    WonItem c = new WonItem(
-                                            heroObject.getString("past_id"),
-                                            heroObject.getString("image_url"),
-                                            heroObject.getString("title"),
-                                            heroObject.getString("endtime"),
-                                            heroObject.getString("mrp"),
-                                            heroObject.getString("sp"),
-                                            heroObject.getString("description"),
-                                            heroObject.getString("bidamount"), "Won", heroObject.getString("orderplaced"));
-                                    pastItems.add(c);
-                                }
-                                pastItems.sort(new sortTime2());
-                                WonItemsAdapter walletAdapter = new WonItemsAdapter(view.getContext(), pastItems);
-                                cartList.setAdapter(walletAdapter);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        mybids = dialog.findViewById(R.id.radioMybids);
+        mybids.setChecked(true);
+        wonbids = dialog.findViewById(R.id.radioWon);
+        mybidstext = dialog.findViewById(R.id.mybidsradiotext);
+        mybidstext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mybids.setChecked(true);
+                wonbids.setChecked(false);
+                cartList.setAdapter(adapterall);
+                dialog.dismiss();
+                sortText.setText("My bids");
+            }
+        });
+        wonbidstext = dialog.findViewById(R.id.wonbidsradiotext);
+        wonbidstext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                wonbids.setChecked(true);
+                mybids.setChecked(false);
+                cartList.setAdapter(walletAdapter);
+                dialog.dismiss();
+                sortText.setText("Won bids");
+            }
+        });
 
-            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-            requestQueue.add(stringRequest);
-        }
+        sortText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        sortImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
 
         return view;
+    }
+
+    void loadMyBids(final View view){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getmybids.php?id=" + SharedPrefManager.getInstance(getActivity()).getUser().getId(),
+                new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            cartItems.clear();
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray heroArray = obj.getJSONArray("Bids");
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+                            for (int i = 0; i < heroArray.length(); i++) {
+                                JSONObject heroObject = heroArray.getJSONObject(i);
+                                Date a1 = simpleDateFormat.parse(heroObject.getString("endtime"));
+                                PastProducts c = new PastProducts(
+                                        heroObject.getString("past_id"),
+                                        heroObject.getString("image_url"),
+                                        heroObject.getString("title"),
+                                        heroObject.getString("endtime"),
+                                        heroObject.getString("mrp"),
+                                        heroObject.getString("sp"),
+                                        heroObject.getString("description"),
+                                        heroObject.getString("image_url2"),
+                                        heroObject.getString("image_url3"),
+                                        heroObject.getString("firstname"),
+                                        heroObject.getString("bidamount")
+                                );
+                                if (!(a1.compareTo(new java.sql.Date(System.currentTimeMillis())) > 0))
+                                    cartItems.add(c);
+                            }
+                            cartItems.sort(new sortTime());
+                            adapterall = new BidHistoryAdapterAll(view.getContext(), cartItems);
+                            cartList.setAdapter(adapterall);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
+        requestQueue.add(stringRequest);
+    }
+
+    void loadWonBids(final View view){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getwonitems.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
+                new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            pastItems.clear();
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray heroArray = obj.getJSONArray("Bids");
+                            for (int i = 0; i < heroArray.length(); i++) {
+                                JSONObject heroObject = heroArray.getJSONObject(i);
+                                WonItem c = new WonItem(
+                                        heroObject.getString("past_id"),
+                                        heroObject.getString("image_url"),
+                                        heroObject.getString("title"),
+                                        heroObject.getString("endtime"),
+                                        heroObject.getString("mrp"),
+                                        heroObject.getString("sp"),
+                                        heroObject.getString("description"),
+                                        heroObject.getString("bidamount"), "Won", heroObject.getString("orderplaced"));
+                                pastItems.add(c);
+                            }
+                            pastItems.sort(new sortTime2());
+                            walletAdapter = new WonItemsAdapter(view.getContext(), pastItems);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity().getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
     }
 
     class sortTime2 implements Comparator<WonItem> {
@@ -280,6 +293,7 @@ public class EmptyFragment extends Fragment {
             Glide.with(context)
                     .load(heroList.get(position).getImage_url())
                     .into(holder.bidHistoryImage);
+            holder.bidHistoryRank.setText(heroList.get(position).getWinner());
         }
 
         @Override
@@ -368,8 +382,11 @@ public class EmptyFragment extends Fragment {
 //                        }
 //                    };
 //                    MyRequestQueue.add(MyStringRequest);
-                    getParentFragment().getFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlaceOrderFragment()).commit();
-
+                    Fragment fragment = new PlaceOrderFragment();
+                    Bundle b = new Bundle();
+                    b.putString("id", heroList.get(position).getId());
+                    fragment.setArguments(b);
+                    getParentFragment().getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
                 }
             });
         }

@@ -72,6 +72,13 @@ public class SharedPrefManager {
         );
     }
 
+    public void setKeyAddress(String address){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_ADDRESS, address);
+        editor.apply();
+    }
+
     //this method will logout the user
     public void logout() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textsort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/dmsansregular"
+        android:text="Sort By"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+        android:id="@+id/radioMybids"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/textsort"
+        android:layout_marginTop="14dp"
+        android:gravity="top"
+        android:padding="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textsort" />
+
+    <TextView
+        android:id="@+id/mybidsradiotext"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/textsort"
+        android:paddingLeft="10dp"
+        android:textSize="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/radioMybids"
+        android:gravity="center_vertical"
+        android:text="Mybids"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/wonbidsradiotext"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/radioMybids"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/radioWon"
+        android:gravity="center_vertical"
+        android:text="Won Bids"
+        android:textSize="16dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/black" />
+
+    <RadioButton
+        android:id="@+id/radioWon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/radioMybids"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radioMybids" />
+
+
+</RelativeLayout>

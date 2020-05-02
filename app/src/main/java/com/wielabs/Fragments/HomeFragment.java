@@ -1,6 +1,9 @@
 package com.wielabs.Fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +12,7 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wielabs.Activities.AddMoney;
 import com.wielabs.HomeGridAdapter1;
 import com.wielabs.Models.Current_Product;
@@ -50,7 +55,9 @@ import java.util.Date;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
+
+    public ArrayList<Current_Product> current_products;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -58,6 +65,8 @@ public class HomeFragment extends Fragment {
 
     RecyclerView recyclerView;
     int deviceWidth;
+    int noofbids = 0;
+    FloatingActionButton fab;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,23 +74,88 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         getActivity().findViewById(R.id.fabhome).setVisibility(View.VISIBLE);
         getActivity().findViewById(R.id.bar).setVisibility(View.VISIBLE);
-        View view = inflater.inflate(R.layout.fragment_home2, container, false);
+        final View view = inflater.inflate(R.layout.fragment_home2, container, false);
         recyclerView = view.findViewById(R.id.homeRecyclerView);
-
+        fab = getActivity().findViewById(R.id.fabhome);
+        if(getActivity().findViewById(R.id.blank).getVisibility() == View.GONE) {
+            fab.hide();
+            ((ImageView) getActivity().findViewById(R.id.blank)).setVisibility(View.GONE);
+        }
         view.findViewById(R.id.walleticon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), AddMoney.class));
             }
         });
+        showFab(view);
 
         deviceWidth = getDeviceWidth();
         if (getArguments() != null)
             deviceWidth = getArguments().getInt("width");
         Log.d("HomeFragment", deviceWidth + "");
-        loadCurrentProducts(view);
-        loadPastProducts(view, getDeviceWidth());
+
         return view;
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            current_products.add((Current_Product) intent.getExtras().get("MY_KEY"));
+            h.notifyDataSetChanged();
+            //or
+            //exercises = ParseJSON.ChallengeParseJSON(intent.getStringExtra(MY_KEY));
+        }
+    };
+
+    void animateFab(){
+
+        if (noofbids > 0) {
+            fab.show();
+            ((ImageView) getActivity().findViewById(R.id.blank)).setVisibility(View.VISIBLE);
+        } else {
+            ((FloatingActionButton) getActivity().findViewById(R.id.fabhome)).hide();
+            ((ImageView) getActivity().findViewById(R.id.blank)).setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(receiver, new IntentFilter("FILTER"));
+    }
+
+    void showFab(final View view){
+        final StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getongoingcount.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
+                new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray heroArray = obj.getJSONArray("Bids");
+                            for (int i = 0; i < heroArray.length(); i++) {
+                                JSONObject heroObject = heroArray.getJSONObject(i);
+                                noofbids = Integer.parseInt(heroObject.getString("COUNT(*)"));
+                            }
+                            animateFab();
+                            loadCurrentProducts(view);
+                            loadPastProducts(view, deviceWidth);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
+        requestQueue.add(stringRequest);
     }
 
     int getDeviceWidth(){
@@ -100,11 +174,11 @@ public class HomeFragment extends Fragment {
         display.getSize(point);
         int width = point.x;
         int height = point.y;
-
         return height;
     }
 
-    private ArrayList<Current_Product> current_products;
+    HomeGridAdapter1 h;
+
 
     private void loadCurrentProducts(final View view) {
         current_products = new ArrayList<>();
@@ -134,7 +208,8 @@ public class HomeFragment extends Fragment {
                                 current_products.add(c);
                             }
                             current_products.sort(new sortTime());
-                            recyclerView.setAdapter(new HomeGridAdapter1(deviceWidth, current_products, getFragmentManager()));
+                            h = new HomeGridAdapter1(deviceWidth, current_products, getFragmentManager());
+                            recyclerView.setAdapter(h);
                             StaggeredGridLayoutManager l = new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL);
                             recyclerView.setLayoutManager(l);
                         } catch (JSONException e) {
@@ -202,7 +277,6 @@ public class HomeFragment extends Fragment {
                                 pastProducts.sort(new sortTime2());
                             }
                             loadSlideProducts(view);
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

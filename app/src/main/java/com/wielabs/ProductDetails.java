@@ -56,6 +56,7 @@ public class ProductDetails extends Fragment {
                 productDescListRecycler.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
             }
         });
+
         return view;
     }
 

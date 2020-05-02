@@ -28,7 +28,6 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.HomeGr
     private int deviceWidth;
     private boolean isDimensionChanged = false;
     private ArrayList<Integer> colors = new ArrayList<>();
-    private GradientDrawable gradientDrawable;
     ArrayList<Current_Product> current_products;
 
     public HomeGridAdapter(Context context, int deviceWidth, ArrayList<Current_Product> current_products) {

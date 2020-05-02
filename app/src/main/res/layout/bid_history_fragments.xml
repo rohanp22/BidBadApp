@@ -4,7 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort by"
+            android:fontFamily="@font/dmsansregular"
+            />
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/wonbidstext"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:gravity="center_vertical"
+            android:text="My bids"
+            android:paddingRight="8dp"
+            android:layout_toLeftOf="@+id/sortImage"
+            android:fontFamily="@font/dmsansregular"
+            />
+
+        <ImageView
+            android:id="@+id/sortImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_sort_black_24dp"
+            android:layout_alignParentEnd="true"
+            android:tint="@color/gray"/>
+
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/relativeLayout"
         android:id="@+id/bidHistoryRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

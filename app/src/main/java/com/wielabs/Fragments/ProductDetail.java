@@ -54,14 +54,10 @@ public class ProductDetail extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_detail, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
-
+        final View view = inflater.inflate(R.layout.fragment_product_detail, container, false);
         getActivity().findViewById(R.id.fabhome).setVisibility(View.GONE);
         getActivity().findViewById(R.id.bar).setVisibility(View.GONE);
+
 //        time = view.findViewById(R.id.timeProductDetails);
         ConstraintLayout c = view.findViewById(R.id.backgroundShape);
 
@@ -115,15 +111,6 @@ public class ProductDetail extends Fragment {
                                 detailPrice.setText(view.getContext().getResources().getString(R.string.ruppesymbol) + mrpString);
                                 detailAmount.setText(view.getContext().getResources().getString(R.string.ruppesymbol) + sp);
                                 detailTitle.setText(titleString);
-
-                                Fragment fragment = new ProductDetails();
-                                Bundle b = new Bundle();
-                                b.putString("Description", description);
-                                Log.d("Description", description);
-                                fragment.setArguments(b);
-                                getFragmentManager().beginTransaction().replace(R.id.fragmentDetailsHolder, fragment).commit();
-
-
                                 productDetails.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -197,7 +184,7 @@ public class ProductDetail extends Fragment {
                                         } else {
                                             curtime = String.format("%02d", elapsedMinutes) + " m " + String.format("%02d", elapsedSeconds) + " s ";
                                         }
-                                       // time.setText(curtime);
+                                        // time.setText(curtime);
                                     }
 
                                     public void onFinish() {
@@ -254,6 +241,20 @@ public class ProductDetail extends Fragment {
                 }, 250);
             }
         });
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        if(description != null) {
+            Fragment fragment = new ProductDetails();
+            Bundle b = new Bundle();
+            b.putString("Description", description);
+            fragment.setArguments(b);
+            if (fragment != null)
+                getFragmentManager().beginTransaction().replace(R.id.fragmentDetailsHolder, fragment).commit();
+        }
     }
 
     public class ProductDescriptionImageAdapter extends RecyclerView.Adapter<ProductDescriptionImageAdapter.ProductDescriptionImageViewHolder> {

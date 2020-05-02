@@ -48,7 +48,6 @@ public class MyBidsFragment extends Fragment {
 
     private ArrayList<CartItems> cartItems;
     private RecyclerView cartList;
-    private View view;
 
     @SuppressLint("SimpleDateFormat")
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
@@ -62,18 +61,18 @@ public class MyBidsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_bids, container, false);
-        this.view = view;
+        loadList(view);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        cartItems = new ArrayList<>();
-        loadList(view);
+
     }
 
     void loadList(final View view) {
         cartList = view.findViewById(R.id.myBidsList);
+        cartItems = new ArrayList<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getmyongoingbids.php?id=" + SharedPrefManager.getInstance(getActivity()).getUser().getId(),
                 new Response.Listener<String>() {
@@ -97,9 +96,7 @@ public class MyBidsFragment extends Fragment {
                                         heroObject.getString("endtime"),
                                         heroObject.getString("title"),
                                         heroObject.getString("currentid"));
-
-                                if (a1.compareTo(new java.sql.Date(System.currentTimeMillis())) > 0)
-                                    cartItems.add(c);
+                                 cartItems.add(c);
                             }
 
                             cartItems.sort(new sortTime());
@@ -111,15 +108,9 @@ public class MyBidsFragment extends Fragment {
                             }
 
                             BidsAdapter walletAdapter = new BidsAdapter(view.getContext(), cartItems);
-
-                            Drawable horizontalDivider = ContextCompat.getDrawable(view.getContext(), R.drawable.horizontal);
-                            DividerItemDecoration horizontalDecoration = new DividerItemDecoration(cartList.getContext(),
-                                    DividerItemDecoration.VERTICAL);
-                            horizontalDecoration.setDrawable(horizontalDivider);
-                            cartList.addItemDecoration(horizontalDecoration);
+                            cartList.setAdapter(walletAdapter);
                             cartList.setLayoutManager(new LinearLayoutManager(view.getContext()));
                             view.findViewById(R.id.progressBar).setVisibility(View.GONE);
-                            cartList.setAdapter(walletAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -163,13 +154,7 @@ public class MyBidsFragment extends Fragment {
             holder.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    ProductDescription ldf = new ProductDescription();
-//                    Bundle args = new Bundle();
-//                    args.putString("YourKey", cartItems.get(position).getId());
-//                    args.putString("show", "no");
-//                    args.putString("im", cartItems.get(position).getImage_url());
-//                    ldf.setArguments(args);
-//                    getFragmentManager().beginTransaction().replace(R.id.fragment_container, ldf).addToBackStack(null).commit();
+
                 }
             });
 
@@ -202,6 +187,7 @@ public class MyBidsFragment extends Fragment {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
 
                     try {
+                        if(position != 0)
                         startDate1 = simpleDateFormat.parse(cartItems.get(position).getStatus());
                     } catch (ParseException e) {
                         e.printStackTrace();

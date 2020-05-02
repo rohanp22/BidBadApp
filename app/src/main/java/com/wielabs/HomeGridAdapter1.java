@@ -178,7 +178,7 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
                 Log.d("height width", h+"    "+w);
                 holder.productImage.setImageBitmap(bitmap);
 
-                holder.bidEntry.setText(current_products.get(position).getSp());
+                holder.bidEntry.setText(holder.bidEntry.getContext().getResources().getString(R.string.ruppesymbol) + current_products.get(position).getSp());
 
                 if (imageHeight > imageWidth) {
                     Log.d("Adapter", "H > W");        //holder.bidEntry.setText(current_products.get(position).getSp());

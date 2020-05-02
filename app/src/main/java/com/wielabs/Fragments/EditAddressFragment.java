@@ -88,15 +88,13 @@ public class EditAddressFragment extends Fragment {
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("address", address);
-                        params.put("addressno", "1");
+                        params.put("addressno", getArguments().getInt("addressno")+"");
                         return params;
                     }
                 };
                 MyRequestQueue.add(MyStringRequest);
             }
         });
-
-
         return view;
     }
 }

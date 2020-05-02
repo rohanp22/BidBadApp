@@ -20,13 +20,13 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
+        android:layout_marginTop="?actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="?actionBarSize"
             android:clipToPadding="false"
             android:paddingStart="16dp"
             android:paddingTop="16dp"
@@ -273,9 +273,11 @@
                 app:layout_constraintTop_toTopOf="@+id/orderDeliveryTotal" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/placeOrderButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/dm_sans_regular"
                 android:padding="16dp"
                 android:text="Place order"
@@ -288,6 +290,9 @@
                 app:layout_constraintEnd_toEndOf="@+id/orderDeliveryTotal"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@+id/orderDeliveryTotal" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
