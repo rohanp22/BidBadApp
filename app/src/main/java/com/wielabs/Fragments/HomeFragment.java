@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -210,6 +211,20 @@ public class HomeFragment extends Fragment{
                             current_products.sort(new sortTime());
                             h = new HomeGridAdapter1(deviceWidth, current_products, getFragmentManager());
                             recyclerView.setAdapter(h);
+                            recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+                                @Override
+                                public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                                    int position = parent.getChildAdapterPosition(view);
+                                    // Span count is 2
+                                    int currentColumn = position % 2;
+                                    if (currentColumn == 0)
+                                        outRect.right = getResources().getDimensionPixelSize(R.dimen.grid_margin);
+                                    else
+                                        outRect.left = getResources().getDimensionPixelSize(R.dimen.grid_margin);
+                                    outRect.top = getResources().getDimensionPixelSize(R.dimen.grid_margin);
+                                    outRect.bottom = getResources().getDimensionPixelSize(R.dimen.grid_margin);
+                                }
+                            });
                             StaggeredGridLayoutManager l = new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL);
                             recyclerView.setLayoutManager(l);
                         } catch (JSONException e) {
