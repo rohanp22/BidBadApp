@@ -307,7 +307,7 @@ public class HomeFragment extends Fragment{
         }
     }
 
-    void loadSlideProducts(View view){
+    void loadSlideProducts(final View view) {
         final RecyclerView sliderRecyclerView = view.findViewById(R.id.sliderRecyclerView);
         PagerSnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(sliderRecyclerView);
