@@ -95,10 +95,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        NetworkRequest.Builder builder = new NetworkRequest.Builder();
-
-        connectivityManager.registerNetworkCallback(
-                builder.build(),
+        connectivityManager.registerDefaultNetworkCallback(
                 new ConnectivityManager.NetworkCallback() {
                     /**
                      * @param network
