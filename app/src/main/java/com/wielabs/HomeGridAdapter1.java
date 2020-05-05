@@ -5,11 +5,9 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +18,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -175,13 +172,12 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
                 int h = bitmap.getHeight();
                 imageHeight = h;
                 imageWidth = w;
-                Log.d("height width", h+"    "+w);
                 holder.productImage.setImageBitmap(bitmap);
 
                 holder.bidEntry.setText(holder.bidEntry.getContext().getResources().getString(R.string.ruppesymbol) + current_products.get(position).getSp());
 
                 if (imageHeight > imageWidth) {
-                    Log.d("Adapter", "H > W");        //holder.bidEntry.setText(current_products.get(position).getSp());
+                    //holder.bidEntry.setText(current_products.get(position).getSp());
 
                     holder.constraintLayout.post(new Runnable() {
                         @Override
@@ -190,7 +186,6 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
                             int height = holder.productImage.getHeight();
                             int width = holder.productImage.getWidth();
                             ViewGroup.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-                            Log.d("Adapter", (layoutParams instanceof FrameLayout.LayoutParams) + "");
                             layoutParams.height = (int) (height * 1.5);
                             layoutParams.width = width;
                             holder.productImage.setLayoutParams(layoutParams);
@@ -247,9 +242,6 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
             constraintLayout = itemView.findViewById(R.id.itemHomeRootLayout);
             bidTimer = itemView.findViewById(R.id.homeItemBidTimer);
             bidButton = itemView.findViewById(R.id.homeItemBid);
-            StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) cardView.getLayoutParams();
-            layoutParams.width = (int) (deviceWidth / 2.22);
-            cardView.setLayoutParams(layoutParams);
         }
     }
 
