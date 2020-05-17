@@ -4,24 +4,18 @@ package com.wielabs;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.bluetooth.BluetoothProfile;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Binder;
 import android.os.Build;
-
-import androidx.core.app.NotificationCompat;
-
-import android.os.Handler;
-import android.os.IBinder;
 import android.text.Html;
 import android.util.Log;
 import android.widget.RemoteViews;
+
+import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -109,9 +103,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     PendingIntent.FLAG_UPDATE_CURRENT
             );
 
-            String string = "<font color='#ff8b7a'>Bid now</font>";
-
-
             RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.notification_small);
             RemoteViews notificationLayoutBig = new RemoteViews(getPackageName(), R.layout.notification_big);
             notificationLayout.setTextViewText(R.id.notification_title, title);
@@ -128,7 +119,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                             .setCustomBigContentView(notificationLayoutBig)
                             .setCustomContentView(notificationLayout)
                             //.setCustomContentView(notificationLayout)
-                            .addAction(android.R.drawable.ic_menu_directions, Html.fromHtml(string), morePendingIntent)
                             .setContentIntent(pendingIntent);
 
             NotificationManager notificationManager =

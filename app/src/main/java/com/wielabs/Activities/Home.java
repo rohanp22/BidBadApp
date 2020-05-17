@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.Network;
-import android.net.NetworkRequest;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -51,7 +50,7 @@ import com.wielabs.Fragments.FeedbackBottomDialogFragment;
 import com.wielabs.Fragments.HomeFragment;
 import com.wielabs.Fragments.MyBidsFragment;
 import com.wielabs.Fragments.ProfileFragment;
-import com.wielabs.Fragments.RewardsFragment;
+import com.wielabs.Fragments.RewardFragment;
 import com.wielabs.Others.RequestHandler;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
@@ -352,7 +351,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                         reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_rewards_gray, null));
                     }
                 }, TIME_OUT);
-            } else if (fragmentBefore.getClass().getSimpleName().equals("RewardsFragment")) {
+            } else if (fragmentBefore.getClass().getSimpleName().equals("RewardFragment")) {
                 reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_medal, null));
 
                 indicator.setVisibility(View.VISIBLE);
@@ -474,7 +473,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                 profileText.setVisibility(View.VISIBLE);
                 home.setImageDrawable(getResources().getDrawable(R.drawable.ic_home_gray, null));
                 results.setImageDrawable(getResources().getDrawable(R.drawable.ic_results_gray, null));
-                loadFragment(new RewardsFragment(), "rewards");
+                loadFragment(new RewardFragment(), "rewards");
             }
         }, TIME_OUT);
     }

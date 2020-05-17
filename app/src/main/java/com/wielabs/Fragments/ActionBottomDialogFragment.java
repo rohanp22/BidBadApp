@@ -200,6 +200,7 @@ public class ActionBottomDialogFragment extends BottomSheetDialogFragment
                 super.onPostExecute(s);
                 //hiding the progressbar after completion
                 dismiss();
+                Log.d("addtomybids", s);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
                 Toast.makeText(getView().getContext(), "Bid placed successfully", Toast.LENGTH_LONG);
             }
