@@ -2,19 +2,8 @@ package com.wielabs.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,16 +12,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.wielabs.Models.CartItems;
 import com.bumptech.glide.Glide;
-import com.wielabs.R;
+import com.wielabs.Models.CartItems;
 import com.wielabs.Others.SharedPrefManager;
+import com.wielabs.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -95,17 +91,20 @@ public class MyBidsFragment extends Fragment {
                                         heroObject.getString("bidamount"),
                                         heroObject.getString("endtime"),
                                         heroObject.getString("title"),
-                                        heroObject.getString("currentid"));
-                                 cartItems.add(c);
+                                        heroObject.getString("currentid"),
+                                        heroObject.getString("start_date"),
+                                        heroObject.getString("sp"),
+                                        heroObject.getString("mrp"));
+                                cartItems.add(c);
                             }
 
                             cartItems.sort(new sortTime());
 
-                            if(cartItems.size() == 0){
-                                view.findViewById(R.id.nobids).setVisibility(View.VISIBLE);
-                            } else {
-                                view.findViewById(R.id.nobids).setVisibility(View.GONE);
-                            }
+//                            if(cartItems.size() == 0){
+//                                view.findViewById(R.id.nobids).setVisibility(View.VISIBLE);
+//                            } else {
+//                                view.findViewById(R.id.nobids).setVisibility(View.GONE);
+//                            }
 
                             BidsAdapter walletAdapter = new BidsAdapter(view.getContext(), cartItems);
                             cartList.setAdapter(walletAdapter);
@@ -144,7 +143,7 @@ public class MyBidsFragment extends Fragment {
         @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mybid_layout, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ticket_item, parent, false);
             return new ViewHolder(view);
         }
 
@@ -158,9 +157,15 @@ public class MyBidsFragment extends Fragment {
                 }
             });
 
-            holder.amount.setText("Your bids: "+cartItems.get(position).getMybid());
+            holder.amount.setText(getResources().getString(R.string.ruppesymbol) + cartItems.get(position).getMybid());
 
             holder.title.setText(cartItems.get(position).getTitleCart());
+
+            holder.startDate.setText(cartItems.get(position).getStart_date());
+
+            holder.bidEntry.setText(cartItems.get(position).getBidentry());
+
+            holder.mrp.setText("MRP: " + getResources().getString(R.string.ruppesymbol) + cartItems.get(position).getMrp());
 
             long diff = 0;
 
@@ -209,7 +214,7 @@ public class MyBidsFragment extends Fragment {
 
                         String curtime = elapsedHours + "hr " + String.format("%02d", elapsedMinutes) + "m " + String.format("%02d", elapsedSeconds) + "s";
 
-                        holder.date.setText("Ends in: "+curtime);
+                        holder.date.setText(curtime);
 
                     } else {
 
@@ -238,13 +243,19 @@ public class MyBidsFragment extends Fragment {
             TextView title;
             TextView amount;
             TextView date;
+            TextView startDate;
+            TextView bidEntry;
+            TextView mrp;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                title = (TextView) itemView.findViewById(R.id.titleMyBid);
-                amount = (TextView) itemView.findViewById(R.id.yourBid);
-                image = (ImageView) itemView.findViewById(R.id.myBidImage);
-                date = (TextView) itemView.findViewById(R.id.status);
+                title = (TextView) itemView.findViewById(R.id.ticket_product_title);
+                amount = (TextView) itemView.findViewById(R.id.ticket_bid_amount);
+                image = (ImageView) itemView.findViewById(R.id.ticket_image);
+                date = (TextView) itemView.findViewById(R.id.ticket_timer);
+                startDate = (TextView) itemView.findViewById(R.id.ticket_start_date);
+                bidEntry = (TextView) itemView.findViewById(R.id.ticket_bid_entry);
+                mrp = (TextView) itemView.findViewById(R.id.ticket_mrp);
             }
         }
     }

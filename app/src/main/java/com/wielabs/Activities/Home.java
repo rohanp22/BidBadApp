@@ -431,10 +431,10 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
 
     void profilePressed() {
         indicator.setVisibility(View.VISIBLE);
-        Window window = Home.this.getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(Home.this, android.R.color.transparent));
+//        Window window = Home.this.getWindow();
+//        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//        window.setStatusBarColor(ContextCompat.getColor(Home.this, android.R.color.transparent));
         moveRight(profile, indicator);
         dotPosition = 3;
         profileText.setVisibility(View.INVISIBLE);

@@ -18,6 +18,14 @@
     <color name="dullicon">#D1CFCF</color>
     <color name="green">#228B22</color>
 
+    <color name="colorStatusBar">#EEEEEE</color>
+    <color name="colorDarkBlue">#4f8fff</color>
+    <color name="colorLightBlue">#e0e9fa</color>
+    <color name="colorDarkGreen">#7dce65</color>
+    <color name="colorLightGreen">#e9f4e5</color>
+    <color name="colorDarkRed">#ff5050</color>
+    <color name="colorLightRed">#fee2e3</color>
+
     <color name="gray">#ddd</color>
     <color name="com_accountkit_button_background_color">@color/gradient_color</color>
 
@@ -42,5 +50,5 @@
     <color name="color10">#96eced</color>
     <color name="color11">#f9f9f9</color>
     <color name="green1">#5932CD32</color>
-
+    <color name="colorBlueGrey">#263238</color>
 </resources>

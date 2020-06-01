@@ -1,61 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.MyBidsFragment">
+    android:fitsSystemWindows="false"
+    android:nestedScrollingEnabled="false"
+    android:overScrollMode="never">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No bids currently, Start bidding"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:id="@+id/nobids"/>
-
-    <TextView
-        android:id="@+id/textviewmybids1"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Ongoing Bids"
-        android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:background="@color/white">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/textviewmybids1"
-        android:layout_marginBottom="50dp">
-
-        <LinearLayout
+        <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/colorBlueGrey"
+            app:title="Ongoing Bids"
+            app:titleTextColor="#fff" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/myBidsList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:scrollbars="none" />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:scaleX="0.10"
-        android:scaleY="0.10"
-        android:textColor="@color/colorAccent"
-        android:visibility="visible" />
+        tools:context=".Fragments.MyBidsFragment">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/nobids"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="No bids currently, Start bidding"
+            android:visibility="gone" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?actionBarSize"
+            android:layout_marginBottom="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#eeeeee"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/myBidsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50dp"
+                    android:scrollbars="none" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleX="0.10"
+            android:scaleY="0.10"
+            android:textColor="@color/colorAccent"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -78,10 +78,12 @@ public class HomeFragment extends Fragment{
         final View view = inflater.inflate(R.layout.fragment_home2, container, false);
         recyclerView = view.findViewById(R.id.homeRecyclerView);
         fab = getActivity().findViewById(R.id.fabhome);
-        if(getActivity().findViewById(R.id.blank).getVisibility() == View.GONE) {
+        if (getActivity().findViewById(R.id.blank).getVisibility() == View.GONE) {
             fab.hide();
             ((ImageView) getActivity().findViewById(R.id.blank)).setVisibility(View.GONE);
         }
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.black, null));
+
         view.findViewById(R.id.walleticon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -209,7 +211,7 @@ public class HomeFragment extends Fragment{
                                 current_products.add(c);
                             }
                             current_products.sort(new sortTime());
-                            h = new HomeGridAdapter1(deviceWidth, current_products, getFragmentManager());
+                            h = new HomeGridAdapter1(deviceWidth, current_products, getFragmentManager(), view.getContext());
                             recyclerView.setAdapter(h);
                             recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
                                 @Override

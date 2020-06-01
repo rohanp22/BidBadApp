@@ -3,13 +3,18 @@ package com.wielabs.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
-import com.wielabs.PhoneVerification;
 import com.wielabs.R;
 
 public class PhoneInput extends AppCompatActivity {
@@ -38,12 +43,29 @@ public class PhoneInput extends AppCompatActivity {
                     return;
                 }
 
-                String phoneNumber = code + number;
+                final String phoneNumber = code + number;
 
-                Intent intent = new Intent(PhoneInput.this, VerifyPhoneActivity.class);
-                intent.putExtra("phoneNumber", phoneNumber);
-                startActivity(intent);
+                StringRequest stringRequest2 = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/isuserregistered.php?mobile=" + phoneNumber,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                if (response.equals("0")) {
+                                    Intent intent = new Intent(PhoneInput.this, VerifyPhoneActivity.class);
+                                    intent.putExtra("phoneNumber", phoneNumber);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(PhoneInput.this, "User already Registered", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        });
 
+                RequestQueue requestQueue2 = Volley.newRequestQueue(PhoneInput.this);
+                requestQueue2.add(stringRequest2);
             }
         });
     }

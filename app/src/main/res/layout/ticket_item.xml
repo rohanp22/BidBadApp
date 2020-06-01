@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/bg_ticket"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.wielabs.Others.VerticalTextView
+            android:id="@+id/ticket_share_your_bid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/ticket_mrp_margin_bottom"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:gravity="bottom"
+            android:text="Share your bid"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ticket_image"
+            android:layout_width="@dimen/ticket_image_height"
+            android:layout_height="@dimen/ticket_image_height"
+            android:layout_marginStart="@dimen/ticket_image_start_margin"
+            android:src="@drawable/headphones"
+            app:layout_constraintBottom_toBottomOf="@+id/ticket_bid_entry_text"
+            app:layout_constraintStart_toEndOf="@+id/ticket_share_your_bid"
+            app:layout_constraintTop_toTopOf="@+id/ticket_product_title" />
+
+        <TextView
+            android:id="@+id/ticket_product_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:text="Wireless Headsets"
+            android:textSize="@dimen/ticket_timer_size"
+            app:layout_constraintEnd_toStartOf="@+id/ticket_share"
+            app:layout_constraintStart_toEndOf="@+id/ticket_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ticket_product_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="32 inch (90 cm)"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintEnd_toEndOf="@+id/ticket_product_title"
+            app:layout_constraintStart_toStartOf="@+id/ticket_product_title"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_product_title" />
+
+        <TextView
+            android:id="@+id/ticket_start_date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Start date"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintStart_toStartOf="@+id/ticket_product_desc"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_product_desc" />
+
+        <TextView
+            android:id="@+id/ticket_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:text="15/05/2020 08:56:12 sec"
+            android:textSize="@dimen/text_desc"
+            app:layout_constraintStart_toStartOf="@+id/ticket_start_date_text"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_start_date_text" />
+
+        <ImageView
+            android:id="@+id/ticket_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_share"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ticket_mrp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:text="MRP ₹25000"
+            android:textSize="@dimen/ticket_timer_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/ticket_bid_entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_bid_coins"
+            android:drawablePadding="4dp"
+            android:drawableTint="@color/black"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="25"
+            android:textSize="@dimen/ticket_timer_size"
+            app:layout_constraintBottom_toBottomOf="@+id/ticket_mrp"
+            app:layout_constraintStart_toStartOf="@+id/ticket_product_desc"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_start_date" />
+
+        <TextView
+            android:id="@+id/ticket_bid_entry_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="2dp"
+            android:text="bid entry"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/ticket_bid_entry"
+            app:layout_constraintEnd_toStartOf="@+id/ticket_mrp"
+            app:layout_constraintStart_toEndOf="@+id/ticket_bid_entry" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/bg_ticket_bottom"
+        android:elevation="2dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <ImageView
+            android:id="@+id/ticket_hammer"
+            android:layout_width="@dimen/bid_amount_height"
+            android:layout_height="@dimen/bid_amount_height"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_hammer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ticket_bid_amount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Your bid amount"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintStart_toEndOf="@+id/ticket_hammer"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ticket_bid_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="₹18000"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ticket_timer_size"
+            app:layout_constraintEnd_toEndOf="@+id/ticket_bid_amount_text"
+            app:layout_constraintStart_toStartOf="@+id/ticket_bid_amount_text"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_bid_amount_text" />
+
+        <TextView
+            android:id="@+id/ticket_ending_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ending time"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size"
+            app:layout_constraintEnd_toEndOf="@+id/ticket_timer"
+            app:layout_constraintStart_toStartOf="@+id/ticket_timer"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ticket_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:text="08:24:21 sec"
+            android:textColor="@color/green"
+            android:textSize="@dimen/ticket_timer_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_ending_time" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

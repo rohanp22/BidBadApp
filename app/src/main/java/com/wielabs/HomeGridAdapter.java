@@ -45,7 +45,7 @@ public class HomeGridAdapter extends RecyclerView.Adapter<HomeGridAdapter.HomeGr
     @NonNull
     @Override
     public HomeGridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new HomeGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home, parent, false));
+        return new HomeGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home1, parent, false));
     }
 
     @Override

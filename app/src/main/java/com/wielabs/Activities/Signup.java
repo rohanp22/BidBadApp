@@ -1,7 +1,5 @@
 package com.wielabs.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -17,10 +15,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.wielabs.Models.User;
-import com.wielabs.R;
 import com.wielabs.Others.RequestHandler;
 import com.wielabs.Others.SharedPrefManager;
+import com.wielabs.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,7 +31,7 @@ public class Signup extends AppCompatActivity {
 
     private TextView create, terms;
     private ImageView back;
-    private EditText firstName, lastName, email, password, address, pincode;
+    private EditText firstName, lastName, email, password, address, pincode, referral;
     String phoneNumberString;
 
     @Override
@@ -46,6 +46,7 @@ public class Signup extends AppCompatActivity {
         address = (EditText) findViewById(R.id.et_address);
         pincode = (EditText) findViewById(R.id.et_pincode);
         create = (TextView) findViewById(R.id.txt_create);
+        referral = (EditText) findViewById(R.id.et_referral);
         Button btn = (Button) findViewById(R.id.signupbutton);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +144,7 @@ public class Signup extends AppCompatActivity {
                 params.put("lastname", lastName.getText().toString());
                 params.put("address", address.getText().toString());
                 params.put("pincode", pincode.getText().toString());
+                params.put("referral", referral.getText().toString());
 
                 //returing the response
                 return requestHandler.sendPostRequest("http://easyvela.esy.es/AndroidAPI/Login/Api.php?apicall=signup", params);
@@ -157,7 +159,7 @@ public class Signup extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 //hiding the progressbar after completion
-
+                Log.d("String msg", s);
                 try {
                     //converting response to json object
                     JSONObject obj = new JSONObject(s);

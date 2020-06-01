@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size">11sp</dimen>
+    <dimen name="text_desc">12sp</dimen>
+    <dimen name="start_date_size">12sp</dimen>
+    <dimen name="ticket_title_size">14sp</dimen>
+    <dimen name="ticket_bid_amount_size">20sp</dimen>
+    <dimen name="ticket_timer_size">18sp</dimen>
+    <dimen name="ticket_image_height">72dp</dimen>
+    <dimen name="ticket_image_start_margin">28dp</dimen>
+    <dimen name="ticket_mrp_margin_bottom">16dp</dimen>
+    <dimen name="text_ongoing_size">18sp</dimen>
+    <dimen name="ongoing_image_height">100dp</dimen>
+    <dimen name="banner_image_size">100dp</dimen>
+    <dimen name="bid_amount_size">24sp</dimen>
+    <dimen name="bid_amount_height">24dp</dimen>
+    <dimen name="bid_winner_size">14sp</dimen>
+    <dimen name="bid_winner_height">14dp</dimen>
+    <dimen name="spent_text_size">8sp</dimen>
+    <dimen name="spent_text_height">8dp</dimen>
+    <dimen name="banner_winner_image_size">32dp</dimen>
+    <dimen name="banner_mrp_size">16sp</dimen>
+    <dimen name="banner_mrp_text_size">12sp</dimen>
+    <dimen name="entry_fee_text_size">10sp</dimen>
+    <dimen name="bid_winner_title_size">12sp</dimen>
+    <dimen name="bid_winner_title_height">12dp</dimen>
+    <dimen name="fab_size">64dp</dimen>
+    <dimen name="fab_custom_size">56dp</dimen>
+    <dimen name="banner_height">140dp</dimen>
+</resources>

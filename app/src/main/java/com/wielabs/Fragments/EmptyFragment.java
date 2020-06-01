@@ -31,8 +31,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.wielabs.Models.WonItem;
 import com.wielabs.Models.PastProducts;
+import com.wielabs.Models.WonItem;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
 
@@ -45,8 +45,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class EmptyFragment extends Fragment {
 
@@ -384,6 +382,7 @@ public class EmptyFragment extends Fragment {
 //                    MyRequestQueue.add(MyStringRequest);
                     Fragment fragment = new PlaceOrderFragment();
                     Bundle b = new Bundle();
+                    b.putSerializable("object", heroList.get(position));
                     b.putString("id", heroList.get(position).getId());
                     fragment.setArguments(b);
                     getParentFragment().getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();

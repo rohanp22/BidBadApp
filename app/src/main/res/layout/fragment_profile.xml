@@ -12,14 +12,14 @@
         android:layout_height="?actionBarSize"
         app:elevation="0dp">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="#fff"
             android:paddingStart="20dp"
             android:paddingEnd="0dp"
+            android:background="@color/colorBlueGrey"
             app:title="Profile"
-            app:titleTextAppearance="@style/ToolbarTitle" />
+            app:titleTextColor="#fff" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
