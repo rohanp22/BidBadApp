@@ -40,7 +40,6 @@ import com.wielabs.Models.Current_Product;
 import com.wielabs.Models.PastProducts;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
-import com.wielabs.SliderAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -293,7 +292,11 @@ public class HomeFragment extends Fragment{
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                 pastProducts.sort(new sortTime2());
                             }
-                            loadSlideProducts(view);
+                            //loadSlideProducts(view);
+                            final RecyclerView sliderRecyclerView = view.findViewById(R.id.sliderRecyclerView);
+                            sliderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+                            sliderRecyclerView.setAdapter(new SliderAdapter());
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -333,10 +336,10 @@ public class HomeFragment extends Fragment{
         sliderRecyclerView.post(new Runnable() {
             @Override
             public void run() {
-                sliderRecyclerView.setAdapter(new SliderAdapter(sliderRecyclerView, pastProducts));
+                sliderRecyclerView.setAdapter(new SliderAdapter());
                 sliderRecyclerView.setLayoutManager(layoutManager);
-                //sliderRecyclerView.getLayoutManager().scrollToPosition(Integer.MAX_VALUE/2);
-                layoutManager.scrollToPositionWithOffset(Integer.MAX_VALUE/2, (int) (getDeviceWidth() * .175));
+                sliderRecyclerView.getLayoutManager().scrollToPosition(Integer.MAX_VALUE / 2);
+                layoutManager.scrollToPositionWithOffset(Integer.MAX_VALUE / 2, (int) (getDeviceWidth() * .175));
                 sliderRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -378,5 +381,38 @@ public class HomeFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         // Slider recyclerview setup
+    }
+
+    public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder> {
+
+        @NonNull
+        @Override
+        public SliderAdapter.SliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.banner_image, parent, false);
+//            int width = recyclerView.getWidth();
+//            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+//            layoutParams.width = (int) (width * .65);
+//            view.setLayoutParams(layoutParams);
+            return new SliderAdapter.SliderViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
+            holder.imageView.setImageDrawable(getResources().getDrawable(R.drawable.index, null));
+        }
+
+        @Override
+        public int getItemCount() {
+            return Integer.MAX_VALUE;
+        }
+
+        class SliderViewHolder extends RecyclerView.ViewHolder {
+            private ImageView imageView;
+
+            public SliderViewHolder(@NonNull View itemView) {
+                super(itemView);
+                imageView = itemView.findViewById(R.id.sliderImage);
+            }
+        }
     }
 }

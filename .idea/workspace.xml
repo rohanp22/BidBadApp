@@ -11,36 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16c86884-1563-4979-9afb-7c3b96ae06ff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/AddressFragment2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/EditAddressFragment2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Others/VerticalTextView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/banner_sample_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/banner_sample_2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_mrp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_ticket.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_ticket_bottom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_bid_coins.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_hammer.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/red_bg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/timer_bg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_black.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_blackitalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_bolditalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_condensed_bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_lightitalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_mediumitalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_thi.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/roboto_thinitalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/banner_item_layout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_home1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/ticket_item.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/values-xhdpi/dimens.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/values-xxhdpi/dimens.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/Wishlist.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/index.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/banner_image.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_wishlist.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -48,31 +23,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Activities/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Activities/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Activities/PhoneInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Activities/PhoneInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Activities/Signup.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Activities/Signup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/EmptyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/EmptyFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/HomeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/MyBidsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/MyBidsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/PlaceOrderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/PlaceOrderFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/ReferFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/ReferFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/HomeGridAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/HomeGridAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/HomeGridAdapter1.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/HomeGridAdapter1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Models/CartItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Models/CartItems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_product_des.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_product_des.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/change_password_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/change_password_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/ProfileFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/ProfileFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_bids.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_bids.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_place_order.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_place_order.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,10 +56,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="layoutResourceFile" />
         <option value="resourceFile" />
-        <option value="Class" />
         <option value="valueResourceFile" />
+        <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -127,7 +82,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/wielabs/Others" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -146,8 +101,8 @@
       <recent name="C:\Users\Rohan\Documents\GitHub\BidBadAndroid\app\src\main\res\drawable" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/src/main/java/com/wielabs/Others" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/main/java/com/wielabs/Others" />
       <recent name="$PROJECT_DIR$/app/src/main/res/font" />
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app/src/main/res/values" />
@@ -370,7 +325,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589728183601</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Merge branch 'master' of https://github.com/rohanp22/BidBadApp&#10;&#10; Conflicts:&#10;&#9;.idea/workspace.xml">
+      <created>1591012740823</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1591012740823</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -399,13 +361,45 @@
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="563" y="60" width="784" height="908" key="CommitChangelistDialog2" timestamp="1591012733023">
+    <state x="768" y="222" width="374" height="584" key="#com.intellij.ide.util.MemberChooser" timestamp="1591637829220">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
-    <state x="563" y="60" width="784" height="908" key="CommitChangelistDialog2/0.27.1920.968@0.27.1920.968" timestamp="1591012733023" />
-    <state x="555" y="247" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1591012697388">
+    <state x="768" y="222" width="374" height="584" key="#com.intellij.ide.util.MemberChooser/0.27.1920.968@0.27.1920.968" timestamp="1591637829220" />
+    <state x="543" y="269" width="824" height="491" key="AndroidCreateResourceFileDialog" timestamp="1591638034737">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
-    <state x="555" y="247" width="800" height="535" key="Vcs.Push.Dialog.v2/0.27.1920.968@0.27.1920.968" timestamp="1591012697388" />
+    <state x="543" y="269" width="824" height="491" key="AndroidCreateResourceFileDialog/0.27.1920.968@0.27.1920.968" timestamp="1591638034737" />
+    <state x="563" y="60" width="784" height="908" key="CommitChangelistDialog2" timestamp="1592379263579">
+      <screen x="0" y="27" width="1920" height="968" />
+    </state>
+    <state x="563" y="60" width="784" height="908" key="CommitChangelistDialog2/0.27.1920.968@0.27.1920.968" timestamp="1592379263579" />
+    <state width="1874" height="300" key="GridCell.Tab.0.bottom" timestamp="1591850344076">
+      <screen x="0" y="27" width="1920" height="968" />
+    </state>
+    <state width="1874" height="300" key="GridCell.Tab.0.bottom/0.27.1920.968@0.27.1920.968" timestamp="1591850344076" />
+    <state width="1874" height="300" key="GridCell.Tab.0.center" timestamp="1591850344075">
+      <screen x="0" y="27" width="1920" height="968" />
+    </state>
+    <state width="1874" height="300" key="GridCell.Tab.0.center/0.27.1920.968@0.27.1920.968" timestamp="1591850344075" />
+    <state width="1874" height="300" key="GridCell.Tab.0.left" timestamp="1591850344074">
+      <screen x="0" y="27" width="1920" height="968" />
+    </state>
+    <state width="1874" height="300" key="GridCell.Tab.0.left/0.27.1920.968@0.27.1920.968" timestamp="1591850344074" />
+    <state width="1874" height="300" key="GridCell.Tab.0.right" timestamp="1591850344075">
+      <screen x="0" y="27" width="1920" height="968" />
+    </state>
+    <state width="1874" height="300" key="GridCell.Tab.0.right/0.27.1920.968@0.27.1920.968" timestamp="1591850344075" />
+    <state x="555" y="247" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1591012753200">
+      <screen x="0" y="27" width="1920" height="968" />
+    </state>
+    <state x="555" y="247" width="800" height="535" key="Vcs.Push.Dialog.v2/0.27.1920.968@0.27.1920.968" timestamp="1591012753200" />
+    <state x="732" y="291" width="446" height="447" key="chooseDestDirectoryDialog" timestamp="1591354887132">
+      <screen x="0" y="27" width="1920" height="968" />
+    </state>
+    <state x="732" y="291" width="446" height="447" key="chooseDestDirectoryDialog/0.27.1920.968@0.27.1920.968" timestamp="1591354887132" />
+    <state x="616" y="338" key="com.intellij.ide.util.TipDialog" timestamp="1592377072032">
+      <screen x="0" y="27" width="1920" height="968" />
+    </state>
+    <state x="616" y="338" key="com.intellij.ide.util.TipDialog/0.27.1920.968@0.27.1920.968" timestamp="1592377072032" />
   </component>
 </project>
