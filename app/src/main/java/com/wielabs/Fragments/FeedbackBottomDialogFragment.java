@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,8 +53,8 @@ public class FeedbackBottomDialogFragment extends BottomSheetDialogFragment impl
 
     @Override
     public void onClick(View view) {
-        TextView tvSelected = (TextView) view;
-        mListener.onItemClick(tvSelected.getText().toString());
+//        TextView tvSelected = (TextView) view;
+//        mListener.onItemClick(tvSelected.getText().toString());
         dismiss();
     }
 

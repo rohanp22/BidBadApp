@@ -20,11 +20,10 @@
         android:id="@+id/fabhome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/transparent"
         android:outlineAmbientShadowColor="@color/white"
-        android:src="@drawable/ic_b_iocn"
-        android:visibility="gone"
-        app:fabCustomSize="48dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:borderWidth="0dp"
+        android:visibility="visible"
         app:layout_anchor="@id/bar"
         app:tint="@null" />
 
@@ -39,7 +38,9 @@
         app:elevation="10dp"
         android:animateLayoutChanges="true"
         app:fabAlignmentMode="center"
-        app:fabCradleRoundedCornerRadius="50dp"
+        app:fabCradleMargin="5dp"
+        app:fabCradleVerticalOffset="5dp"
+        app:fabCradleRoundedCornerRadius="60dp"
         app:hideOnScroll="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -107,10 +108,10 @@
                 android:id="@+id/rewardsIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/data_reward"
                 android:paddingLeft="16dp"
                 android:paddingTop="12dp"
                 android:paddingRight="16dp"
-                android:src="@drawable/ic_rewards_gray"
                 app:layout_constraintEnd_toStartOf="@+id/profileIcon"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/blank"

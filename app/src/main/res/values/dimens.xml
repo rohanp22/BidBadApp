@@ -24,8 +24,6 @@
     <dimen name="entry_fee_text_size">8sp</dimen>
     <dimen name="bid_winner_title_size">10sp</dimen>
     <dimen name="bid_winner_title_height">10dp</dimen>
-    <dimen name="fab_size">56dp</dimen>
-    <dimen name="fab_custom_size">48dp</dimen>
     <dimen name="banner_height">124dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
@@ -40,5 +38,5 @@
     <!--    <dimen name="text_desc">14sp</dimen>-->
     <!--    <dimen name="text_ongoing_size">20sp</dimen>-->
     <!--    <dimen name="ongoing_image_height">144dp</dimen>-->
-    <dimen name="design_fab_image_size" tools:override="true">@dimen/fab_size</dimen>
+    <dimen name="design_fab_image_size" tools:override="true">28dp</dimen>
 </resources>

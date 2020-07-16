@@ -63,9 +63,6 @@
         <item name="colorControlActivated">@color/gray</item>
     </style>
 
-
-    -
-
     <style name="AppThemeNew" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -78,11 +75,12 @@
     <style name="ToolbarTitle" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/dmsansregular</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#000</item>
+        <item name="android:textColor">#fff</item>
     </style>
 
     <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14dp</item>
+        <item name="tabTextColor">@color/white</item>
         <item name="textAllCaps">false</item>
     </style>
 

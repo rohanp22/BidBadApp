@@ -31,27 +31,40 @@
 
     <TextView
         android:id="@+id/bidHistoryStartDate"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textSize="12sp"
+        android:text="Helloo bro"
+        android:layout_marginStart="4dp"
         android:fontFamily="@font/dm_sans_regular"
-        android:text="Bidding started on Tue, 31 Mar, 2020 and ended on Thu, 2 Apr, 2020."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/bidHistoryTitle"
+        app:layout_constraintStart_toEndOf="@id/clockimage"
         app:layout_constraintTop_toBottomOf="@+id/bidHistoryTitle" />
+
+    <ImageView
+        android:id="@+id/clockimage"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_baseline_access_time_24"
+        app:layout_constraintTop_toTopOf="@id/bidHistoryStartDate"
+        app:layout_constraintStart_toStartOf="@id/bidHistoryTitle"
+        app:layout_constraintBottom_toBottomOf="@id/bidHistoryStartDate"
+        app:layout_constraintEnd_toStartOf="@+id/bidHistoryStartDate" />
 
     <TextView
         android:id="@+id/bidHistoryRank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_rank_bid_history"
         android:fontFamily="@font/dm_sans_regular"
         android:paddingStart="16dp"
         android:paddingTop="4dp"
         android:paddingEnd="16dp"
+        android:gravity="center_vertical"
+        android:drawableStart="@drawable/ic_certificate"
+        android:drawableTint="@color/colorPrimary"
         android:textSize="12sp"
         android:paddingBottom="4dp"
+        android:textColor="@color/colorPrimary"
         android:text="#324"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:textStyle="bold"
@@ -69,7 +82,7 @@
         android:textSize="12sp"
         android:textColor="?android:textColorPrimary"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/bidHistoryStartDate"
+        app:layout_constraintStart_toStartOf="@+id/clockimage"
         app:layout_constraintTop_toBottomOf="@+id/bidHistoryStartDate" />
 
     <TextView
@@ -78,12 +91,12 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/dm_sans_regular"
         android:text="25$"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:textColor="#f9a825"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/bidHistoryStartDate"
+        app:layout_constraintStart_toStartOf="@+id/clockimage"
         app:layout_constraintTop_toBottomOf="@+id/bidHistoryAmountText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

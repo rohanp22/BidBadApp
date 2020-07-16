@@ -102,7 +102,7 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/roboto_condensed_bold"
             android:text="MRP ₹25000"
-            android:textSize="@dimen/ticket_timer_size"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -113,7 +113,7 @@
             android:layout_marginTop="8dp"
             android:drawableStart="@drawable/ic_bid_coins"
             android:drawablePadding="4dp"
-            android:drawableTint="@color/black"
+            android:drawableTint="@color/colorPrimary"
             android:fontFamily="@font/roboto_bold"
             android:gravity="center"
             android:text="25"
@@ -155,6 +155,7 @@
             android:layout_height="@dimen/bid_amount_height"
             android:layout_marginStart="8dp"
             android:src="@drawable/ic_hammer"
+            android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -13,8 +13,9 @@ public class PastProducts implements Serializable {
     private String bidamount;
     private String description;
     private String winner;
+    private String winnerid;
 
-    public PastProducts(String id, String image_url, String title, String end_date, String mrp, String sp, String description, String image_url2, String image_url3, String winner, String bidamount){
+    public PastProducts(String id, String image_url, String title, String end_date, String mrp, String sp, String description, String image_url2, String image_url3, String winner, String bidamount, String winnerid) {
         this.end_date = end_date;
         this.title = title;
         this.image_url = image_url;
@@ -24,6 +25,11 @@ public class PastProducts implements Serializable {
         this.sp = sp;
         this.winner = winner;
         this.bidamount = bidamount;
+        this.winnerid = winnerid;
+    }
+
+    public String getWinnerid() {
+        return winnerid;
     }
 
     public String getDescription() {

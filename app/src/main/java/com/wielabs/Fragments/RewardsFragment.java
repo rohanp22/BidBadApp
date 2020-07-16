@@ -280,6 +280,13 @@ public class RewardsFragment extends Fragment {
                     @Override
                     public void onClick(final View view) {
                         if (getAdapterPosition() < 3) {
+                            switch (getAdapterPosition()) {
+                                case 1:
+                                    getParentFragment().getFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).addToBackStack(null).commit();
+                                    break;
+                                default:
+                                    break;
+                            }
                             Toast.makeText(itemView.getContext(), "Complete task to unlock scratch card", Toast.LENGTH_SHORT).show();
                             if (scratchCardModels.get(getAdapterPosition()).getColor().equals("orange")) {
                                 progressBar.setMax(5);

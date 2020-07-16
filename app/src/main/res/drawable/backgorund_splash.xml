@@ -1,4 +1,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/white"/>
-    <item android:gravity="center" android:drawable="@drawable/ic_bidbad_brand_logo_final"/>
+    <item android:drawable="@color/white" />
+    <item
+        android:gravity="center"
+        android:drawable="@drawable/bluegrey__logo_final_final" />
 </layer-list>

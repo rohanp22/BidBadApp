@@ -88,8 +88,8 @@ public class EmptyFragment extends Fragment {
         cartItems = new ArrayList<>();
         progressBar = view.findViewById(R.id.mybidsprogress);
 
-        loadMyBids(view);
         loadWonBids(view);
+        loadMyBids(view);
 
         dialog = new Dialog(view.getContext());
         dialog.setContentView(R.layout.sort_dialog);
@@ -165,7 +165,8 @@ public class EmptyFragment extends Fragment {
                                         heroObject.getString("image_url2"),
                                         heroObject.getString("image_url3"),
                                         heroObject.getString("firstname"),
-                                        heroObject.getString("bidamount")
+                                        heroObject.getString("bidamount"),
+                                        heroObject.getString("ids")
                                 );
                                 if (!(a1.compareTo(new java.sql.Date(System.currentTimeMillis())) > 0))
                                     cartItems.add(c);
@@ -267,6 +268,7 @@ public class EmptyFragment extends Fragment {
 
         Context context;
         ArrayList<PastProducts> heroList;
+        ArrayList<WonItem> wonItems;
 
         BidHistoryAdapterAll(Context context, ArrayList<PastProducts> heroList) {
             this.context = context;
@@ -281,17 +283,35 @@ public class EmptyFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull BidHistoryViewHolder holder, int position) {
-            if(getItemCount() == 0){
+            if (getItemCount() == 0) {
                 progressBar.setVisibility(View.GONE);
+            }
+            if (Integer.parseInt(heroList.get(position).getWinnerid()) == SharedPrefManager.getInstance(context).getUser().getId()) {
+                holder.bidHistoryRank.setText("Place order");
+                holder.bidHistoryRank.setBackgroundColor(getResources().getColor(R.color.colorLightGreen));
+            } else {
+                holder.bidHistoryRank.setText(heroList.get(position).getWinner());
+                holder.bidHistoryRank.setBackgroundColor(getResources().getColor(R.color.white));
             }
             progressBar.setVisibility(View.GONE);
             holder.bidHistoryTitle.setText(heroList.get(position).getTitle());
-            holder.bidHistoryStartDate.setText(heroList.get(position).getEnd_date());
+            String pattern = "dd MMM yyyy HH:mm";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+            Date date = null;
+            try {
+                date = simpleDateFormat2.parse(heroList.get(position).getEnd_date());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            System.out.println(date);
+            String dt = simpleDateFormat.format(date);
+            holder.bidHistoryStartDate.setText(dt);
+
             holder.bidHistoryAmount.setText(getResources().getString(R.string.ruppesymbol) + heroList.get(position).getBidamount());
             Glide.with(context)
                     .load(heroList.get(position).getImage_url())
                     .into(holder.bidHistoryImage);
-            holder.bidHistoryRank.setText(heroList.get(position).getWinner());
         }
 
         @Override
@@ -341,7 +361,18 @@ public class EmptyFragment extends Fragment {
         public void onBindViewHolder(@NonNull final BidHistoryViewHolder holder, final int position) {
             progressBar.setVisibility(View.GONE);
             holder.bidHistoryTitle.setText(heroList.get(position).getTitle());
-            holder.bidHistoryStartDate.setText(heroList.get(position).getEnd_date());
+            String pattern = "dd MMM yyyy HH:mm";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a");
+            Date date = null;
+            try {
+                date = simpleDateFormat2.parse(heroList.get(position).getEnd_date());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            System.out.println(date);
+            String dt = simpleDateFormat.format(date);
+            holder.bidHistoryStartDate.setText(dt);
             holder.bidHistoryAmount.setText(getResources().getString(R.string.ruppesymbol) + heroList.get(position).getBidamount());
             Glide.with(context)
                     .load(heroList.get(position).getImage_url())

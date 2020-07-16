@@ -6,7 +6,6 @@
     android:layout_marginTop="2dp"
     android:layout_marginBottom="2dp"
     android:id="@+id/constraintLayout"
-    android:background="@drawable/leaderboard_item_bg"
     android:paddingStart="16dp"
     android:paddingTop="12dp"
     android:paddingEnd="16dp"
@@ -15,26 +14,32 @@
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/profilePicLeaderBoard"
             android:layout_width="56dp"
             android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_toRightOf="@id/textBadge"
+            app:civ_border_color="@color/colorLightRed"
+            app:civ_border_width="4dp"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/textBadge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/leaderboard_textview_bg"
-            android:fontFamily="@font/ralewayregualr"
             android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
             android:text="1"
             android:textStyle="bold" />
+
     </RelativeLayout>
 
     <TextView

@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Point;
+import android.graphics.drawable.Animatable2;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.os.AsyncTask;
@@ -16,8 +19,6 @@ import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -73,6 +73,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     int noofbids = 0;
     private ConnectivityManager connectivityManager;
     private boolean isUpdateChecked = false;
+    private ProfileFragment profileFragment;
 
     private int[] getDeviceDimensions() {
         Display display = getWindowManager().getDefaultDisplay();
@@ -80,9 +81,9 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         display.getSize(point);
         int width = point.x;
         int height = point.y;
-
         return new int[]{width, height};
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -90,7 +91,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         setTheme(R.style.AppTheme_NoactionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        profileFragment = new ProfileFragment();
         connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -113,10 +114,27 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                     }
                 });
 
-
         blank = findViewById(R.id.blank);
         fab = findViewById(R.id.fabhome);
-        loadFragment(new HomeFragment(), "home");
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new HomeFragment())
+                .addToBackStack(null)
+                .commit();
+
+        fab.setImageResource(R.drawable.loader);
+        Drawable drawable = fab.getDrawable();
+        final AnimatedVectorDrawable drawable1 = (AnimatedVectorDrawable) drawable;
+        drawable1.registerAnimationCallback(new Animatable2.AnimationCallback() {
+            @Override
+            public void onAnimationEnd(Drawable drawable) {
+                drawable1.start();
+            }
+        });
+        if (drawable instanceof AnimatedVectorDrawable) {
+            drawable1.start();
+        }
+
 
         bottomAppBar = findViewById(R.id.bar);
         home = findViewById(R.id.homeIcon);
@@ -243,14 +261,12 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                     public void onErrorResponse(VolleyError error) {
                     }
                 });
-
         RequestQueue requestQueue2 = Volley.newRequestQueue(Home.this);
         requestQueue2.add(stringRequest2);
     }
 
     @SuppressLint("RestrictedApi")
     private boolean loadFragment(final Fragment fragment, String name) {
-
         if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -262,11 +278,10 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         return false;
     }
 
-
     private Fragment getCurrentFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        String fragmentTag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getName();
-        Fragment currentFragment = fragmentManager.findFragmentByTag(fragmentTag);
+        int fragmentTag = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1).getId();
+        Fragment currentFragment = fragmentManager.findFragmentById(fragmentTag);
         return currentFragment;
     }
 
@@ -333,10 +348,6 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                 }, TIME_OUT);
             } else if (fragmentBefore.getClass().getSimpleName().equals("ProfileFragment")) {
                 indicator.setVisibility(View.VISIBLE);
-                Window window = Home.this.getWindow();
-                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(ContextCompat.getColor(Home.this, android.R.color.transparent));
                 moveRight(profile, indicator);
                 dotPosition = 3;
                 profileText.setVisibility(View.INVISIBLE);
@@ -447,15 +458,18 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                 home.setImageDrawable(getResources().getDrawable(R.drawable.ic_home_gray, null));
                 results.setImageDrawable(getResources().getDrawable(R.drawable.ic_results_gray, null));
                 reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_rewards_gray, null));
-
                 loadFragment(new ProfileFragment(), "profile");
             }
         }, TIME_OUT);
     }
 
     void rewardsPressed() {
-        reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_medal, null));
-
+        reward.setImageDrawable(getResources().getDrawable(R.drawable.data_reward, null));
+        Drawable drawable = reward.getDrawable();
+        final AnimatedVectorDrawable drawable1 = (AnimatedVectorDrawable) drawable;
+        if (drawable instanceof AnimatedVectorDrawable) {
+            drawable1.start();
+        }
         indicator.setVisibility(View.VISIBLE);
         if (dotPosition > 2)
             moveLeft(reward, indicator);

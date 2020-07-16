@@ -32,14 +32,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.wielabs.Activities.AddMoney;
 import com.wielabs.HomeGridAdapter1;
 import com.wielabs.Models.Current_Product;
 import com.wielabs.Models.PastProducts;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
+import com.wielabs.SliderAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +65,7 @@ public class HomeFragment extends Fragment{
     }
 
     RecyclerView recyclerView;
+    RecyclerView bannerRecyclerView;
     int deviceWidth;
     int noofbids = 0;
     FloatingActionButton fab;
@@ -76,17 +78,19 @@ public class HomeFragment extends Fragment{
         getActivity().findViewById(R.id.bar).setVisibility(View.VISIBLE);
         final View view = inflater.inflate(R.layout.fragment_home2, container, false);
         recyclerView = view.findViewById(R.id.homeRecyclerView);
+        bannerRecyclerView = view.findViewById(R.id.bannerSliderView);
         fab = getActivity().findViewById(R.id.fabhome);
         if (getActivity().findViewById(R.id.blank).getVisibility() == View.GONE) {
             fab.hide();
             ((ImageView) getActivity().findViewById(R.id.blank)).setVisibility(View.GONE);
         }
+        loadBanner(view);
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.black, null));
 
         view.findViewById(R.id.walleticon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), AddMoney.class));
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new WalletFragment()).addToBackStack(null).commit();
             }
         });
         showFab(view);
@@ -181,6 +185,17 @@ public class HomeFragment extends Fragment{
 
     HomeGridAdapter1 h;
 
+    private void loadBanner(final View view) {
+        ArrayList<String> images = new ArrayList<>();
+        images.add("http://easyvela.esy.es/CurrentProductImages/index.jpeg");
+        images.add("http://easyvela.esy.es/CurrentProductImages/index.jpeg");
+        images.add("http://easyvela.esy.es/CurrentProductImages/index.jpeg");
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        bannerRecyclerView.setAdapter(new BannerAdapter(bannerRecyclerView, images));
+        bannerRecyclerView.setLayoutManager(linearLayoutManager);
+        linearLayoutManager.scrollToPositionWithOffset(Integer.MAX_VALUE / 2, (int) (getDeviceWidth() * .175));
+
+    }
 
     private void loadCurrentProducts(final View view) {
         current_products = new ArrayList<>();
@@ -285,17 +300,15 @@ public class HomeFragment extends Fragment{
                                         heroObject.getString("image_url2"),
                                         heroObject.getString("image_url3"),
                                         heroObject.getString("firstname"),
-                                        heroObject.getString("bidamount")
+                                        heroObject.getString("bidamount"),
+                                        heroObject.getString("id")
                                 );
                                 pastProducts.add(c);
                             }
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                 pastProducts.sort(new sortTime2());
                             }
-                            //loadSlideProducts(view);
-                            final RecyclerView sliderRecyclerView = view.findViewById(R.id.sliderRecyclerView);
-                            sliderRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
-                            sliderRecyclerView.setAdapter(new SliderAdapter());
+                            loadSlideProducts(view);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -336,7 +349,7 @@ public class HomeFragment extends Fragment{
         sliderRecyclerView.post(new Runnable() {
             @Override
             public void run() {
-                sliderRecyclerView.setAdapter(new SliderAdapter());
+                sliderRecyclerView.setAdapter(new SliderAdapter(sliderRecyclerView, pastProducts));
                 sliderRecyclerView.setLayoutManager(layoutManager);
                 sliderRecyclerView.getLayoutManager().scrollToPosition(Integer.MAX_VALUE / 2);
                 layoutManager.scrollToPositionWithOffset(Integer.MAX_VALUE / 2, (int) (getDeviceWidth() * .175));
@@ -383,22 +396,34 @@ public class HomeFragment extends Fragment{
         // Slider recyclerview setup
     }
 
-    public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder> {
+    public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.SliderViewHolder> {
+        private RecyclerView recyclerView;
+        ArrayList<String> images;
+        int SIZE;
+
+        public BannerAdapter(RecyclerView recyclerView, ArrayList<String> images) {
+            this.recyclerView = recyclerView;
+            this.images = images;
+            SIZE = images.size();
+        }
 
         @NonNull
         @Override
-        public SliderAdapter.SliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public BannerAdapter.SliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.banner_image, parent, false);
-//            int width = recyclerView.getWidth();
-//            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-//            layoutParams.width = (int) (width * .65);
-//            view.setLayoutParams(layoutParams);
-            return new SliderAdapter.SliderViewHolder(view);
+            int width = recyclerView.getWidth();
+            ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+            layoutParams.width = (int) (width * .65);
+            view.setLayoutParams(layoutParams);
+            return new BannerAdapter.SliderViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
-            holder.imageView.setImageDrawable(getResources().getDrawable(R.drawable.index, null));
+            Glide.with(holder.imageView.getContext())
+                    .load(images.get(position % SIZE))
+                    .into(holder.imageView);
+            Log.d("Imageurl", images.get(position % SIZE));
         }
 
         @Override

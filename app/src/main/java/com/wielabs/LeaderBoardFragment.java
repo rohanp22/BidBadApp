@@ -10,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,8 +52,11 @@ public class LeaderBoardFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         // Inflate the layout for this fragment
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider_small));
         leaderboard = view.findViewById(R.id.leaderBoardRecyclerView);
         leaderboard.addItemDecoration(new ItemBackgroundDecoration());
+        leaderboard.addItemDecoration(itemDecorator);
         leaderboard.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         leaderlist = new ArrayList<>();

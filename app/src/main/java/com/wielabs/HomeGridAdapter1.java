@@ -140,7 +140,7 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
                     String curtime;
 
                     if (elapsedHours > 0) {
-                        curtime = elapsedHours + " hr " + String.format("%02d", elapsedMinutes) + " min";
+                        curtime = elapsedHours + "hr " + String.format("%02d", elapsedMinutes) + "min";
                         holder.bidTimer.setText(curtime);
                     } else {
                         curtime = String.format("%02d", elapsedMinutes) + " m " + String.format("%02d", elapsedSeconds) + " sec";

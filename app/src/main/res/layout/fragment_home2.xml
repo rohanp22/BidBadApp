@@ -26,30 +26,57 @@
 
                 <TextView
                     android:id="@+id/logo"
-                    android:layout_width="82.1875dp"
-                    android:layout_height="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="bidbad"
-                    android:fontFamily="@font/round"
+                    android:text="Bid"
+                    android:fontFamily="@font/roboto_bold"
                     android:textColor="@color/colorPrimary"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="bad"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/white"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/logo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
                     android:id="@+id/walleticon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:background="?selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
                     android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_artboard_wallet"
+                    android:src="@drawable/ic_wallet_01"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/notificationicon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="?selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_notification_01"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/walleticon"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -73,9 +100,9 @@
             tools:context=".HomeFragment">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/sliderRecyclerView"
+                android:id="@+id/bannerSliderView"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:overScrollMode="never"
@@ -96,7 +123,7 @@
                 android:textSize="@dimen/text_ongoing_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sliderRecyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/bannerSliderView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginLeft="10dp"
@@ -107,10 +134,21 @@
                 android:layout_marginTop="8dp"
                 android:nestedScrollingEnabled="false"
                 android:overScrollMode="never"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/homeOngoingText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sliderRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_goneMarginTop="5dp"
+                android:overScrollMode="never"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/homeRecyclerView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

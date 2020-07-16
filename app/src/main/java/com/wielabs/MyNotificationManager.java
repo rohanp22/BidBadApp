@@ -9,16 +9,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.Html;
+
 import androidx.core.app.NotificationCompat;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-
-/**
- * Created by Ravi on 31/03/15.
- */
 
 public class MyNotificationManager {
 

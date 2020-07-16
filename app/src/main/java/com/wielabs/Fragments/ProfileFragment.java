@@ -1,6 +1,7 @@
 package com.wielabs.Fragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,10 +12,21 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -22,7 +34,7 @@ import com.wielabs.R;
  */
 public class ProfileFragment extends Fragment {
 
-    TextView wishlist;
+    TextView wishlist, invite, feedback, bids, orders, name, noofbids, noofwins, noofrewards;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -35,7 +47,70 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        name = view.findViewById(R.id.profileName);
+        noofbids = view.findViewById(R.id.profileBids);
+        noofwins = view.findViewById(R.id.profileWins);
+        noofrewards = view.findViewById(R.id.profileRewards);
+
+        name.setText(SharedPrefManager.getInstance(view.getContext()).getUser().getFirstname());
+
+        orders = view.findViewById(R.id.profileOrders);
         wishlist = view.findViewById(R.id.profileWishList);
+        invite = view.findViewById(R.id.profileInvite);
+        feedback = view.findViewById(R.id.profileSendFeedback);
+        bids = view.findViewById(R.id.profileBids);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getmyposition.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
+                new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray heroArray = obj.getJSONArray("Leaders");
+                            JSONObject heroObject = heroArray.getJSONObject(0);
+                            noofbids.setText(heroObject.getString("numberofbids"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
+        requestQueue.add(stringRequest);
+
+        orders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new MyOrdersFragment()).addToBackStack(null).commit();
+            }
+        });
+
+        bids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EmptyFragment("mybids")).addToBackStack(null).commit();
+            }
+        });
+
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomSheet(view);
+            }
+        });
+
+        invite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new ReferFragment()).addToBackStack(null).commit();
+            }
+        });
 
         wishlist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,19 +128,27 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+
         ImageView profileEdit = view.findViewById(R.id.profileEdit);
         profileEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container,new EditFragment())
+                        .replace(R.id.fragment_container, new EditFragment())
                         .addToBackStack(null)
                         .commit();
             }
         });
 
         return view;
+    }
+
+    public void showBottomSheet(View view) {
+        FeedbackBottomDialogFragment addPhotoBottomDialogFragment =
+                FeedbackBottomDialogFragment.newInstance();
+        addPhotoBottomDialogFragment.show(getFragmentManager(),
+                FeedbackBottomDialogFragment.TAG);
     }
 
 }

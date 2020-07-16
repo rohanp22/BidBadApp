@@ -25,6 +25,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_centerVertical="true"
+                    android:id="@+id/backEdit"
                     android:layout_marginLeft="16dp"
                     android:src="@drawable/ic_back"
                     android:tint="@color/black" />
@@ -33,22 +34,12 @@
                     android:id="@+id/toolbar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
                     android:fontFamily="@font/dm_sans_regular"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/backEdit"
                     android:text="Edit profile"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
-                    android:fontFamily="@font/dm_sans_regular"
-                    android:text="Save"
-                    android:textColor="@color/blue"
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
@@ -61,7 +52,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="55dp"
+        android:paddingBottom="65dp"
         android:layout_marginTop="?actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout

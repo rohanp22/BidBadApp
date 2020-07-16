@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/gray" />
+            <!--shadow Color-->
+        </shape>
+    </item>
+
+    <item
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp"
+        android:bottom="3dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/grey_titn" />//Background Color
+        </shape>
+    </item>
+
+    <item
+        android:gravity="center"
+        android:height="36dp"
+        android:width="36dp"
+        android:drawable="@drawable/circular_bg" />
+
+    <item
+        android:gravity="center"
+        android:height="28dp"
+        android:width="28dp"
+        android:drawable="@drawable/circular_lock" />
+
+    <item
+        android:height="16dp"
+        android:width="16dp"
+        android:gravity="center"
+        android:drawable="@drawable/ic_hammer" />
+
+</layer-list>

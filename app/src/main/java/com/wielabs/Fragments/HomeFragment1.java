@@ -3,6 +3,12 @@ package com.wielabs.Fragments;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,13 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import android.util.Log;
-import android.view.Display;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -178,7 +177,8 @@ public class HomeFragment1 extends Fragment {
                                         heroObject.getString("image_url2"),
                                         heroObject.getString("image_url3"),
                                         heroObject.getString("firstname"),
-                                        heroObject.getString("bidamount")
+                                        heroObject.getString("bidamount"),
+                                        heroObject.getString("id")
                                 );
                                 pastProducts.add(c);
                             }

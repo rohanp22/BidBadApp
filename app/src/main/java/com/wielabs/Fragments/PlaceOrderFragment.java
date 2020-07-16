@@ -99,6 +99,8 @@ public class PlaceOrderFragment extends Fragment {
 
         if (bal < Integer.parseInt(wonItem.getBidamount())) {
             insuffecientBalance.setVisibility(View.VISIBLE);
+        } else {
+            insuffecientBalance.setVisibility(View.GONE);
         }
 
         placeOrderButton.setOnClickListener(new View.OnClickListener() {

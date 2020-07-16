@@ -24,7 +24,7 @@
     <dimen name="entry_fee_text_size">10sp</dimen>
     <dimen name="bid_winner_title_size">12sp</dimen>
     <dimen name="bid_winner_title_height">12dp</dimen>
-    <dimen name="fab_size">64dp</dimen>
-    <dimen name="fab_custom_size">56dp</dimen>
+    <!--    <dimen name="fab_size">48dp</dimen>-->
+    <!--    <dimen name="fab_custom_size">48dp</dimen>-->
     <dimen name="banner_height">140dp</dimen>
 </resources>

@@ -13,10 +13,11 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="#fff"
+            android:background="@color/colorBlueGrey"
             android:paddingStart="20dp"
             android:paddingEnd="0dp"
             app:title="Results"
+            app:titleTextColor="@color/white"
             app:titleTextAppearance="@style/ToolbarTitle" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -27,13 +28,13 @@
         android:layout_height="match_parent"
         tools:context=".BidsHistory">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                app:tabTextAppearance="@style/MineCustomTabText"
-                android:layout_width="match_parent"
-                android:elevation="2dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"/>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            app:tabTextAppearance="@style/MineCustomTabText"
+            android:layout_width="match_parent"
+            android:elevation="2dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlueGrey" />
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"
