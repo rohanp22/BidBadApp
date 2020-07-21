@@ -64,6 +64,16 @@ public class PlaceOrderFragment extends Fragment {
         });
         wallet = view.findViewById(R.id.orderDeliveryPayment1);
         insuffecientBalance = view.findViewById(R.id.textInsuffecientBalance);
+        placeOrderAddress = view.findViewById(R.id.orderDeliveryAddress);
+        placeOrderAddress.setText(SharedPrefManager.getInstance(view.getContext()).getUser().getAddress());
+        placeOrderButton = view.findViewById(R.id.placeOrderButton);
+        id = getArguments().getString("id");
+        wonItem = (WonItem) getArguments().getSerializable("object");
+
+        subtotal.setText(getResources().getString(R.string.ruppesymbol) + wonItem.getBidamount());
+        shippingcost.setText(getResources().getString(R.string.ruppesymbol) + "0");
+        discount.setText(getResources().getString(R.string.ruppesymbol) + "0");
+        total.setText(getResources().getString(R.string.ruppesymbol) + wonItem.getBidamount());
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/checkbalance.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
                 new Response.Listener<String>() {
@@ -73,6 +83,11 @@ public class PlaceOrderFragment extends Fragment {
                             JSONObject obj = new JSONObject(response);
                             bal = Integer.parseInt(obj.getString("balance"));
                             wallet.setText("Wallet Balance : ₹ " + String.format("%,d", bal));
+                            if (bal > Integer.parseInt(wonItem.getBidamount())) {
+                                insuffecientBalance.setVisibility(View.GONE);
+                            } else {
+                                insuffecientBalance.setVisibility(View.VISIBLE);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -86,22 +101,6 @@ public class PlaceOrderFragment extends Fragment {
 
         RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
         requestQueue.add(stringRequest);
-        placeOrderAddress = view.findViewById(R.id.orderDeliveryAddress);
-        placeOrderAddress.setText(SharedPrefManager.getInstance(view.getContext()).getUser().getAddress());
-        placeOrderButton = view.findViewById(R.id.placeOrderButton);
-        id = getArguments().getString("id");
-        wonItem = (WonItem) getArguments().getSerializable("object");
-
-        subtotal.setText(getResources().getString(R.string.ruppesymbol) + wonItem.getBidamount());
-        shippingcost.setText(getResources().getString(R.string.ruppesymbol) + "0");
-        discount.setText(getResources().getString(R.string.ruppesymbol) + "0");
-        total.setText(getResources().getString(R.string.ruppesymbol) + wonItem.getBidamount());
-
-        if (bal < Integer.parseInt(wonItem.getBidamount())) {
-            insuffecientBalance.setVisibility(View.VISIBLE);
-        } else {
-            insuffecientBalance.setVisibility(View.GONE);
-        }
 
         placeOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override

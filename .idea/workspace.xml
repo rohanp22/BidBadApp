@@ -6,92 +6,28 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="da" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16c86884-1563-4979-9afb-7c3b96ae06ff" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_mikhaellopez_circularimageview_4_2_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/WalletFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Models/NotificationModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bid_btn.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bluegrey__logo_final_final.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/data_reward.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/divider_small.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_access_time_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_money_24.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_certificate.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_notification_01.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_wallet_01.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/loader.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/winner_bg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_notification.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/latest_transactions.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/notificationmodel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Activities/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Activities/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Activities/ScrollingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Activities/ScrollingActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/AllBidsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/AllBidsFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/EmptyFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/EmptyFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/FeedbackBottomDialogFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/FeedbackBottomDialogFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/HomeFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/HomeFragment1.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/HomeFragment1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/PlaceOrderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/PlaceOrderFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/ProfileFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/ProfileFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/RewardsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Fragments/RewardsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/HomeGridAdapter1.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/HomeGridAdapter1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/ItemBackgroundDecoration.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/ItemBackgroundDecoration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/LeaderBoardFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/LeaderBoardFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Models/PastProducts.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/Models/PastProducts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/wielabs/MyNotificationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/wielabs/MyNotificationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/backgorund_splash.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/backgorund_splash.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_hammer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_hammer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/leaderboard_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/leaderboard_bg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/leaderboard_item_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/leaderboard_item_bg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/timer_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/timer_bg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/banner_image.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/banner_image.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/edit_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/edit_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_bids_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_bids_history.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_leaderboard.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_leaderboard.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_bids.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_bids.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_wishlist.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_wishlist.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_bid_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_bid_history.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_leaderboard.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_leaderboard.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/rewards_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/rewards_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/ticket_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/ticket_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/transaction_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/transaction_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-xhdpi/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-xhdpi/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-xxhdpi/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-xxhdpi/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="J7AAGF06418545H" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -402,7 +338,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592379267429</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Merge branch 'master' of https://github.com/rohanp22/BidBadApp&#10;&#10; Conflicts:&#10;&#9;.idea/workspace.xml">
+      <created>1594921509753</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1594921509753</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -439,49 +382,49 @@
       <screen x="0" y="27" width="1920" height="968" />
     </state>
     <state x="543" y="269" width="824" height="491" key="AndroidCreateResourceFileDialog/0.27.1920.968@0.27.1920.968" timestamp="1594800696591" />
-    <state x="563" y="60" width="784" height="908" key="CommitChangelistDialog2" timestamp="1594921504249">
+    <state x="563" y="60" width="784" height="908" key="CommitChangelistDialog2" timestamp="1595309342277">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
-    <state x="563" y="60" width="784" height="908" key="CommitChangelistDialog2/0.27.1920.968@0.27.1920.968" timestamp="1594921504249" />
+    <state x="563" y="60" width="784" height="908" key="CommitChangelistDialog2/0.27.1920.968@0.27.1920.968" timestamp="1595309342277" />
     <state x="738" y="272" width="424" height="491" key="FileChooserDialogImpl" timestamp="1594830287236">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
     <state x="738" y="272" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.968@0.27.1920.968" timestamp="1594830287236" />
-    <state width="1874" height="435" key="GridCell.Tab.0.bottom" timestamp="1594919944501">
+    <state width="1874" height="435" key="GridCell.Tab.0.bottom" timestamp="1595228583818">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
-    <state width="1874" height="435" key="GridCell.Tab.0.bottom/0.27.1920.968@0.27.1920.968" timestamp="1594919944501" />
-    <state width="1874" height="435" key="GridCell.Tab.0.center" timestamp="1594919944500">
+    <state width="1874" height="435" key="GridCell.Tab.0.bottom/0.27.1920.968@0.27.1920.968" timestamp="1595228583818" />
+    <state width="1874" height="435" key="GridCell.Tab.0.center" timestamp="1595228583818">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
-    <state width="1874" height="435" key="GridCell.Tab.0.center/0.27.1920.968@0.27.1920.968" timestamp="1594919944500" />
-    <state width="1874" height="435" key="GridCell.Tab.0.left" timestamp="1594919944499">
+    <state width="1874" height="435" key="GridCell.Tab.0.center/0.27.1920.968@0.27.1920.968" timestamp="1595228583818" />
+    <state width="1874" height="435" key="GridCell.Tab.0.left" timestamp="1595228583817">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
-    <state width="1874" height="435" key="GridCell.Tab.0.left/0.27.1920.968@0.27.1920.968" timestamp="1594919944499" />
-    <state width="1874" height="435" key="GridCell.Tab.0.right" timestamp="1594919944500">
+    <state width="1874" height="435" key="GridCell.Tab.0.left/0.27.1920.968@0.27.1920.968" timestamp="1595228583817" />
+    <state width="1874" height="435" key="GridCell.Tab.0.right" timestamp="1595228583818">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
-    <state width="1874" height="435" key="GridCell.Tab.0.right/0.27.1920.968@0.27.1920.968" timestamp="1594919944500" />
+    <state width="1874" height="435" key="GridCell.Tab.0.right/0.27.1920.968@0.27.1920.968" timestamp="1595228583818" />
     <state x="449" y="146" width="1022" height="737" key="SettingsEditor" timestamp="1592396007616">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
     <state x="449" y="146" width="1022" height="737" key="SettingsEditor/0.27.1920.968@0.27.1920.968" timestamp="1592396007616" />
-    <state x="555" y="247" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1593244863372">
+    <state x="555" y="247" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1594921513186">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
-    <state x="555" y="247" width="800" height="535" key="Vcs.Push.Dialog.v2/0.27.1920.968@0.27.1920.968" timestamp="1593244863372" />
+    <state x="555" y="247" width="800" height="535" key="Vcs.Push.Dialog.v2/0.27.1920.968@0.27.1920.968" timestamp="1594921513186" />
     <state x="732" y="291" width="446" height="447" key="chooseDestDirectoryDialog" timestamp="1594830369560">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
     <state x="732" y="291" width="446" height="447" key="chooseDestDirectoryDialog/0.27.1920.968@0.27.1920.968" timestamp="1594830369560" />
-    <state x="616" y="338" key="com.intellij.ide.util.TipDialog" timestamp="1594789742346">
+    <state x="616" y="338" key="com.intellij.ide.util.TipDialog" timestamp="1595243920636">
       <screen x="0" y="27" width="1920" height="968" />
     </state>
     <state x="311" y="187" key="com.intellij.ide.util.TipDialog/0.27.1366.656/1366.0.1920.1080@0.27.1366.656" timestamp="1593435384652" />
     <state x="438" y="238" key="com.intellij.ide.util.TipDialog/0.27.1366.656@0.27.1366.656" timestamp="1593430921734" />
     <state x="437" y="284" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1593440814413" />
-    <state x="616" y="338" key="com.intellij.ide.util.TipDialog/0.27.1920.968@0.27.1920.968" timestamp="1594789742346" />
+    <state x="616" y="338" key="com.intellij.ide.util.TipDialog/0.27.1920.968@0.27.1920.968" timestamp="1595243920636" />
     <state x="624" y="231" key="run.anything.popup" timestamp="1594703045390">
       <screen x="0" y="27" width="1920" height="968" />
     </state>

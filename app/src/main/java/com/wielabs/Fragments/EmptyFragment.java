@@ -282,7 +282,7 @@ public class EmptyFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull BidHistoryViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final BidHistoryViewHolder holder, final int position) {
             if (getItemCount() == 0) {
                 progressBar.setVisibility(View.GONE);
             }
@@ -293,6 +293,26 @@ public class EmptyFragment extends Fragment {
                 holder.bidHistoryRank.setText(heroList.get(position).getWinner());
                 holder.bidHistoryRank.setBackgroundColor(getResources().getColor(R.color.white));
             }
+
+
+            holder.bidHistoryRank.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (holder.bidHistoryRank.getText().equals("Place order")) {
+                        for (int i = 0; i < pastItems.size(); i++) {
+                            if (pastItems.get(i).getId().equals(heroList.get(position).getId())) {
+                                Fragment fragment = new PlaceOrderFragment();
+                                Bundle b = new Bundle();
+                                b.putSerializable("object", pastItems.get(i));
+                                b.putString("id", pastItems.get(i).getId());
+                                fragment.setArguments(b);
+                                getParentFragment().getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
+                            }
+                        }
+                    }
+                }
+            });
+
             progressBar.setVisibility(View.GONE);
             holder.bidHistoryTitle.setText(heroList.get(position).getTitle());
             String pattern = "dd MMM yyyy HH:mm";
