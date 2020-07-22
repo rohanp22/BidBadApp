@@ -1,8 +1,10 @@
 package com.wielabs.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -49,6 +51,8 @@ public class WalletFragment extends Fragment {
 
     RecyclerView recyclerView;
     ArrayList<WalletTransaction> walletTransactions;
+    TextView freeBidCount;
+    View view;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -63,9 +67,9 @@ public class WalletFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_wallet, container, false);
+        view = inflater.inflate(R.layout.fragment_wallet, container, false);
         // Inflate the layout for this fragment
-
+        freeBidCount = view.findViewById(R.id.image1);
         recyclerView = (RecyclerView) view.findViewById(R.id.walletTransactions);
         Drawable horizontalDivider = ContextCompat.getDrawable(view.getContext(), R.drawable.horizontal_divider);
         DividerItemDecoration horizontalDecoration = new DividerItemDecoration(recyclerView.getContext(),
@@ -76,7 +80,25 @@ public class WalletFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
         walletTransactions = new ArrayList<>();
-
+        loadFreeBids();
+        freeBidCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(view.getContext());
+                dialog.setContentView(R.layout.dialog_freebid);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                RecyclerView recyclerView = dialog.findViewById(R.id.recyclerView);
+                recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                ArrayList<Freebid> freebids = new ArrayList<>();
+                for (int j = 1; j <= 5; j++) {
+                    if (count[j - 1] != 0) {
+                        freebids.add(new Freebid("worth " + j + " bid coin", count[j - 1]));
+                    }
+                }
+                recyclerView.setAdapter(new FreeBidAdapter(view.getContext(), freebids));
+                dialog.show();
+            }
+        });
         StringRequest stringRequest2 = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/showtransactions.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
                 new Response.Listener<String>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -120,6 +142,47 @@ public class WalletFragment extends Fragment {
         requestQueue2.add(stringRequest2);
 
         return view;
+    }
+
+    ArrayList<Integer> freebidamount;
+    int freebidcount = 0;
+    int[] count = new int[5];
+
+    void loadFreeBids() {
+        freebidamount = new ArrayList<>();
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getscratchedcards.php?id=" + SharedPrefManager.getInstance(getContext()).getUser().getId(),
+                new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            JSONArray heroArray = obj.getJSONArray("Scratch_Cards");
+                            Log.d("output", response);
+                            for (int i = 0; i < heroArray.length(); i++) {
+                                JSONObject heroObject = heroArray.getJSONObject(i);
+                                if (heroObject.getString("type").equals("freebid")) {
+                                    freebidcount++;
+                                    int numberOnly = Integer.parseInt(heroObject.getString("text").replaceAll("[^0-9]", ""));
+                                    count[numberOnly - 1] = count[numberOnly - 1] + 1;
+                                    Log.d("free bid amount", numberOnly + "");
+                                    freebidamount.add(numberOnly);
+                                }
+                            }
+                            freeBidCount.setText(freebidcount + "");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
+        requestQueue.add(stringRequest);
     }
 
     class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.ViewHolder> {
@@ -254,6 +317,66 @@ public class WalletFragment extends Fragment {
                 e.printStackTrace();
             }
             return b1.compareTo(a1);
+        }
+    }
+
+    class Freebid {
+        String text;
+        int number;
+
+        Freebid(String text, int number) {
+            this.text = text;
+            this.number = number;
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+        public String getText() {
+            return text;
+        }
+    }
+
+    class FreeBidAdapter extends RecyclerView.Adapter<FreeBidAdapter.ViewHolder> {
+
+        ArrayList<Freebid> walletTransactions;
+        Context context;
+
+        FreeBidAdapter(Context context, ArrayList<Freebid> walletTransactions) {
+            this.context = context;
+            this.walletTransactions = walletTransactions;
+        }
+
+        @NonNull
+        @Override
+        public FreeBidAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.freebid_custom, viewGroup, false);
+
+            return new FreeBidAdapter.ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            holder.number.setText(walletTransactions.get(position).getNumber() + " available");
+            holder.text.setText(walletTransactions.get(position).getText());
+        }
+
+        @Override
+        public int getItemCount() {
+            return walletTransactions.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+            TextView text;
+            TextView number;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                text = itemView.findViewById(R.id.scratchcardtext);
+                number = itemView.findViewById(R.id.noofcards);
+            }
         }
     }
 
