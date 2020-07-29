@@ -48,8 +48,8 @@ public class PlaceOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        getActivity().findViewById(R.id.fabhome).setVisibility(View.GONE);
-        getActivity().findViewById(R.id.bar).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.fabhome).setVisibility(View.INVISIBLE);
+        getActivity().findViewById(R.id.bar).setVisibility(View.INVISIBLE);
         final View view = inflater.inflate(R.layout.fragment_place_order, container, false);
         subtotal = view.findViewById(R.id.orderDeliverySubtotal);
         shippingcost = view.findViewById(R.id.orderDeliveryShippingFees);

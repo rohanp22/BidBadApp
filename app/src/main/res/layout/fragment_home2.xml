@@ -89,13 +89,13 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?actionBarSize"
-        android:overScrollMode="never">
+        android:overScrollMode="always"
+        android:background="#eeeeee"
+        android:layout_marginTop="?actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#eeeeee"
+            android:layout_height="match_parent"
             android:paddingBottom="?actionBarSize"
             tools:context=".HomeFragment">
 

@@ -93,6 +93,12 @@ public class HomeFragment extends Fragment{
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new WalletFragment()).addToBackStack(null).commit();
             }
         });
+        view.findViewById(R.id.notificationicon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotificationFragment()).addToBackStack(null).commit();
+            }
+        });
         showFab(view);
 
         deviceWidth = getDeviceWidth();

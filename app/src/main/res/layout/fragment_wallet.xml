@@ -156,7 +156,6 @@
                         android:id="@+id/image1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="56"
                         android:gravity="center"
                         android:textSize="24dp"
                         app:layout_constraintEnd_toEndOf="parent"

@@ -106,9 +106,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             RemoteViews notificationLayout = new RemoteViews(getPackageName(), R.layout.notification_small);
             RemoteViews notificationLayoutBig = new RemoteViews(getPackageName(), R.layout.notification_big);
             notificationLayout.setTextViewText(R.id.notification_title, title);
-            notificationLayoutBig.setTextViewText(R.id.notification_title_big, message);
-            notificationLayout.setImageViewBitmap(R.id.notification_small_image, bmp);
-            notificationLayoutBig.setImageViewBitmap(R.id.notification_image, bmp);
+            notificationLayoutBig.setTextViewText(R.id.notification_title_big, title);
+            notificationLayout.setTextViewText(R.id.notification_message, message);
+            //notificationLayoutBig.setImageViewBitmap(R.id.notification_image, bmp);
 
             String channelId = "notificationBidBad";
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -116,7 +116,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     new NotificationCompat.Builder(this, channelId)
                             .setSmallIcon(R.drawable.logo)
                             .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                            .setCustomBigContentView(notificationLayoutBig)
+                            //.setCustomBigContentView(notificationLayoutBig)
                             .setCustomContentView(notificationLayout)
                             //.setCustomContentView(notificationLayout)
                             .setContentIntent(pendingIntent);
@@ -180,8 +180,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         RemoteViews notificationLayoutBig = new RemoteViews(getPackageName(), R.layout.notification_big);
         notificationLayout.setTextViewText(R.id.notification_title, messageBody);
         notificationLayoutBig.setTextViewText(R.id.notification_title_big, messageBody);
-        notificationLayout.setImageViewBitmap(R.id.notification_small_image, bmp);
-        notificationLayoutBig.setImageViewBitmap(R.id.notification_image, bmp);
 
         String channelId = "notificationBidBad";
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);

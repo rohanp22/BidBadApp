@@ -10,10 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -52,7 +52,7 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
     @NonNull
     @Override
     public HomeGridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new HomeGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home, parent, false));
+        return new HomeGridViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home1, parent, false));
     }
 
     int imageHeight, imageWidth;
@@ -229,15 +229,14 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
     }
 
     class HomeGridViewHolder extends RecyclerView.ViewHolder {
-        private ImageView bidButton;
         private MaterialCardView cardView;
         private ImageView productImage;
         private TextView title;
         private TextView bidEntry;
         TextView mrp;
-        private ConstraintLayout constraintLayout;
+        private RelativeLayout constraintLayout;
         private TextView bidTimer;
-        private ImageView bid;
+        private TextView bid;
 
         public HomeGridViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -249,7 +248,6 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
             productImage = itemView.findViewById(R.id.homeItemImage);
             constraintLayout = itemView.findViewById(R.id.itemHomeRootLayout);
             bidTimer = itemView.findViewById(R.id.homeItemBidTimer);
-            bidButton = itemView.findViewById(R.id.homeItemBid);
         }
     }
 

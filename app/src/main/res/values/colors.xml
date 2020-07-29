@@ -51,4 +51,6 @@
     <color name="color11">#f9f9f9</color>
     <color name="green1">#5932CD32</color>
     <color name="colorBlueGrey">#263238</color>
+    <color name="DarkGreen">#009D60</color>
+    <color name="LightGreen">#ecf5f2</color>
 </resources>

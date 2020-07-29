@@ -31,7 +31,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class NotificationFragment extends Fragment {
 
@@ -47,15 +50,19 @@ public class NotificationFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    RecyclerView recyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         final View view = inflater.inflate(R.layout.fragment_notification, container, false);
+        getActivity().findViewById(R.id.fabhome).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.bar).setVisibility(View.GONE);
         // Inflate the layout for this fragment
-        final RecyclerView recyclerView = view.findViewById(R.id.notificationRecyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView = view.findViewById(R.id.notificationRecyclerview);
         notificationModels = new ArrayList<>();
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getwishlist.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getnotifications.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
                 new Response.Listener<String>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
@@ -63,17 +70,20 @@ public class NotificationFragment extends Fragment {
                         try {
                             notificationModels.clear();
                             JSONObject obj = new JSONObject(response);
-                            JSONArray heroArray = obj.getJSONArray("Bids");
+                            JSONArray heroArray = obj.getJSONArray("Notifications");
                             for (int i = 0; i < heroArray.length(); i++) {
                                 JSONObject heroObject = heroArray.getJSONObject(i);
                                 NotificationModel c = new NotificationModel(
-                                        heroObject.getString("currentid"),
-                                        heroObject.getString("image_url")
+                                        heroObject.getString("notificationtitle"),
+                                        heroObject.getString("notificationbody"),
+                                        heroObject.getString("time")
                                 );
                                 notificationModels.add(c);
                             }
                             NotificationAdapter wishlistAdapter = new NotificationAdapter(view.getContext(), notificationModels);
                             recyclerView.setAdapter(wishlistAdapter);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -109,10 +119,20 @@ public class NotificationFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull BidHistoryViewHolder holder, int position) {
+            Date date1;
             if (getItemCount() == 0) {
                 //    progressBar.setVisibility(View.GONE);
             }
             //progressBar.setVisibility(View.GONE);
+            try {
+                date1 = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a").parse(heroList.get(position).getTime());
+                SimpleDateFormat formatter = new SimpleDateFormat("dd MMM");
+                String strDate = formatter.format(date1);
+                holder.time.setText(strDate);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             holder.title.setText(heroList.get(position).getTitle());
             holder.message.setText(heroList.get(position).getMessage());
         }
@@ -129,14 +149,15 @@ public class NotificationFragment extends Fragment {
         class BidHistoryViewHolder extends RecyclerView.ViewHolder {
             TextView title;
             TextView message;
+            TextView time;
 
             BidHistoryViewHolder(View itemView) {
                 super(itemView);
                 title = itemView.findViewById(R.id.notificationTitle);
+                time = itemView.findViewById(R.id.notificationTime);
                 message = itemView.findViewById(R.id.notificationMessage);
             }
         }
     }
-
 
 }

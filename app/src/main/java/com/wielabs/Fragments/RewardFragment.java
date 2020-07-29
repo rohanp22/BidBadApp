@@ -3,7 +3,6 @@ package com.wielabs.Fragments;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,8 @@ public class RewardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.d("BidsHistory", "working");
+        getActivity().findViewById(R.id.fabhome).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.bar).setVisibility(View.VISIBLE);
 
         View view = inflater.inflate(R.layout.rewards_fragment, container, false);
 
