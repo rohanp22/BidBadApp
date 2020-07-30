@@ -89,7 +89,8 @@ public class AllBidsFragment extends Fragment {
                                         heroObject.getString("image_url3"),
                                         heroObject.getString("firstname"),
                                         heroObject.getString("bidamount"),
-                                        heroObject.getString("id")
+                                        heroObject.getString("id"),
+                                        null
                                 );
                                 cartItems.add(c);
                             }

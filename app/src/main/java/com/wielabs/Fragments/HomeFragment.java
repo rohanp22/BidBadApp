@@ -307,7 +307,8 @@ public class HomeFragment extends Fragment{
                                         heroObject.getString("image_url3"),
                                         heroObject.getString("firstname"),
                                         heroObject.getString("bidamount"),
-                                        heroObject.getString("id")
+                                        heroObject.getString("id"),
+                                        null
                                 );
                                 pastProducts.add(c);
                             }

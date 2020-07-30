@@ -161,6 +161,7 @@ public class RewardsFragment extends Fragment {
                             recyclerView = view.findViewById(R.id.recyclerViewRewards);
                             recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
                             recyclerView.setAdapter(new ScratchCardAdapter(view.getContext(), scratchCards));
+                            view.findViewById(R.id.progressBarRewards).setVisibility(View.GONE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

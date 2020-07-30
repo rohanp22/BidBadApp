@@ -31,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.wielabs.Activities.AddMoney;
 import com.wielabs.Activities.WalletTransaction;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
@@ -52,6 +53,7 @@ public class WalletFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<WalletTransaction> walletTransactions;
     TextView freeBidCount;
+    TextView addMoney;
     View view;
 
     @Override
@@ -70,6 +72,13 @@ public class WalletFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_wallet, container, false);
         // Inflate the layout for this fragment
         freeBidCount = view.findViewById(R.id.image1);
+        addMoney = view.findViewById(R.id.addmoneyicon);
+        addMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new AddMoney()).addToBackStack(null).commit();
+            }
+        });
         recyclerView = (RecyclerView) view.findViewById(R.id.walletTransactions);
         Drawable horizontalDivider = ContextCompat.getDrawable(view.getContext(), R.drawable.horizontal_divider);
         DividerItemDecoration horizontalDecoration = new DividerItemDecoration(recyclerView.getContext(),
@@ -210,10 +219,9 @@ public class WalletFragment extends Fragment {
                 viewHolder.amount.setTextColor(getContext().getColor(R.color.green));
             } else {
                 viewHolder.amount.setText("- ₹" + abs(Integer.parseInt(walletTransactions.get(i).getValue())));
-                viewHolder.amount.setTextColor(Color.BLACK);
+                viewHolder.amount.setTextColor(Color.parseColor("#FF000D"));
             }
-            viewHolder.orderid.setText("Order id - " + walletTransactions.get(i).getOrderid());
-
+            viewHolder.orderid.setText("order id - " + walletTransactions.get(i).getOrderid());
 
             String pattern = "d MMM yy";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);

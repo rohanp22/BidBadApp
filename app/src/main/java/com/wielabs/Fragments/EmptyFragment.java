@@ -75,6 +75,8 @@ public class EmptyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        getActivity().findViewById(R.id.bar).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.fabhome).setVisibility(View.VISIBLE);
         pastItems = new ArrayList<>();
         final View view = inflater.inflate(R.layout.bid_history_fragments, container, false);
         sortText = view.findViewById(R.id.wonbidstext);
@@ -166,7 +168,8 @@ public class EmptyFragment extends Fragment {
                                         heroObject.getString("image_url3"),
                                         heroObject.getString("firstname"),
                                         heroObject.getString("bidamount"),
-                                        heroObject.getString("ids")
+                                        heroObject.getString("ids"),
+                                        heroObject.getString("orderplaced")
                                 );
                                 if (!(a1.compareTo(new java.sql.Date(System.currentTimeMillis())) > 0))
                                     cartItems.add(c);
@@ -268,7 +271,6 @@ public class EmptyFragment extends Fragment {
 
         Context context;
         ArrayList<PastProducts> heroList;
-        ArrayList<WonItem> wonItems;
 
         BidHistoryAdapterAll(Context context, ArrayList<PastProducts> heroList) {
             this.context = context;
@@ -286,12 +288,19 @@ public class EmptyFragment extends Fragment {
             if (getItemCount() == 0) {
                 progressBar.setVisibility(View.GONE);
             }
-            if (Integer.parseInt(heroList.get(position).getWinnerid()) == SharedPrefManager.getInstance(context).getUser().getId()) {
-                holder.bidHistoryRank.setText("Place order");
-                holder.bidHistoryRank.setBackgroundColor(getResources().getColor(R.color.colorLightGreen));
-            } else {
+            Log.d("Orderplaced", heroList.get(position).getOrderplaced());
+            if (Integer.parseInt(heroList.get(position).getWinnerid()) != SharedPrefManager.getInstance(context).getUser().getId() && heroList.get(position).getOrderplaced() == "null") {
                 holder.bidHistoryRank.setText(heroList.get(position).getWinner());
+                holder.bidHistoryRank.setTextColor(getResources().getColor(R.color.colorPrimary, null));
                 holder.bidHistoryRank.setBackgroundColor(getResources().getColor(R.color.white));
+            } else if (Integer.parseInt(heroList.get(position).getWinnerid()) == SharedPrefManager.getInstance(context).getUser().getId()) {
+                if (heroList.get(position).getOrderplaced() == "null") {
+                    holder.bidHistoryRank.setText("Place order");
+                } else {
+                    holder.bidHistoryRank.setText("Order placed");
+                }
+                holder.bidHistoryRank.setTextColor(getResources().getColor(R.color.DarkGreen, null));
+                holder.bidHistoryRank.setBackgroundColor(getResources().getColor(R.color.LightGreen, null));
             }
 
 
@@ -390,7 +399,7 @@ public class EmptyFragment extends Fragment {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            System.out.println(date);
+            holder.bidHistoryMedalImage.setVisibility(View.GONE);
             String dt = simpleDateFormat.format(date);
             holder.bidHistoryStartDate.setText(dt);
             holder.bidHistoryAmount.setText(getResources().getString(R.string.ruppesymbol) + heroList.get(position).getBidamount());
@@ -401,36 +410,13 @@ public class EmptyFragment extends Fragment {
                 holder.bidHistoryRank.setVisibility(View.GONE);
             } else {
                 holder.bidHistoryRank.setText("Place order");
+                holder.bidHistoryRank.setTextColor(getResources().getColor(R.color.DarkGreen, null));
+                holder.bidHistoryRank.setBackground(getResources().getDrawable(R.drawable.timer_bg, null));
             }
 
             holder.bidHistoryRank.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    RequestQueue MyRequestQueue = Volley.newRequestQueue(context);
-//                    String url = "http://easyvela.esy.es/AndroidAPI/placeorder.php?id="+ SharedPrefManager.getInstance(context).getUser().getId(); // <----enter your post url here
-//                    StringRequest MyStringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-//                        @Override
-//                        public void onResponse(String response) {
-//                            //This code is executed if the server responds, whether or not the response contains data.
-//                            //The String 'response' contains the server's response.
-//                            holder.bidHistoryRank.setVisibility(View.GONE);
-//                            getParentFragment().getFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlaceOrderFragment()).commit();
-//                        }
-//                    }, new Response.ErrorListener() { //Create an error listener to handle errors appropriately.
-//                        @Override
-//                        public void onErrorResponse(VolleyError error) {
-//                            //This code is executed if there is an error.
-//                        }
-//                    }) {
-//                        protected Map<String, String> getParams() {
-//                            Map<String, String> params = new HashMap<String, String>();
-//                            params.put("productid", heroList.get(position).getId());
-//                            params.put("status", "Order placed");
-//                            params.put("address", SharedPrefManager.getInstance(context).getUser().getAddress());
-//                            return params;
-//                        }
-//                    };
-//                    MyRequestQueue.add(MyStringRequest);
                     Fragment fragment = new PlaceOrderFragment();
                     Bundle b = new Bundle();
                     b.putSerializable("object", heroList.get(position));
@@ -454,9 +440,11 @@ public class EmptyFragment extends Fragment {
             TextView bidHistoryStartDate;
             TextView bidHistoryAmount;
             TextView bidHistoryRank;
+            ImageView bidHistoryMedalImage;
 
             BidHistoryViewHolder(View itemView) {
                 super(itemView);
+                bidHistoryMedalImage = itemView.findViewById(R.id.bidHistoryMedalImage);
                 bidHistoryImage = itemView.findViewById(R.id.bidHistoryImage);
                 bidHistoryAmount = itemView.findViewById(R.id.bidHistoryAmount);
                 bidHistoryTitle = itemView.findViewById(R.id.bidHistoryTitle);

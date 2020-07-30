@@ -33,8 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_money_24" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/newfiles/certificate.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_winner_04" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/newfiles/winnericons/winner-04.svg" />
                           </map>
                         </option>
                       </PersistentState>

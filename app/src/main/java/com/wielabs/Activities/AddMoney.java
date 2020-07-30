@@ -1,7 +1,5 @@
 package com.wielabs.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,11 +9,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,14 +29,17 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
-import com.wielabs.R;
 import com.wielabs.Others.SharedPrefManager;
+import com.wielabs.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
-public class AddMoney extends AppCompatActivity implements PaymentResultListener {
+import static android.app.Activity.RESULT_OK;
+
+public class AddMoney extends Fragment implements PaymentResultListener {
 
     EditText e;
     final int UPI_PAYMENT = 0;
@@ -41,30 +49,37 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
     String note = "Add money to wallet";
     TextView t;
     int amount;
+    View view;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_money);
-        Checkout.preload(getApplicationContext());
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
 
-        findViewById(R.id.backAddMoney).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.activity_add_money, container, false);
+        Checkout.preload(view.getContext());
 
-        t = (TextView) findViewById(R.id.walletbalance) ;
+//        view.findViewById(R.id.backAddMoney).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onBackPressed();
+//            }
+//        });
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/checkbalance.php?id="+ SharedPrefManager.getInstance(this).getUser().getId(),
+        t = (TextView) view.findViewById(R.id.walletbalance);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/checkbalance.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject obj = new JSONObject(response);
                             bal = Integer.parseInt(obj.getString("balance"));
-                            t.setText("₹"+String.format("%,d", bal));
+                            t.setText("₹" + String.format("%,d", bal));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -76,14 +91,14 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
                     }
                 });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(AddMoney.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
         requestQueue.add(stringRequest);
 
-        e = (EditText) findViewById(R.id.enteramount);
+        e = (EditText) view.findViewById(R.id.enteramount);
         e.setEnabled(false);
-        Button b1 = (Button) findViewById(R.id.add50);
-        Button b2 = (Button) findViewById(R.id.add100);
-        Button b3 = (Button) findViewById(R.id.add500);
+        Button b1 = (Button) view.findViewById(R.id.add50);
+        Button b2 = (Button) view.findViewById(R.id.add100);
+        Button b3 = (Button) view.findViewById(R.id.add500);
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +124,7 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
             }
         });
 
-        Button b = (Button) findViewById(R.id.addmoney);
+        Button b = (Button) view.findViewById(R.id.addmoney);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,15 +132,22 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
                     e.setError("Please enter Valid Amount");
                     e.requestFocus();
                     return;
-                }
-                else{
+                } else {
                     amount = Integer.parseInt(e.getText().toString());
                     payUsingUpi(e.getText().toString(), upiId, name, note);
                 }
 
             }
         });
+        return view;
     }
+
+//    @Override
+//    void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_add_money);
+//
+//    }
 
     void payUsingUpi(String amount, String upiId, String name, String note) {
 
@@ -154,18 +176,18 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
 //        intent.setPackage(GOOGLE_PAY_PACKAGE_NAME);
 //        startActivityForResult(intent, GOOGLE_PAY_REQUEST_CODE);
 
-        if(null != chooser.resolveActivity(getPackageManager())) {
+        if (null != chooser.resolveActivity(getActivity().getPackageManager())) {
             startActivityForResult(chooser, UPI_PAYMENT);
         } else {
-            Toast.makeText(AddMoney.this,"No UPI app found, please install one to continue",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getView().getContext(), "No UPI app found, please install one to continue", Toast.LENGTH_SHORT).show();
         }
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("requestCode", requestCode+"");
+        Log.d("requestCode", requestCode + "");
         switch (123) {
             case UPI_PAYMENT:
                 if ((RESULT_OK == resultCode) || (resultCode == 11)) {
@@ -192,17 +214,17 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
     }
 
     private void upiPaymentDataOperation(ArrayList<String> data) {
-        if (isConnectionAvailable(AddMoney.this)) {
+        if (isConnectionAvailable()) {
             String str = data.get(0);
-            Log.d("UPIPAY", "upiPaymentDataOperation: "+str);
+            Log.d("UPIPAY", "upiPaymentDataOperation: " + str);
             String paymentCancel = "";
-            if(str == null) str = "discard";
+            if (str == null) str = "discard";
             String status = "";
             String approvalRefNo = "";
             String response[] = str.split("&");
             for (int i = 0; i < response.length; i++) {
                 String equalStr[] = response[i].split("=");
-                if(equalStr.length >= 2) {
+                if (equalStr.length >= 2) {
                     if (equalStr[0].toLowerCase().equals("Status".toLowerCase())) {
                         status = equalStr[1].toLowerCase();
                     }
@@ -217,40 +239,39 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
 
             if (status.equals("success")) {
                 //Code to handle successful transaction here.
-                int id = SharedPrefManager.getInstance(this).getUser().getId();
-                StringRequest stringRequest2 = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/updatewallet.php?id="+id+"&value="+amount+"&type="+"Added money to wallet",
+                int id = SharedPrefManager.getInstance(view.getContext()).getUser().getId();
+                StringRequest stringRequest2 = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/updatewallet.php?id=" + id + "&value=" + amount + "&type=" + "Added money to wallet",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                startActivity(new Intent(AddMoney.this, AddMoney.class));
+                                //startActivity(new Intent(view.getContext(), AddMoney.class));
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(AddMoney.this.getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(view.getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
 
-                RequestQueue requestQueue2 = Volley.newRequestQueue(AddMoney.this);
+                RequestQueue requestQueue2 = Volley.newRequestQueue(view.getContext());
                 requestQueue2.add(stringRequest2);
-                Toast.makeText(AddMoney.this, "Transaction successful.", Toast.LENGTH_SHORT).show();
-                Log.d("UPI", "responseStr: "+approvalRefNo);
+                Toast.makeText(view.getContext(), "Transaction successful.", Toast.LENGTH_SHORT).show();
+                Log.d("UPI", "responseStr: " + approvalRefNo);
                 updateWallet();
             }
             else if("Payment cancelled by user.".equals(paymentCancel)) {
-                Toast.makeText(AddMoney.this, "Payment cancelled by user.", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(AddMoney.this, "Transaction failed.Please try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Payment cancelled by user.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(view.getContext(), "Transaction failed.Please try again", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(AddMoney.this, "Internet connection is not available. Please check and try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), "Internet connection is not available. Please check and try again", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static boolean isConnectionAvailable(AddMoney context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    public boolean isConnectionAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
             NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnected()
@@ -264,10 +285,6 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
 
     void updateWallet(){
 
-    }
-
-    public void gotoTransactions(View view) {
-        startActivity(new Intent(AddMoney.this, ScrollingActivity.class));
     }
 
     @Override
@@ -297,7 +314,7 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
         /**
          * Reference to current activity
          */
-        final Activity activity = this;
+        final Activity activity = getActivity();
 
         /**
          * Pass your payment options to the Razorpay Checkout as a JSONObject
@@ -331,10 +348,5 @@ public class AddMoney extends AppCompatActivity implements PaymentResultListener
         } catch(Exception e) {
             Log.e("Addmoney", "Error in starting Razorpay Checkout", e);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 }

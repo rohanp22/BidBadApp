@@ -15,37 +15,46 @@
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"/>
 
-    <LinearLayout
-        android:layout_below="@+id/backAddMoney"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout1"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:padding="10dp"
-        android:background="@drawable/dialog_bg"
         android:layout_width="match_parent"
-        android:layout_height="100dp" >
+        android:layout_height="100dp"
+        android:layout_below="@+id/backAddMoney"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/dialog_bg"
+        android:padding="10dp">
 
         <TextView
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:layout_marginLeft="40dp"
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Wallet Balance "
-            />
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/walletbalance"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/walletbalance"
-            android:layout_marginLeft="40dp"
-            android:layout_gravity="center_vertical"
-            android:textSize="20dp"
-            android:gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="40dp"
+            android:gravity="right"
+            android:text=""
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
         android:layout_margin="20dp"
@@ -111,17 +120,5 @@
         android:layout_below="@id/linearAdd"
         android:layout_margin="20dp"
         android:textColor="@color/white"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/addmoney"
-        android:id="@+id/showtransactions"
-        android:background="@drawable/gradient_curved"
-        android:layout_margin="20dp"
-        android:textColor="@color/white"
-        android:text="Show transactions"
-        android:onClick="gotoTransactions"
-        />
 
 </RelativeLayout>
