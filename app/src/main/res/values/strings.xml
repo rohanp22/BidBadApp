@@ -50,5 +50,9 @@
     <string name="title_of_product">Title of product</string>
     <string name="enter_your_bid">Enter your bid</string>
     <string name="ruppesymbol">₹</string>
+    <string name="tell_us_your_experience">Tell us your experience...</string>
+    <string name="your_review_will_help_us_to_give_you_better_n_experience_make_it_a_good_one">Your review will help us to give you better \n experience. Make it a good one!</string>
+    <string name="feedback">Feedback</string>
+    <string name="discard">Discard</string>
 
 </resources>

@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:background="#fff"
-            android:paddingStart="20dp"
+            android:paddingStart="10dp"
             android:paddingEnd="0dp"
             app:title="Order Summary"
             app:titleTextAppearance="@style/ToolbarTitle" />
@@ -24,28 +25,18 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
         android:overScrollMode="never">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?actionBarSize"
             android:clipToPadding="false"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:paddingBottom="16dp"
+            android:layout_marginTop="10dp"
             tools:context=".OrderSummary">
-
-            <ImageView
-                android:id="@+id/summaryOrderIllustration"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginStart="-16dp"
-                android:layout_marginEnd="-16dp"
-                android:src="@drawable/backgound_texture"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/summaryOrderImage"
@@ -71,7 +62,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/summaryOrderImage"
-                app:layout_constraintTop_toBottomOf="@+id/summaryOrderIllustration" />
+                app:layout_constraintTop_toBottomOf="parent" />
 
             <TextView
                 android:id="@+id/summaryOrderId"
@@ -122,7 +113,7 @@
                 android:textColor="?android:textColorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/summaryOrderDetail"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <View

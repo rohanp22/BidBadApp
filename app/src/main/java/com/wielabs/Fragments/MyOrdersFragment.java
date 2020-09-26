@@ -1,10 +1,17 @@
 package com.wielabs.Fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -14,29 +21,18 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.wielabs.Activities.PlaceOrder;
+import com.bumptech.glide.Glide;
 import com.wielabs.Models.Order;
 import com.wielabs.Models.WonItem;
-import com.bumptech.glide.Glide;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,9 +42,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MyOrdersFragment extends Fragment {
 
@@ -171,6 +164,13 @@ public class MyOrdersFragment extends Fragment {
                 orderTitle = itemView.findViewById(R.id.summaryOrderTitle);
                 //orderAmount = itemView.findViewById(R.id.bidHistoryTitle);
                 orderPlaceDate = itemView.findViewById(R.id.summaryOrderDate);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new OrderSummary()).addToBackStack(null).commit();
+                    }
+                });
             }
         }
     }

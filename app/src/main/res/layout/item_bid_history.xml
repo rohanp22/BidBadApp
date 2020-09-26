@@ -55,7 +55,6 @@
         android:id="@+id/bidHistoryMedalImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_winner_04"
         android:backgroundTint="@color/colorPrimary"
         app:layout_constraintEnd_toStartOf="@id/bidHistoryRank"
         app:layout_constraintTop_toTopOf="@id/bidHistoryRank" />

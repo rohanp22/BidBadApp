@@ -13,7 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,6 +63,9 @@ public class NotificationFragment extends Fragment {
         getActivity().findViewById(R.id.bar).setVisibility(View.GONE);
         // Inflate the layout for this fragment
         recyclerView = view.findViewById(R.id.notificationRecyclerview);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), RecyclerView.VERTICAL);
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.notificationdivider));
+        recyclerView.addItemDecoration(dividerItemDecoration);
         notificationModels = new ArrayList<>();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getnotifications.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
                 new Response.Listener<String>() {

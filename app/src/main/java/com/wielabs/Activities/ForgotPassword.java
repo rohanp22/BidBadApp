@@ -60,11 +60,11 @@ public class ForgotPassword extends AppCompatActivity {
                             @Override
                             public void onResponse(String response) {
                                 if (response.equals("0")) {
+                                    Toast.makeText(ForgotPassword.this, "User not registered", Toast.LENGTH_SHORT).show();
+                                } else {
                                     Intent intent = new Intent(ForgotPassword.this, VerifyForgotPassword.class);
                                     intent.putExtra("phoneNumber", phoneNumber);
                                     startActivity(intent);
-                                } else {
-                                    Toast.makeText(ForgotPassword.this, "User already Registered", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         },

@@ -34,7 +34,7 @@ import org.json.JSONObject;
  */
 public class ProfileFragment extends Fragment {
 
-    TextView wishlist, invite, feedback, bids, orders, name, noofbids, noofwins, noofrewards;
+    TextView wishlist, invite, feedback, bids, orders, name, noofbids, noofwins, noofrewards, wonbids;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class ProfileFragment extends Fragment {
         noofbids = view.findViewById(R.id.profileBids);
         noofwins = view.findViewById(R.id.profileWins);
         noofrewards = view.findViewById(R.id.profileRewards);
+        wonbids = view.findViewById(R.id.profileNotifications);
 
         name.setText(SharedPrefManager.getInstance(view.getContext()).getUser().getFirstname());
 
@@ -59,6 +60,13 @@ public class ProfileFragment extends Fragment {
         invite = view.findViewById(R.id.profileInvite);
         feedback = view.findViewById(R.id.profileSendFeedback);
         bids = view.findViewById(R.id.profileBids);
+
+        wonbids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EmptyFragment("")).addToBackStack(null).commit();
+            }
+        });
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/getmyposition.php?id=" + SharedPrefManager.getInstance(view.getContext()).getUser().getId(),
                 new Response.Listener<String>() {
@@ -91,13 +99,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        bids.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EmptyFragment("mybids")).addToBackStack(null).commit();
-            }
-        });
-
         feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,6 +126,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 SharedPrefManager.getInstance(view.getContext()).logout();
+            }
+        });
+
+        wonbids.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new WonBidsFagment()).addToBackStack(null).commit();
             }
         });
 

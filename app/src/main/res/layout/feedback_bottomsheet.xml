@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/feedback_bg"
     android:layout_height="wrap_content">
 
@@ -13,9 +12,10 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:textSize="18dp"
-        android:text="Feedback"
+        android:text="@string/feedback"
         android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="SpUsage" />
 
     <View
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="Your review will help us to give you better \n experience. Make it a good one!" />
+        android:text="@string/your_review_will_help_us_to_give_you_better_n_experience_make_it_a_good_one" />
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -58,12 +58,13 @@
         android:background="@drawable/drawable_uname"
         android:gravity="left"
         android:id="@+id/feedbackMessage"
-        android:hint="Tell us your experience..."
+        android:hint="@string/tell_us_your_experience"
         android:inputType="textMultiLine"
         android:lines="4"
         android:padding="10dp"
         android:textColorHint="@color/gray"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"
+        android:importantForAutofill="no" />
 
     <LinearLayout
         android:layout_marginTop="50dp"
@@ -73,25 +74,30 @@
         android:orientation="horizontal"
         android:weightSum="3">
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Discard"
+            android:text="@string/discard"
+            android:layout_margin="5dp"
+            android:gravity="center"
             android:background="@color/white"
+            android:backgroundTint="@color/white"
             android:textColor="@color/black"
             android:textAllCaps="false" />
 
-        <Button
+        <TextView
+            android:layout_margin="5dp"
+            android:gravity="center"
             android:textColor="@color/white"
+            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_weight="2"
-            android:background="@color/colorPrimaryLight"
-            android:text="Send feedback"
-            android:textAllCaps="false"/>
+            android:background="@color/colorPrimary"
+            android:text="Send feedback" />
 
     </LinearLayout>
 

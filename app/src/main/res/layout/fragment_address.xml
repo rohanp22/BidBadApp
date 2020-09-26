@@ -26,30 +26,286 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addnewaddress"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:id="@+id/addnewaddress"
         android:layout_marginRight="20dp"
-        app:rippleColor="@null"
         android:layout_marginBottom="70dp"
         android:backgroundTint="@color/colorPrimary"
         android:fontFamily="@font/dm_sans_regular"
         android:src="@drawable/ic_add_black_24dp"
         android:text="Add new"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="10dp"
         app:icon="@drawable/ic_add_black_24dp"
         app:iconSize="16dp"
-        android:textAllCaps="false"
         app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@null" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/addressrecyclerview"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?actionBarSize"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addressappbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/address1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/radioAddress1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="top"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/addressfield1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:lineHeight="20dp"
+                    android:paddingRight="8dp"
+                    android:text="Home\n19-1-924/A/11/1 \nMurli nagar\nBahadurpura\nHyderabad-500064"
+                    app:layout_constraintStart_toEndOf="@id/radioAddress1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/deleteAddress1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:src="@drawable/ic_delete_forever_black_24dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/addressfield1" />
+
+                <ImageView
+                    android:id="@+id/editAddress1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/gray"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:src="@drawable/edit_circle"
+                    android:text="Edit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toStartOf="@id/deleteAddress1"
+                    app:layout_constraintTop_toTopOf="@id/addressfield1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/address2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/address1">
+
+                <RadioButton
+                    android:id="@+id/radioAddress2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="top"
+                    android:scaleX="0.5"
+                    android:onClick="radioClicked"
+                    android:scaleY="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/addressfield2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:lineHeight="20dp"
+                    android:paddingRight="8dp"
+                    android:text="Home\n19-1-924/A/11/1 \nMurli nagar\nBahadurpura\nHyderabad-500064"
+                    app:layout_constraintStart_toEndOf="@id/radioAddress2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/deleteAddress2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:src="@drawable/ic_delete_forever_black_24dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/addressfield2" />
+
+                <ImageView
+                    android:id="@+id/editAddress2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/gray"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:src="@drawable/edit_circle"
+                    android:text="Edit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toStartOf="@id/deleteAddress2"
+                    app:layout_constraintTop_toTopOf="@id/addressfield2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/address3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/address2">
+
+                <RadioButton
+                    android:id="@+id/radioAddress3"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="top"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/addressfield3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:lineHeight="20dp"
+                    android:paddingRight="8dp"
+                    android:text="Home\n19-1-924/A/11/1 \nMurli nagar\nBahadurpura\nHyderabad-500064"
+                    app:layout_constraintStart_toEndOf="@id/radioAddress3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/deleteAddress3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:src="@drawable/ic_delete_forever_black_24dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/addressfield3" />
+
+                <ImageView
+                    android:id="@+id/editAddress3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/gray"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:src="@drawable/edit_circle"
+                    android:text="Edit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toStartOf="@id/deleteAddress3"
+                    app:layout_constraintTop_toTopOf="@id/addressfield3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/address4"
+                android:padding="8dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/address3">
+
+                <RadioButton
+                    android:id="@+id/radioAddress4"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="top"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/addressfield4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:lineHeight="20dp"
+                    android:paddingRight="8dp"
+                    android:text="Home\n19-1-924/A/11/1 \nMurli nagar\nBahadurpura\nHyderabad-500064"
+                    app:layout_constraintStart_toEndOf="@id/radioAddress4"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/deleteAddress4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:backgroundTint="@android:color/holo_red_light"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:src="@drawable/ic_delete_forever_black_24dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/addressfield4" />
+
+                <ImageView
+                    android:id="@+id/editAddress4"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/gray"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:src="@drawable/edit_circle"
+                    android:text="Edit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toStartOf="@id/deleteAddress4"
+                    app:layout_constraintTop_toTopOf="@id/addressfield4" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/addressrecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?actionBarSize"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.wielabs.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,22 +33,38 @@ import java.util.Map;
  */
 public class PlaceOrderFragment extends Fragment {
 
-    public PlaceOrderFragment() {
-        // Required empty public constructor
-    }
-
     String id;
     Button placeOrderButton;
     TextView placeOrderAddress;
     TextView subtotal, shippingcost, discount, total, wallet, insuffecientBalance;
     MaterialButton changeAddress;
     int bal;
+    String TAG = "Placeorder";
     WonItem wonItem;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().findViewById(R.id.fabhome).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.bar).setVisibility(View.GONE);
+        Log.d(TAG, "resume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().findViewById(R.id.fabhome).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.bar).setVisibility(View.GONE);
+        Log.d(TAG, "stop");
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.d(TAG, "oncreateview");
+
         getActivity().findViewById(R.id.fabhome).setVisibility(View.GONE);
         getActivity().findViewById(R.id.bar).setVisibility(View.GONE);
         final View view = inflater.inflate(R.layout.fragment_place_order, container, false);
@@ -136,5 +153,19 @@ public class PlaceOrderFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "stop");
+        getActivity().findViewById(R.id.fabhome).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.bar).setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "destroy");
     }
 }

@@ -393,17 +393,12 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
                 home.setImageDrawable(getResources().getDrawable(R.drawable.ic_home_gray, null));
                 results.setImageDrawable(getResources().getDrawable(R.drawable.ic_results_gray, null));
                 reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_rewards_gray, null));
-            } else if (fragmentBefore.getClass().getSimpleName().equals("PlaceOrderFragment")) {
-//                indicator.setVisibility(View.INVISIBLE);
-//                homeText.setVisibility(View.VISIBLE);
-//                resultText.setVisibility(View.VISIBLE);
-//                rewardText.setVisibility(View.VISIBLE);
-//                profileText.setVisibility(View.VISIBLE);
-//                home.setImageDrawable(getResources().getDrawable(R.drawable.ic_home_gray, null));
-//                results.setImageDrawable(getResources().getDrawable(R.drawable.ic_results_gray, null));
-//                reward.setImageDrawable(getResources().getDrawable(R.drawable.ic_rewards_gray, null));
+            } else if (fragmentBefore.getClass().getSimpleName().equals("OrderSummary") || fragmentBefore.getClass().getSimpleName().equals("MyOrdersFragment") || fragmentBefore.getClass().getSimpleName().equals("PlaceOrderFragment")) {
                 findViewById(R.id.fabhome).setVisibility(View.VISIBLE);
                 findViewById(R.id.bar).setVisibility(View.VISIBLE);
+            } else if (fragmentBefore.getClass().getSimpleName().equals("AddressFragment2")) {
+                findViewById(R.id.fabhome).setVisibility(View.GONE);
+                findViewById(R.id.bar).setVisibility(View.GONE);
             }
         }
     }

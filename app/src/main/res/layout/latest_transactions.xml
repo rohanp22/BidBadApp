@@ -65,7 +65,7 @@
                 app:layout_constraintTop_toTopOf="@id/imageTransaction"
                 android:layout_marginRight="10dp"
                 android:text="30"
-                android:textColor="#000"
+                android:textColor="#ad1615"
                 android:textSize="16dp" />
 
             <TextView

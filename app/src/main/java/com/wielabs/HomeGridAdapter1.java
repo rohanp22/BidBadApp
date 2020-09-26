@@ -2,7 +2,7 @@ package com.wielabs;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.GradientDrawable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
@@ -37,7 +37,6 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
     private int deviceWidth;
     private boolean isDimensionChanged = false;
     private ArrayList<Integer> colors = new ArrayList<>();
-    private GradientDrawable gradientDrawable;
     private ArrayList<Current_Product> current_products;
     private FragmentManager fragmentManager;
     Context context;
@@ -145,6 +144,7 @@ public class HomeGridAdapter1 extends RecyclerView.Adapter<HomeGridAdapter1.Home
                     } else {
                         curtime = String.format("%02d", elapsedMinutes) + " m " + String.format("%02d", elapsedSeconds) + " sec";
                         holder.bidTimer.setText(curtime);
+                        holder.bidTimer.setTextColor(Color.parseColor("#ad1615"));
                     }
                 }
             }

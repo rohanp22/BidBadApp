@@ -85,14 +85,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/timer_bg"
+                android:background="@drawable/timer_red"
                 android:fontFamily="@font/roboto_condensed_bold"
                 android:gravity="center"
                 android:paddingStart="8dp"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
                 android:text="23:07:08 sec"
-                android:textColor="@color/DarkGreen"
+                android:textColor="#ad1615"
                 android:textSize="8dp" />
 
         </LinearLayout>

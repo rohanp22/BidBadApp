@@ -12,7 +12,6 @@ public class Current_Product implements Serializable {
     private String sp;
     private String description;
 
-
     public Current_Product(String id, String image_url, String title, String end_date, String mrp, String sp, String description, String image_url2, String image_url3){
         this.end_date = end_date;
         this.title = title;

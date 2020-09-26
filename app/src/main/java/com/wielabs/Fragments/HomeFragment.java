@@ -37,6 +37,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.wielabs.HomeGridAdapter1;
 import com.wielabs.Models.Current_Product;
+import com.wielabs.Models.HomeItems;
 import com.wielabs.Models.PastProducts;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
@@ -113,7 +114,7 @@ public class HomeFragment extends Fragment{
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            current_products.add((Current_Product) intent.getExtras().get("MY_KEY"));
+            HomeItems.current_products.add((Current_Product) intent.getExtras().get("MY_KEY"));
             h.notifyDataSetChanged();
             //or
             //exercises = ParseJSON.ChallengeParseJSON(intent.getStringExtra(MY_KEY));
@@ -152,8 +153,34 @@ public class HomeFragment extends Fragment{
                                 noofbids = Integer.parseInt(heroObject.getString("COUNT(*)"));
                             }
                             animateFab();
-                            loadCurrentProducts(view);
-                            loadPastProducts(view, deviceWidth);
+//                            loadCurrentProducts(view);
+//                            loadPastProducts(view, deviceWidth);
+                            if (!HomeItems.isLoaded) {
+                                loadCurrentProducts(view);
+                                loadPastProducts(view, deviceWidth);
+                                HomeItems.isLoaded = true;
+                            } else {
+                                HomeItems.current_products.sort(new sortTime());
+                                h = new HomeGridAdapter1(deviceWidth, HomeItems.current_products, getFragmentManager(), view.getContext());
+                                recyclerView.setAdapter(h);
+                                recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+                                    @Override
+                                    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                                        int position = parent.getChildAdapterPosition(view);
+                                        // Span count is 2
+                                        int currentColumn = position % 2;
+                                        if (currentColumn == 0)
+                                            outRect.right = getResources().getDimensionPixelSize(R.dimen.grid_margin);
+                                        else
+                                            outRect.left = getResources().getDimensionPixelSize(R.dimen.grid_margin);
+                                        outRect.top = getResources().getDimensionPixelSize(R.dimen.grid_margin);
+                                        outRect.bottom = getResources().getDimensionPixelSize(R.dimen.grid_margin);
+                                    }
+                                });
+                                StaggeredGridLayoutManager l = new StaggeredGridLayoutManager(2, RecyclerView.VERTICAL);
+                                recyclerView.setLayoutManager(l);
+                                loadSlideProducts(view);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -204,14 +231,14 @@ public class HomeFragment extends Fragment{
     }
 
     private void loadCurrentProducts(final View view) {
-        current_products = new ArrayList<>();
+        HomeItems.current_products = new ArrayList<>();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/currentproducts.php?id=" + SharedPrefManager.getInstance(getContext()).getUser().getId(),
                 new Response.Listener<String>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onResponse(String response) {
                         try {
-                            current_products.clear();
+                            HomeItems.current_products.clear();
                             JSONObject obj = new JSONObject(response);
                             JSONArray heroArray = obj.getJSONArray("Current_Products");
                             Log.d("output", response);
@@ -228,10 +255,10 @@ public class HomeFragment extends Fragment{
                                         heroObject.getString("image_url2"),
                                         heroObject.getString("image_url3")
                                 );
-                                current_products.add(c);
+                                HomeItems.current_products.add(c);
                             }
-                            current_products.sort(new sortTime());
-                            h = new HomeGridAdapter1(deviceWidth, current_products, getFragmentManager(), view.getContext());
+                            HomeItems.current_products.sort(new sortTime());
+                            h = new HomeGridAdapter1(deviceWidth, HomeItems.current_products, getFragmentManager(), view.getContext());
                             recyclerView.setAdapter(h);
                             recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
                                 @Override
@@ -283,13 +310,13 @@ public class HomeFragment extends Fragment{
     private ArrayList<PastProducts> pastProducts;
 
     private void loadPastProducts(final View view,final int deviceWidth){
-        pastProducts = new ArrayList<>();
+        HomeItems.pastProducts = new ArrayList<>();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://easyvela.esy.es/AndroidAPI/pastproducts.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            pastProducts.clear();
+                            HomeItems.pastProducts.clear();
                             Log.d("output", response);
                             JSONObject obj = new JSONObject(response);
                             JSONArray heroArray = obj.getJSONArray("Current_Products");
@@ -310,10 +337,10 @@ public class HomeFragment extends Fragment{
                                         heroObject.getString("id"),
                                         null
                                 );
-                                pastProducts.add(c);
+                                HomeItems.pastProducts.add(c);
                             }
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                pastProducts.sort(new sortTime2());
+                                HomeItems.pastProducts.sort(new sortTime2());
                             }
                             loadSlideProducts(view);
 
@@ -356,7 +383,7 @@ public class HomeFragment extends Fragment{
         sliderRecyclerView.post(new Runnable() {
             @Override
             public void run() {
-                sliderRecyclerView.setAdapter(new SliderAdapter(sliderRecyclerView, pastProducts));
+                sliderRecyclerView.setAdapter(new SliderAdapter(sliderRecyclerView, HomeItems.pastProducts));
                 sliderRecyclerView.setLayoutManager(layoutManager);
                 sliderRecyclerView.getLayoutManager().scrollToPosition(Integer.MAX_VALUE / 2);
                 layoutManager.scrollToPositionWithOffset(Integer.MAX_VALUE / 2, (int) (getDeviceWidth() * .175));

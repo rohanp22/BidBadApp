@@ -26,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.wielabs.Models.HomeItems;
 import com.wielabs.Others.RequestHandler;
 import com.wielabs.Others.SharedPrefManager;
 import com.wielabs.R;
@@ -201,6 +202,7 @@ public class ActionBottomDialogFragment extends BottomSheetDialogFragment
                 //hiding the progressbar after completion
                 dismiss();
                 Log.d("addtomybids", s);
+                HomeItems.isLoaded = false;
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
                 Toast.makeText(getView().getContext(), "Bid placed successfully", Toast.LENGTH_LONG);
             }

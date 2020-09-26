@@ -216,10 +216,10 @@ public class WalletFragment extends Fragment {
         public void onBindViewHolder(@NonNull WalletAdapter.ViewHolder viewHolder, int i) {
             if (Integer.parseInt(walletTransactions.get(i).getValue()) > 0) {
                 viewHolder.amount.setText("+ ₹" + walletTransactions.get(i).getValue());
-                viewHolder.amount.setTextColor(getContext().getColor(R.color.green));
+                viewHolder.amount.setTextColor(Color.parseColor("##3B864F"));
             } else {
                 viewHolder.amount.setText("- ₹" + abs(Integer.parseInt(walletTransactions.get(i).getValue())));
-                viewHolder.amount.setTextColor(Color.parseColor("#FF000D"));
+                viewHolder.amount.setTextColor(Color.parseColor("#ad1615"));
             }
             viewHolder.orderid.setText("order id - " + walletTransactions.get(i).getOrderid());
 
