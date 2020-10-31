@@ -4,6 +4,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7a127054fb9bfe7e1516c57b2b5aec18/jetified-account-kit-sdk-4.20.0/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7a127054fb9bfe7e1516c57b2b5aec18/jetified-account-kit-sdk-4.20.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7a127054fb9bfe7e1516c57b2b5aec18/jetified-account-kit-sdk-4.20.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/47488e8723c9783357b05d17d7fdb8eb/jetified-account-kit-sdk-4.20.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/47488e8723c9783357b05d17d7fdb8eb/jetified-account-kit-sdk-4.20.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/47488e8723c9783357b05d17d7fdb8eb/jetified-account-kit-sdk-4.20.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.android/account-kit-sdk/4.20.0/fa238f40e709b61264827f8d992c7f4db4f7d549/account-kit-sdk-4.20.0-javadoc.jar!/" />
